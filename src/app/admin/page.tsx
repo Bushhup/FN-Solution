@@ -22,8 +22,8 @@ import {
 import { FileText, Users, HandCoins, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { useUser, useDoc, useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, doc } from 'firebase/firestore';
+import { useUser, useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -49,26 +49,25 @@ export default function AdminPage() {
     const router = useRouter();
     const firestore = useFirestore();
 
-    const adminRef = useMemoFirebase(() => user ? doc(firestore, 'roles_admin', user.uid) : null, [firestore, user]);
-    const { data: adminDoc, isLoading: isAdminLoading } = useDoc(adminRef);
+    const isAdmin = useMemo(() => user?.email === 'frank@gmail.com', [user]);
 
-    const leadsQuery = useMemoFirebase(() => (adminDoc ? collection(firestore, 'leads') : null), [firestore, adminDoc]);
+    const leadsQuery = useMemoFirebase(() => (isAdmin ? collection(firestore, 'leads') : null), [firestore, isAdmin]);
     const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
 
-    const usersQuery = useMemoFirebase(() => (adminDoc ? collection(firestore, 'users') : null), [firestore, adminDoc]);
+    const usersQuery = useMemoFirebase(() => (isAdmin ? collection(firestore, 'users') : null), [firestore, isAdmin]);
     const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
     useEffect(() => {
         if (!isUserLoading && !user) {
             router.push('/login');
-        } else if (!isUserLoading && user && !isAdminLoading && !adminDoc) {
+        } else if (!isUserLoading && user && !isAdmin) {
             router.push('/dashboard'); // Redirect non-admins
         }
-    }, [user, isUserLoading, adminDoc, isAdminLoading, router]);
+    }, [user, isUserLoading, isAdmin, router]);
 
     const totalConversions = useMemo(() => leads?.filter(lead => lead.status === 'Converted').length || 0, [leads]);
 
-    if (isUserLoading || isAdminLoading) {
+    if (isUserLoading) {
         return (
             <div className="container mx-auto py-12">
                 <Skeleton className="h-12 w-1/3 mb-8" />
@@ -82,7 +81,7 @@ export default function AdminPage() {
         );
     }
     
-    if (!adminDoc) {
+    if (!isAdmin) {
         return (
              <div className="container mx-auto flex h-[calc(100vh-4rem)] items-center justify-center">
                 <div className="text-center">

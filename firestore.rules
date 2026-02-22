@@ -2,8 +2,8 @@
  * Core Philosophy:
  * This ruleset implements a Role-Based Access Control (RBAC) model combined with
  * user ownership. It defines two primary roles: 'Admin' and 'User'.
- * Admins have broad read and write permissions across managed data collections
- * like services, testimonials, and leads. Standard users have strict ownership
+ * The Admin role is assigned to a specific, hardcoded email address, granting
+ * broad read and write permissions. Standard users have strict ownership
  * over their own profile and any leads they submit while authenticated.
  * Anonymous users have read-only access to public information and the ability
  * to submit leads.
@@ -11,8 +11,6 @@
  * Data Structure:
  * The data is organized into several top-level collections:
  * - /users/{userId}: Stores private user profile data.
- * - /roles_admin/{adminId}: A high-performance lookup collection where the
- *   existence of a document signifies admin privileges for that user ID.
  * - /services/{serviceId}: A public catalog of company services.
  * - /leads/{leadId}: A collection of all user-submitted inquiries.
  * - /testimonials/{testimonialId}: A public collection of customer reviews.
@@ -20,8 +18,9 @@
  * and security.
  *
  * Key Security Decisions:
- * - Admin status is determined by document existence in /roles_admin, which is
- *   a fast, secure, and easily auditable method (`exists()`).
+ * - Admin status is determined by matching the user's email to a specific
+ *   hardcoded value ('frank@gmail.com'). This is a simple and direct approach
+ *   for a single-administrator system.
  * - Listing all users is explicitly disallowed to protect user privacy.
  * - Public data (services, testimonials) is structurally segregated into its
  *   own collections, making list operations inherently safe.
@@ -30,8 +29,6 @@
  *
  * Denormalization for Authorization:
  * To create simpler and more performant rules, we denormalize authorization data:
- * - /roles_admin: This collection acts as a denormalized list of admin UIDs,
- *   avoiding the need to read a user's profile document to check their role.
  * - leads.userId: Each lead document submitted by an authenticated user contains
  *   a denormalized 'userId' field. This allows a user to query for their own
  *   leads and for security rules to verify ownership without extra database reads.
@@ -67,11 +64,10 @@ service cloud.firestore {
     
     /**
      * Checks if the current user has administrative privileges.
-     * Admin status is granted by the existence of a document in the /roles_admin collection
-     * where the document ID is the user's UID.
+     * Admin status is granted if the user's email matches 'frank@gmail.com'.
      */
     function isAdmin() {
-      return isSignedIn() && exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
+      return isSignedIn() && request.auth.token.email == 'frank@gmail.com';
     }
 
     /**
@@ -136,21 +132,6 @@ service cloud.firestore {
       allow create: if isOwner(userId) && isConsistentUserDataOnCreate(userId);
       allow update: if (isOwner(userId) || isAdmin()) && isExistingDoc() && isUserIdImmutable();
       allow delete: if isAdmin() && isExistingDoc(); // Only admins can delete user profiles.
-    }
-
-    /**
-     * @description A dedicated collection for administrator role management. Existence of a doc signifies admin rights.
-     * @path /roles_admin/{adminId}
-     * @allow (create) An existing admin adding a new user to the admin list, e.g., POST /roles_admin/new-admin-uid by an admin.
-     * @deny (create) A non-admin user trying to make themselves an admin.
-     * @principle Centralizes and protects global role management.
-     */
-    match /roles_admin/{adminId} {
-      allow get: if isAdmin();
-      allow list: if isAdmin();
-      allow create: if isAdmin();
-      allow update: if isAdmin() && isExistingDoc();
-      allow delete: if isAdmin() && isExistingDoc();
     }
 
     /**
