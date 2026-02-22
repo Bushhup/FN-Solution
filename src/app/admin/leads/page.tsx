@@ -24,6 +24,7 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
 import { collection, doc, orderBy, query, where } from 'firebase/firestore';
@@ -67,13 +68,13 @@ export default function AllLeadsPage() {
       }, [user, isUserLoading, isAdmin, router]);
 
     const leadsQuery = useMemoFirebase(() => {
-        if (!isAdmin) return null;
+        if (isUserLoading || !isAdmin) return null;
         const baseQuery = collection(firestore, 'leads');
         if (statusFilter) {
             return query(baseQuery, where('status', '==', statusFilter), orderBy('createdAt', 'desc'));
         }
         return query(baseQuery, orderBy('createdAt', 'desc'));
-    }, [firestore, isAdmin, statusFilter]);
+    }, [firestore, isAdmin, statusFilter, isUserLoading]);
 
     const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
 

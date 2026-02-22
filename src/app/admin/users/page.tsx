@@ -34,9 +34,9 @@ export default function AllUsersPage() {
     }, [user, isUserLoading, isAdmin, router]);
 
     const usersQuery = useMemoFirebase(() => {
-        if (!isAdmin) return null;
+        if (isUserLoading || !isAdmin) return null;
         return query(collection(firestore, 'users'), orderBy('createdAt', 'desc'));
-    }, [firestore, isAdmin]);
+    }, [firestore, isAdmin, isUserLoading]);
 
     const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 

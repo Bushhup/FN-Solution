@@ -67,14 +67,14 @@ export default function AdminPage() {
   const isAdmin = useMemo(() => user?.email === 'frank@gmail.com', [user]);
 
   const leadsQuery = useMemoFirebase(
-    () => (isAdmin ? query(collection(firestore, 'leads'), orderBy('createdAt', 'desc')) : null),
-    [firestore, isAdmin]
+    () => (!isUserLoading && isAdmin ? query(collection(firestore, 'leads'), orderBy('createdAt', 'desc')) : null),
+    [firestore, isAdmin, isUserLoading]
   );
   const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
 
   const usersQuery = useMemoFirebase(
-    () => (isAdmin ? query(collection(firestore, 'users'), orderBy('createdAt', 'desc')) : null),
-    [firestore, isAdmin]
+    () => (!isUserLoading && isAdmin ? query(collection(firestore, 'users'), orderBy('createdAt', 'desc')) : null),
+    [firestore, isAdmin, isUserLoading]
   );
   const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
@@ -133,7 +133,7 @@ export default function AdminPage() {
     return data.slice(0, new Date().getMonth() + 1);
   }, [leads, users]);
 
-  if (isUserLoading) {
+  if (isUserLoading || !isAdmin) {
     return (
       <div className="container mx-auto py-12">
         <Skeleton className="h-12 w-1/3 mb-8" />
@@ -143,19 +143,6 @@ export default function AdminPage() {
           <Skeleton className="h-32 w-full" />
         </div>
         <Skeleton className="h-96 w-full" />
-      </div>
-    );
-  }
-
-  if (!isAdmin) {
-    return (
-      <div className="container mx-auto flex h-[calc(100vh-4rem)] items-center justify-center">
-        <div className="text-center">
-          <h2 className="font-headline text-2xl font-bold">Access Denied</h2>
-          <p className="text-muted-foreground">
-            You do not have permission to view this page. Redirecting...
-          </p>
-        </div>
       </div>
     );
   }
