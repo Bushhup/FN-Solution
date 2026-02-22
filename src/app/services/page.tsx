@@ -1,6 +1,7 @@
 import { services } from '@/lib/data';
 import { GlassCard } from '@/components/ui/glass-card';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Our Services - FN Tax Solution',
@@ -21,12 +22,14 @@ export default function ServicesPage() {
       </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => (
-          <GlassCard
-            key={service.title}
-            icon={service.icon}
-            title={service.title}
-            description={service.description}
-          />
+          <Link href={`/services/${service.slug}`} key={service.slug}>
+            <GlassCard
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+              className="h-full"
+            />
+          </Link>
         ))}
       </div>
     </div>
