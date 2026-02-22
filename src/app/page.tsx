@@ -1,3 +1,5 @@
+'use client';
+
 import { HeroSection } from '@/components/landing/hero-section';
 import { ServicesSection } from '@/components/landing/services-section';
 import { WhyChooseUsSection } from '@/components/landing/why-choose-us-section';
