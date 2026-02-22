@@ -17,6 +17,9 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address.'),
@@ -25,19 +28,29 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const { toast } = useToast();
+  const router = useRouter();
+  const auth = useAuth();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { email: '', password: '' },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast({
-      title: 'Logged In!',
-      description: 'Redirecting you to your dashboard...',
-    });
-    // router.push('/dashboard');
+    try {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      toast({
+        title: 'Logged In!',
+        description: 'Redirecting you to your dashboard...',
+      });
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.error('Login Error:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Login Failed',
+        description: error.message || 'An unexpected error occurred.',
+      });
+    }
   }
 
   return (
@@ -79,8 +92,8 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full btn-gradient" size="lg">
-                Log In
+              <Button type="submit" className="w-full btn-gradient" size="lg" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Logging In...' : 'Log In'}
               </Button>
             </form>
           </Form>

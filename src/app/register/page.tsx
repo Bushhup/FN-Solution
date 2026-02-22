@@ -17,6 +17,10 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
+import { useRouter } from 'next/navigation';
+import { useAuth, useFirestore, setDocumentNonBlocking } from '@/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, serverTimestamp } from 'firebase/firestore';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -26,19 +30,44 @@ const formSchema = z.object({
 
 export default function RegisterPage() {
   const { toast } = useToast();
+  const router = useRouter();
+  const auth = useAuth();
+  const firestore = useFirestore();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: '', email: '', password: '' },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast({
-      title: 'Account Created!',
-      description: 'You can now log in with your new credentials.',
-    });
-    // router.push('/login');
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const user = userCredential.user;
+
+      const userDocRef = doc(firestore, 'users', user.uid);
+      const userData = {
+        id: user.uid,
+        name: values.name,
+        email: values.email,
+        role: 'User',
+        createdAt: serverTimestamp(),
+      };
+
+      setDocumentNonBlocking(userDocRef, userData, { merge: true });
+
+      toast({
+        title: 'Account Created!',
+        description: 'You can now log in with your new credentials.',
+      });
+      router.push('/login');
+    } catch (error: any) {
+      console.error('Registration Error:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Registration Failed',
+        description: error.message || 'An unexpected error occurred.',
+      });
+    }
   }
 
   return (
@@ -93,8 +122,8 @@ export default function RegisterPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full btn-gradient" size="lg">
-                Create Account
+              <Button type="submit" className="w-full btn-gradient" size="lg" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Creating Account...' : 'Create Account'}
               </Button>
             </form>
           </Form>

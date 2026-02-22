@@ -18,6 +18,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { services } from '@/lib/data';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { addDocumentNonBlocking, useFirestore, useUser } from '@/firebase';
+import { collection, serverTimestamp } from 'firebase/firestore';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -29,6 +31,9 @@ const formSchema = z.object({
 
 export function ConsultationForm() {
   const { toast } = useToast();
+  const firestore = useFirestore();
+  const { user } = useUser();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,9 +46,16 @@ export function ConsultationForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Simulate server action
-    console.log(values);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const leadsCollection = collection(firestore, 'leads');
+    const leadData = {
+      ...values,
+      status: 'New',
+      createdAt: serverTimestamp(),
+      ...(user && { userId: user.uid }),
+    };
+
+    addDocumentNonBlocking(leadsCollection, leadData);
+
     toast({
       title: 'Request Submitted!',
       description: "We've received your consultation request and will be in touch shortly.",
@@ -131,8 +143,8 @@ export function ConsultationForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full btn-gradient" size="lg">
-          Submit Request
+        <Button type="submit" className="w-full btn-gradient" size="lg" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'Submitting...' : 'Submit Request'}
         </Button>
       </form>
     </Form>

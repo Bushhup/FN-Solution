@@ -1,37 +1,66 @@
-import { services } from '@/lib/data';
-import { notFound } from 'next/navigation';
+'use client';
+
+import { Service, services } from '@/lib/data';
+import { notFound, useParams } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronRight, Landmark } from 'lucide-react';
+import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
+import { doc } from 'firebase/firestore';
+import { Skeleton } from '@/components/ui/skeleton';
 
-type Props = {
-  params: { slug: string };
-};
+// type Props = {
+//   params: { id: string };
+// };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = services.find((s) => s.slug === params.slug);
+// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+//   const service = services.find((s) => s.slug === params.id);
 
-  if (!service) {
-    return {
-      title: 'Service Not Found',
-    };
+//   if (!service) {
+//     return {
+//       title: 'Service Not Found',
+//     };
+//   }
+
+//   return {
+//     title: `${service.title} - FN Tax Solution`,
+//     description: service.description,
+//   };
+// }
+
+export default function ServiceDetailPage() {
+  const params = useParams();
+  const serviceId = params.slug as string;
+  const firestore = useFirestore();
+
+  const serviceRef = useMemoFirebase(() => serviceId ? doc(firestore, 'services', serviceId) : null, [firestore, serviceId]);
+  const { data: service, isLoading } = useDoc<Service>(serviceRef);
+
+  // This is temporary until we fetch other services from firestore
+  const otherServices = services.filter((s) => s.slug !== serviceId).slice(0, 3);
+
+  if (isLoading) {
+    return (
+        <div className="container mx-auto py-20 sm:py-28">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+                <div className="lg:col-span-2 space-y-8">
+                    <Skeleton className="h-12 w-1/2" />
+                    <Skeleton className="h-8 w-full" />
+                    <Skeleton className="h-24 w-full" />
+                    <Skeleton className="h-32 w-full" />
+                </div>
+                <div className="lg:col-span-1">
+                    <Skeleton className="h-64 w-full" />
+                </div>
+            </div>
+        </div>
+    )
   }
-
-  return {
-    title: `${service.title} - FN Tax Solution`,
-    description: service.description,
-  };
-}
-
-export default function ServiceDetailPage({ params }: Props) {
-  const service = services.find((s) => s.slug === params.slug);
 
   if (!service) {
     notFound();
   }
-
-  const otherServices = services.filter((s) => s.slug !== params.slug).slice(0, 3);
 
   return (
     <div className="container mx-auto py-20 sm:py-28">
@@ -45,7 +74,7 @@ export default function ServiceDetailPage({ params }: Props) {
           </div>
           <div className="mb-8 flex items-center gap-4">
             <div className="rounded-lg bg-primary/10 p-4 text-primary">
-              <service.icon className="h-8 w-8" />
+              <Landmark className="h-8 w-8" />
             </div>
             <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl">
               {service.title}
@@ -55,16 +84,7 @@ export default function ServiceDetailPage({ params }: Props) {
             {service.description}
           </p>
 
-          <div className="space-y-8">
-            {service.details.map((detail, index) => (
-              <div key={index} className="glass-card rounded-xl p-6">
-                <h3 className="font-headline text-xl font-semibold text-foreground mb-3">
-                  {detail.heading}
-                </h3>
-                <p className="text-muted-foreground">{detail.text}</p>
-              </div>
-            ))}
-          </div>
+          {/* Details section is removed as it's not in the DB schema */}
         </div>
 
         {/* Sidebar */}

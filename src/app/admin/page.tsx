@@ -19,17 +19,15 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { FileText, Users, HandCoins } from 'lucide-react';
+import { FileText, Users, HandCoins, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { MoreHorizontal } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-
-const mockLeads = [
-  { id: 'LEAD-001', name: 'John Smith', service: 'GST Registration', date: '2023-12-05', status: 'New' },
-  { id: 'LEAD-002', name: 'Maria Garcia', service: 'Income Tax Filing', date: '2023-12-04', status: 'Contacted' },
-  { id: 'LEAD-003', name: 'Ken Adwards', service: 'Company Registration', date: '2023-12-02', status: 'Converted' },
-  { id: 'LEAD-004', name: 'Li Wang', service: 'Compliance Services', date: '2023-12-01', status: 'New' },
-];
+import { useUser, useDoc, useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, doc } from 'firebase/firestore';
+import { useRouter } from 'next/navigation';
+import { useEffect, useMemo } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+import { format } from 'date-fns';
 
 const statusVariant: { [key: string]: 'default' | 'secondary' | 'destructive' | 'outline' } = {
     'Converted': 'default',
@@ -47,6 +45,41 @@ const analyticsData = [
 ];
 
 export default function AdminPage() {
+    const { user, isUserLoading } = useUser();
+    const router = useRouter();
+    const firestore = useFirestore();
+
+    const adminRef = useMemoFirebase(() => user ? doc(firestore, 'roles_admin', user.uid) : null, [firestore, user]);
+    const { data: adminDoc, isLoading: isAdminLoading } = useDoc(adminRef);
+
+    const leadsQuery = useMemoFirebase(() => collection(firestore, 'leads'), [firestore]);
+    const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
+
+    const usersQuery = useMemoFirebase(() => collection(firestore, 'users'), [firestore]);
+    const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
+
+    useEffect(() => {
+        if (!isUserLoading && !isAdminLoading && !adminDoc) {
+            router.push('/dashboard'); // Redirect non-admins
+        }
+    }, [user, isUserLoading, adminDoc, isAdminLoading, router]);
+
+    const totalConversions = useMemo(() => leads?.filter(lead => lead.status === 'Converted').length || 0, [leads]);
+
+    if (isUserLoading || isAdminLoading || !adminDoc) {
+        return (
+            <div className="container mx-auto py-12">
+                <Skeleton className="h-12 w-1/3 mb-8" />
+                <div className="grid gap-6 md:grid-cols-3 mb-8">
+                    <Skeleton className="h-32 w-full" />
+                    <Skeleton className="h-32 w-full" />
+                    <Skeleton className="h-32 w-full" />
+                </div>
+                <Skeleton className="h-96 w-full" />
+            </div>
+        );
+    }
+
   return (
     <div className="container mx-auto py-12">
       <h1 className="mb-8 font-headline text-4xl font-bold">Admin Panel</h1>
@@ -58,7 +91,7 @@ export default function AdminPage() {
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">1,234</div>
+            <div className="text-2xl font-bold">{areLeadsLoading ? <Skeleton className="h-8 w-16" /> : leads?.length || 0}</div>
             <p className="text-xs text-muted-foreground">+20.1% from last month</p>
           </CardContent>
         </Card>
@@ -68,7 +101,7 @@ export default function AdminPage() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">573</div>
+            <div className="text-2xl font-bold">{areUsersLoading ? <Skeleton className="h-8 w-16" /> : users?.length || 0}</div>
             <p className="text-xs text-muted-foreground">+12.2% from last month</p>
           </CardContent>
         </Card>
@@ -78,7 +111,7 @@ export default function AdminPage() {
             <HandCoins className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">245</div>
+            <div className="text-2xl font-bold">{areLeadsLoading ? <Skeleton className="h-8 w-16" /> : totalConversions}</div>
             <p className="text-xs text-muted-foreground">+15% this month</p>
           </CardContent>
         </Card>
@@ -101,14 +134,19 @@ export default function AdminPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {mockLeads.map((lead) => (
+                  {areLeadsLoading && Array.from({length: 4}).map((_, i) => (
+                    <TableRow key={i}>
+                        <TableCell colSpan={5}><Skeleton className="h-8 w-full" /></TableCell>
+                    </TableRow>
+                  ))}
+                  {leads && leads.length > 0 ? leads.map((lead) => (
                     <TableRow key={lead.id}>
                       <TableCell className="font-medium">{lead.name}</TableCell>
                       <TableCell>{lead.service}</TableCell>
                       <TableCell>
                         <Badge variant={statusVariant[lead.status] || 'default'}>{lead.status}</Badge>
                       </TableCell>
-                      <TableCell>{lead.date}</TableCell>
+                      <TableCell>{lead.createdAt ? format(lead.createdAt.toDate(), 'PPP') : 'N/A'}</TableCell>
                       <TableCell>
                          <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -125,7 +163,11 @@ export default function AdminPage() {
                           </DropdownMenu>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )) : !areLeadsLoading && (
+                    <TableRow>
+                        <TableCell colSpan={5} className="text-center">No leads found.</TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
           </CardContent>
