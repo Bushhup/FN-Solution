@@ -5,9 +5,9 @@ import { Github, Linkedin, Twitter } from 'lucide-react';
 
 export function Footer() {
   const socialLinks = [
-    { icon: Twitter, href: '#', name: 'Twitter' },
-    { icon: Linkedin, href: '#', name: 'LinkedIn' },
-    { icon: Github, href: '#', name: 'GitHub' },
+    { icon: Twitter, href: 'https://twitter.com', name: 'Twitter' },
+    { icon: Linkedin, href: 'https://linkedin.com', name: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com', name: 'GitHub' },
   ];
 
   const footerLinks = [
@@ -48,11 +48,21 @@ export function Footer() {
             </p>
             <div className="mt-6 flex space-x-4">
               {socialLinks.map((social) => (
-                <Link key={social.name} href={social.href} passHref>
-                  <Button variant="ghost" size="icon" aria-label={social.name}>
+                <Button
+                  key={social.name}
+                  asChild
+                  variant="ghost"
+                  size="icon"
+                  aria-label={social.name}
+                >
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <social.icon className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
-                  </Button>
-                </Link>
+                  </a>
+                </Button>
               ))}
             </div>
           </div>
