@@ -36,7 +36,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 export function TestimonialsSection() {
   return (
     <section id="testimonials" className="bg-[#F0F2F5] py-20 sm:py-28">
-      <div className="container">
+      <div className="container mx-auto">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Trusted by Growing Businesses

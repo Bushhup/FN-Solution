@@ -146,7 +146,7 @@ export function CtaSection() {
       className="relative overflow-hidden py-20 sm:py-28"
     >
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/10 via-background to-background"></div>
-      <div className="container">
+      <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <div className="text-center lg:text-left">
             <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl">

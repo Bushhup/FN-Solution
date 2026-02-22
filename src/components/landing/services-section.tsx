@@ -4,7 +4,7 @@ import { GlassCard } from '@/components/ui/glass-card';
 export function ServicesSection() {
   return (
     <section id="services" className="py-20 sm:py-28">
-      <div className="container">
+      <div className="container mx-auto">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl">
             Our Comprehensive Services

@@ -134,7 +134,7 @@ export default function AdminPage() {
           <CardHeader>
             <CardTitle>Leads & User Growth</CardTitle>
           </CardHeader>
-          <CardContent className="pl-2">
+          <CardContent className="px-2">
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={analyticsData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border)/0.5)" />
