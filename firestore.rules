@@ -21,7 +21,7 @@
  * - Admin status is determined by matching the user's email to a specific
  *   hardcoded value ('frank@gmail.com'). This is a simple and direct approach
  *   for a single-administrator system.
- * - Listing all users is explicitly disallowed to protect user privacy.
+ * - Listing all users is explicitly disallowed for non-admins to protect user privacy.
  * - Public data (services, testimonials) is structurally segregated into its
  *   own collections, making list operations inherently safe.
  * - Leads can be created by anyone, but viewing is restricted. Authenticated
@@ -36,7 +36,7 @@
  * Structural Segregation:
  * Public and private data are stored in separate top-level collections. For
  * example, /services and /testimonials are fully public for reads, while /users
- * is strictly private on a per-user basis. This prevents accidental data
+ * is strictly private on a per-user basis (except for admins). This prevents accidental data
  * leakage from list queries.
  */
 rules_version = '2';
@@ -122,13 +122,15 @@ service cloud.firestore {
     /**
      * @description Stores individual user profiles. Access is restricted to the user themselves or administrators.
      * @path /users/{userId}
+     * @allow (get) An authenticated user reading their own profile, or an admin reading any profile.
+     * @allow (list) An admin listing all users for reporting purposes (e.g., total user count).
      * @allow (create) An authenticated user creating their own profile document, e.g., POST /users/abc-123 with auth.uid = 'abc-123'.
      * @deny (create) A user trying to create a profile for another user, e.g., POST /users/xyz-456 with auth.uid = 'abc-123'.
      * @principle Restricts access to a user's own data tree and ensures relational integrity on creation.
      */
     match /users/{userId} {
       allow get: if isOwner(userId) || isAdmin();
-      allow list: if false; // Disallow listing all users to protect privacy.
+      allow list: if isAdmin(); // Allow admins to list users for dashboard counts.
       allow create: if isOwner(userId) && isConsistentUserDataOnCreate(userId);
       allow update: if (isOwner(userId) || isAdmin()) && isExistingDoc() && isUserIdImmutable();
       allow delete: if isAdmin() && isExistingDoc(); // Only admins can delete user profiles.

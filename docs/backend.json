@@ -24,9 +24,8 @@
           "description": "The user's role on the platform, determining access level (e.g., 'User', 'Admin')."
         },
         "createdAt": {
-          "type": "string",
-          "description": "Timestamp indicating when the user account was created.",
-          "format": "date-time"
+          "type": "object",
+          "description": "Timestamp indicating when the user account was created."
         }
       },
       "required": [
@@ -60,9 +59,8 @@
           "description": "The broader category the service belongs to (e.g., 'GST Registration', 'Income Tax Filing', 'Company Registration')."
         },
         "createdAt": {
-          "type": "string",
-          "description": "Timestamp indicating when the service record was created.",
-          "format": "date-time"
+          "type": "object",
+          "description": "Timestamp indicating when the service record was created."
         }
       },
       "required": [
@@ -120,9 +118,8 @@
           ]
         },
         "createdAt": {
-          "type": "string",
-          "description": "Timestamp indicating when the lead was submitted.",
-          "format": "date-time"
+          "type": "object",
+          "description": "Timestamp indicating when the lead was submitted."
         }
       },
       "required": [
@@ -159,9 +156,8 @@
           "description": "The rating given by the client, typically on a scale (e.g., 1 to 5 stars)."
         },
         "createdAt": {
-          "type": "string",
-          "description": "Timestamp indicating when the testimonial was submitted.",
-          "format": "date-time"
+          "type": "object",
+          "description": "Timestamp indicating when the testimonial was submitted."
         }
       },
       "required": [
@@ -188,7 +184,7 @@
           "schema": {
             "$ref": "#/backend/entities/User"
           },
-          "description": "Stores individual user profiles. Access is restricted to the user themselves or administrators. The 'role' field within the document is for application logic, not for direct rule-based authorization."
+          "description": "Stores individual user profiles. Individual profiles can be read by their owner or an admin. Only admins are allowed to list all users. The 'role' field within the document is for application logic, not for direct rule-based authorization."
         }
       },
       {
