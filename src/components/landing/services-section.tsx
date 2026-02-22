@@ -1,5 +1,8 @@
 import { services } from '@/lib/data';
 import { GlassCard } from '@/components/ui/glass-card';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export function ServicesSection() {
   return (
@@ -15,7 +18,7 @@ export function ServicesSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
+          {services.slice(0, 3).map((service) => (
             <GlassCard
               key={service.title}
               icon={service.icon}
@@ -23,6 +26,13 @@ export function ServicesSection() {
               description={service.description}
             />
           ))}
+        </div>
+        <div className="mt-16 text-center">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/services">
+                View All Services <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
         </div>
       </div>
     </section>

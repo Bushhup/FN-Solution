@@ -25,7 +25,7 @@ export function HeroSection() {
               <Link href="#cta">Get Free Consultation</Link>
             </Button>
             <Button asChild variant="ghost" size="lg">
-              <Link href="#services">
+              <Link href="/services">
                 Explore Services <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

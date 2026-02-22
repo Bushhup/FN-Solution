@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, Twitter } from 'lucide-react';
+import { services } from '@/lib/data';
 
 export function Footer() {
   const socialLinks = [
@@ -14,18 +15,15 @@ export function Footer() {
     {
       title: 'Services',
       links: [
-        { label: 'GST Registration', href: '#' },
-        { label: 'Income Tax Filing', href: '#' },
-        { label: 'Company Registration', href: '#' },
-        { label: 'Compliance', href: '#' },
+        ...services.slice(0, 4).map(s => ({ label: s.title, href: '/services' })),
+        { label: 'View All...', href: '/services' },
       ],
     },
     {
       title: 'Company',
       links: [
-        { label: 'About Us', href: '#' },
-        { label: 'Contact', href: '#' },
-        { label: 'Careers', href: '#' },
+        { label: 'About Us', href: '/about' },
+        { label: 'Contact Us', href: '/#cta' },
       ],
     },
     {
@@ -40,8 +38,8 @@ export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-background/95">
       <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          <div className="md:col-span-1">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-4">
             <Logo />
             <p className="mt-4 text-sm text-muted-foreground">
               Your trusted partner for financial compliance and growth.
@@ -66,26 +64,28 @@ export function Footer() {
               ))}
             </div>
           </div>
-
-          {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h3 className="font-headline text-sm font-semibold uppercase tracking-wider text-foreground">
-                {section.title}
-              </h3>
-              <ul className="mt-4 space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
+            {footerLinks.map((section) => (
+              <div key={section.title}>
+                <h3 className="font-headline text-sm font-semibold uppercase tracking-wider text-foreground">
+                  {section.title}
+                </h3>
+                <ul className="mt-4 space-y-2">
+                  {section.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 border-t border-border/40 pt-8 text-center">

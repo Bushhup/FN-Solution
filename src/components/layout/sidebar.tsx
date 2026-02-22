@@ -12,10 +12,11 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Logo } from '@/components/logo';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 const navLinks = [
-  { href: '#services', label: 'Services' },
-  { href: '#about', label: 'Why Us' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About Us' },
   { href: '#testimonials', label: 'Testimonials' },
   { href: '/admin', label: 'Admin' },
   { href: '/dashboard', label: 'Dashboard' },
@@ -33,7 +34,9 @@ export function Sidebar() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-4/5 pt-16">
-        <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+        <SheetTitle asChild>
+          <VisuallyHidden>Navigation Menu</VisuallyHidden>
+        </SheetTitle>
         <div className="flex flex-col gap-8">
             <Logo />
             <nav
