@@ -154,15 +154,13 @@ service cloud.firestore {
     /**
      * @description Stores all service inquiries. Can be created by anyone, but viewing is restricted.
      * @path /leads/{leadId}
-     * @allow (create) An anonymous user submitting a contact form.
-     * @allow (get) An authenticated user reading a lead they previously submitted (`resource.data.userId == auth.uid`).
-     * @deny (get) An authenticated user trying to read another user's lead.
-     * @deny (list) A non-admin user trying to list all leads in the system.
+     * @allow (read) An admin can read any lead. An authenticated user can read (get/list) their own leads.
+     * @allow (create) An anonymous or authenticated user submitting a lead.
+     * @deny (read) A user attempting to read leads belonging to another user.
      * @principle Enforces document ownership for reads and modifications, while allowing broad create access.
      */
     match /leads/{leadId} {
-      allow get: if (isOwner(resource.data.userId) || isAdmin());
-      allow list: if isAdmin(); // Only admins can list all leads. Users must query for their own.
+      allow read: if isAdmin() || isOwner(resource.data.userId);
       allow create: if isLeadDataValidOnCreate();
       allow update: if isExistingDoc() && (isOwner(resource.data.userId) || isAdmin()) && isLeadOwnerImmutable();
       allow delete: if isExistingDoc() && (isOwner(resource.data.userId) || isAdmin());
