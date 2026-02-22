@@ -22,7 +22,7 @@ export function HeroSection() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button asChild className="btn-gradient" size="lg">
-              <Link href="#cta">Get Free Consultation</Link>
+              <Link href="/contact">Get Free Consultation</Link>
             </Button>
             <Button asChild variant="ghost" size="lg">
               <Link href="/services">

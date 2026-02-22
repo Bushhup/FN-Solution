@@ -23,7 +23,7 @@ export function Footer() {
       title: 'Company',
       links: [
         { label: 'About Us', href: '/about' },
-        { label: 'Contact Us', href: '/#cta' },
+        { label: 'Contact Us', href: '/contact' },
       ],
     },
     {
