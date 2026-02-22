@@ -1,3 +1,22 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "testimonial-1",
+      "description": "A professional woman in an office setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1573165850883-9b0e18c44bd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjB3b21hbnxlbnwwfHx8fDE3NzE2OTAwODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional woman"
+    },
+    {
+      "id": "testimonial-2",
+      "description": "A confident man in a corporate environment.",
+      "imageUrl": "https://images.unsplash.com/photo-1584940120743-8981ca35b012?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y29ycG9yYXRlJTIwbWFufGVufDB8fHx8MTc3MTc0Nzk3MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "corporate man"
+    },
+    {
+      "id": "testimonial-3",
+      "description": "A creative young woman in a modern workspace.",
+      "imageUrl": "https://images.unsplash.com/photo-1603201667493-4c2696de0b1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjcmVhdGl2ZSUyMHdvbWFufGVufDB8fHx8MTc3MTc0Nzk3Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "creative woman"
+    }
+  ]
 }
