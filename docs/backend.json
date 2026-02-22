@@ -87,9 +87,9 @@
           "type": "string",
           "description": "Reference to the User who submitted this lead, if they were logged in. This field is optional if the lead is submitted by a guest. (Relationship: User 1:N Lead)"
         },
-        "serviceId": {
+        "service": {
           "type": "string",
-          "description": "Reference to the Service associated with this lead, indicating which service the inquiry is about. (Relationship: Service 1:N Lead)"
+          "description": "The name of the service the inquiry is about."
         },
         "name": {
           "type": "string",
@@ -110,7 +110,14 @@
         },
         "status": {
           "type": "string",
-          "description": "The current processing status of the lead (e.g., 'New', 'Pending', 'In Progress', 'Completed', 'Rejected')."
+          "description": "The current processing status of the lead.",
+          "enum": [
+            "New",
+            "Pending",
+            "In Progress",
+            "Completed",
+            "Rejected"
+          ]
         },
         "createdAt": {
           "type": "string",
@@ -120,7 +127,7 @@
       },
       "required": [
         "id",
-        "serviceId",
+        "service",
         "name",
         "email",
         "phone",
