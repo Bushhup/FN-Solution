@@ -18,8 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useAuth, initiateEmailSignIn } from '@/firebase';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address.'),
@@ -37,7 +36,7 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
+      await initiateEmailSignIn(auth, values.email, values.password);
       toast({
         title: 'Logged In!',
         description: 'Redirecting you to your dashboard...',
