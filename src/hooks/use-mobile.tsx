@@ -8,18 +8,28 @@ export function useIsMobile() {
   React.useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
     
+    // Ensure `matches` is read once and used to set the initial state.
+    setIsMobile(mql.matches)
+
     const handleMediaQueryChange = (event: MediaQueryListEvent) => {
       setIsMobile(event.matches)
     }
 
-    // Set the initial value
-    setIsMobile(mql.matches)
-
-    // Listen for changes
-    mql.addEventListener('change', handleMediaQueryChange)
+    // `addListener` is deprecated but included for broader browser support.
+    try {
+      mql.addEventListener('change', handleMediaQueryChange);
+    } catch (e) {
+      // Fallback for older browsers
+      mql.addListener(handleMediaQueryChange);
+    }
 
     return () => {
-      mql.removeEventListener('change', handleMediaQueryChange)
+      try {
+        mql.removeEventListener('change', handleMediaQueryChange)
+      } catch (e) {
+        // Fallback for older browsers
+        mql.removeListener(handleMediaQueryChange)
+      }
     }
   }, [])
 
