@@ -52,21 +52,23 @@ export default function AdminPage() {
     const adminRef = useMemoFirebase(() => user ? doc(firestore, 'roles_admin', user.uid) : null, [firestore, user]);
     const { data: adminDoc, isLoading: isAdminLoading } = useDoc(adminRef);
 
-    const leadsQuery = useMemoFirebase(() => collection(firestore, 'leads'), [firestore]);
+    const leadsQuery = useMemoFirebase(() => (adminDoc ? collection(firestore, 'leads') : null), [firestore, adminDoc]);
     const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
 
-    const usersQuery = useMemoFirebase(() => collection(firestore, 'users'), [firestore]);
+    const usersQuery = useMemoFirebase(() => (adminDoc ? collection(firestore, 'users') : null), [firestore, adminDoc]);
     const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
     useEffect(() => {
-        if (!isUserLoading && !isAdminLoading && !adminDoc) {
+        if (!isUserLoading && !user) {
+            router.push('/login');
+        } else if (!isUserLoading && user && !isAdminLoading && !adminDoc) {
             router.push('/dashboard'); // Redirect non-admins
         }
     }, [user, isUserLoading, adminDoc, isAdminLoading, router]);
 
     const totalConversions = useMemo(() => leads?.filter(lead => lead.status === 'Converted').length || 0, [leads]);
 
-    if (isUserLoading || isAdminLoading || !adminDoc) {
+    if (isUserLoading || isAdminLoading) {
         return (
             <div className="container mx-auto py-12">
                 <Skeleton className="h-12 w-1/3 mb-8" />
@@ -76,6 +78,17 @@ export default function AdminPage() {
                     <Skeleton className="h-32 w-full" />
                 </div>
                 <Skeleton className="h-96 w-full" />
+            </div>
+        );
+    }
+    
+    if (!adminDoc) {
+        return (
+             <div className="container mx-auto flex h-[calc(100vh-4rem)] items-center justify-center">
+                <div className="text-center">
+                    <h2 className="font-headline text-2xl font-bold">Access Denied</h2>
+                    <p className="text-muted-foreground">You do not have permission to view this page. Redirecting...</p>
+                </div>
             </div>
         );
     }
