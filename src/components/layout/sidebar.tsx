@@ -5,7 +5,12 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Logo } from '@/components/logo';
 
 const navLinks = [
@@ -28,6 +33,7 @@ export function Sidebar() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-4/5 pt-16">
+        <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
         <div className="flex flex-col gap-8">
             <Logo />
             <nav
