@@ -1,0 +1,230 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the FN Tax Solution platform, including both regular customers and administrators, with role-based access.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The full name of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address, used for login and notifications.",
+          "format": "email"
+        },
+        "role": {
+          "type": "string",
+          "description": "The user's role on the platform, determining access level (e.g., 'User', 'Admin')."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the user account was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "role",
+        "createdAt"
+      ]
+    },
+    "Service": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Service",
+      "type": "object",
+      "description": "Represents a specific tax, compliance, business registration, legal, or accounting service offered by FN Tax Solution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Service entity."
+        },
+        "title": {
+          "type": "string",
+          "description": "The name or title of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of what the service entails, including its benefits and processes."
+        },
+        "category": {
+          "type": "string",
+          "description": "The broader category the service belongs to (e.g., 'GST Registration', 'Income Tax Filing', 'Company Registration')."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the service record was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "category",
+        "createdAt"
+      ]
+    },
+    "Lead": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Lead",
+      "type": "object",
+      "description": "Represents a service request or consultation inquiry submitted by a user or a guest through a form.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Lead entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User who submitted this lead, if they were logged in. This field is optional if the lead is submitted by a guest. (Relationship: User 1:N Lead)"
+        },
+        "serviceId": {
+          "type": "string",
+          "description": "Reference to the Service associated with this lead, indicating which service the inquiry is about. (Relationship: Service 1:N Lead)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The full name of the person submitting the lead."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the person submitting the lead.",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "The phone number of the person submitting the lead."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed message or specific inquiry from the lead."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current processing status of the lead (e.g., 'New', 'Pending', 'In Progress', 'Completed', 'Rejected')."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the lead was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "serviceId",
+        "name",
+        "email",
+        "phone",
+        "message",
+        "status",
+        "createdAt"
+      ]
+    },
+    "Testimonial": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Testimonial",
+      "type": "object",
+      "description": "Represents a review or feedback provided by a client of FN Tax Solution, used to build trust and credibility.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Testimonial entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the client who provided the testimonial."
+        },
+        "review": {
+          "type": "string",
+          "description": "The actual text content of the testimonial or review."
+        },
+        "rating": {
+          "type": "number",
+          "description": "The rating given by the client, typically on a scale (e.g., 1 to 5 stars)."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the testimonial was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "review",
+        "rating",
+        "createdAt"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores individual user profiles. Access is restricted to the user themselves or administrators. The 'role' field within the document is for application logic, not for direct rule-based authorization."
+        }
+      },
+      {
+        "path": "/roles_admin/{adminId}",
+        "definition": {
+          "entityName": "AdminRole",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "A dedicated collection for administrator role management. The document ID (`adminId`) corresponds to a user's UID. The existence of a document at this path signifies administrator privileges for the corresponding user, enabling authorization independence through existence checks in security rules. No specific schema beyond the UID is required; documents can be empty or contain minimal metadata."
+        }
+      },
+      {
+        "path": "/services/{serviceId}",
+        "definition": {
+          "entityName": "Service",
+          "schema": {
+            "$ref": "#/backend/entities/Service"
+          },
+          "description": "Catalog of available services offered by FN Tax Solution. This collection is publicly readable by all users (authenticated or anonymous). Only administrators have the ability to create, update, or delete service definitions."
+        }
+      },
+      {
+        "path": "/leads/{leadId}",
+        "definition": {
+          "entityName": "Lead",
+          "schema": {
+            "$ref": "#/backend/entities/Lead"
+          },
+          "description": "Stores all service inquiries and consultation requests, whether submitted by authenticated users or guests. Includes a denormalized 'userId' (optional) for authorization independence, allowing authenticated users to view and potentially update their own leads directly. Only administrators can view all leads and manage their status."
+        }
+      },
+      {
+        "path": "/testimonials/{testimonialId}",
+        "definition": {
+          "entityName": "Testimonial",
+          "schema": {
+            "$ref": "#/backend/entities/Testimonial"
+          },
+          "description": "Customer testimonials and reviews. This collection is publicly readable by all users (authenticated or anonymous) to build trust and credibility. Only administrators have the ability to create, update, or delete testimonials."
+        }
+      }
+    ],
+    "reasoning": "The recommended Firestore structure for FN Tax Solution prioritizes secure, scalable, and debuggable authorization rules by adhering strictly to the core design principles, especially Authorization Independence and Structural Segregation.\n\n**Authorization Independence via Denormalization:**\n\n1.  **Leads (`/leads/{leadId}`):** To ensure authorization independence for user-specific access, each `Lead` document includes an optional `userId` field. This denormalization means that a logged-in user can query and read *their own* leads by checking `request.auth.uid == resource.data.userId` directly within the security rules, without needing to perform a `get()` operation on a parent `User` document. This design enables atomic lead creation (by both authenticated and guest users) and simplifies rule logic, making it robust against transactional complexities and easier to debug.\n\n2.  **Admin Roles (`/roles_admin/{adminId}`):** For crucial admin authorization, a dedicated top-level collection `/roles_admin` is used. This collection stores documents whose IDs are the UIDs of administrator users. Security rules can check for admin status using `exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid))`. This 'existence over content' approach for DBAC (Database Access Control) ensures that admin checks are highly performant, atomic, and completely independent of fetching the full `User` profile or relying on custom claims, thereby fulfilling the Authorization Independence mandate for global roles.\n\n**QAPs (Rules are not Filters) and Structural Segregation:**\n\n1.  **Public Collections (`/services`, `/testimonials`):** These collections are designed with a homogeneous security posture: they are publicly readable by anyone, while write access is restricted to administrators. This structural segregation ensures that `list` operations on these collections inherently return only data intended for public consumption, without requiring server-side filtering after data retrieval or complex rule-based filtering, thus upholding the QAPs principle.\n\n2.  **User-Owned Data (`/users/{userId}`):** User profiles are stored in a path-based structure (`/users/{userId}`), where the `userId` in the path matches `request.auth.uid`. This design ensures that when a user accesses their profile, the ownership is self-evident in the path and easily verifiable (`request.auth.uid == userId`) by security rules. This is a secure and QAP-compliant method for private, user-specific data.\n\n3.  **Leads (User-Specific Listing):** While `/leads` is a top-level collection, the denormalized `userId` field within each `Lead` document (as explained above) enables QAP-compliant `list` operations for users. When a user queries `db.collection('leads').where('userId', '==', request.auth.uid)`, the security rule `resource.data.userId == request.auth.uid` validates each document *before* it's returned, preventing accidental data leakage and ensuring the client-side query aligns perfectly with the server-side authorization.\n\nBy carefully segregating data based on its security posture and denormalizing authorization-critical fields, this structure enables simple, robust, and easily debuggable security rules that are scalable and secure for the FN Tax Solution application."
+  }
+}
