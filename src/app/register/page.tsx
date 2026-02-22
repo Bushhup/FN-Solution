@@ -61,11 +61,17 @@ export default function RegisterPage() {
       });
       router.push('/login');
     } catch (error: any) {
-      console.error('Registration Error:', error);
+      let description = 'An unexpected error occurred. Please try again.';
+      if (error.code === 'auth/email-already-in-use') {
+        description = 'This email address is already registered. Please try logging in instead.';
+      } else {
+        description = error.message || description;
+      }
+
       toast({
         variant: 'destructive',
         title: 'Registration Failed',
-        description: error.message || 'An unexpected error occurred.',
+        description: description,
       });
     }
   }
