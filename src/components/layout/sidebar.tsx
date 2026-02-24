@@ -13,18 +13,19 @@ import {
 } from '@/components/ui/sheet';
 import { Logo } from '@/components/logo';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { useUser } from '@/firebase';
 
 const navLinks = [
   { href: '/services', label: 'Services' },
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact Us' },
   { href: '#testimonials', label: 'Testimonials' },
-  { href: '/admin', label: 'Admin' },
-  { href: '/dashboard', label: 'Dashboard' },
 ];
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
+  const isAdmin = user?.email === 'frank@gmail.com';
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -53,6 +54,24 @@ export function Sidebar() {
                     {label}
                 </Link>
                 ))}
+                { user && (
+                    <Link
+                        href="/dashboard"
+                        className="transition-colors hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Dashboard
+                    </Link>
+                )}
+                { isAdmin && (
+                    <Link
+                        href="/admin"
+                        className="transition-colors hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Admin
+                    </Link>
+                )}
             </nav>
         </div>
       </SheetContent>
