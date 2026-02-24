@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
-import { MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { services } from '@/lib/data';
 
 export function Footer() {
@@ -48,6 +48,10 @@ export function Footer() {
                 <div className="flex items-center gap-3">
                     <Phone className="h-5 w-5 text-primary" />
                     <span>+91 93211 92310</span>
+                </div>
+                <div className="flex items-center gap-3">
+                    <Mail className="h-5 w-5 text-primary" />
+                    <span>fntaxsolution@gmail.com</span>
                 </div>
             </div>
             <div className="mt-6 flex space-x-4">
