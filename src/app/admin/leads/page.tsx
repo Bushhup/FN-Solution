@@ -26,7 +26,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
+import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking, useDoc } from '@/firebase';
 import { collection, doc, orderBy, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -56,25 +56,28 @@ export default function AllLeadsPage() {
     const searchParams = useSearchParams();
     const firestore = useFirestore();
 
-    const isAdmin = useMemo(() => user?.email === 'frank@gmail.com', [user]);
+    const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+    const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
+    const isAdmin = useMemo(() => userProfile?.role === 'Admin', [userProfile]);
+
     const statusFilter = searchParams.get('status');
 
     useEffect(() => {
-        if (!isUserLoading && !user) {
+        if (!isUserLoading && !isProfileLoading && !user) {
           router.push('/login');
-        } else if (!isUserLoading && user && !isAdmin) {
+        } else if (!isUserLoading && !isProfileLoading && user && !isAdmin) {
           router.push('/dashboard');
         }
-      }, [user, isUserLoading, isAdmin, router]);
+    }, [user, isUserLoading, isProfileLoading, isAdmin, router]);
 
     const leadsQuery = useMemoFirebase(() => {
-        if (isUserLoading || !isAdmin) return null;
+        if (isUserLoading || isProfileLoading || !isAdmin) return null;
         const baseQuery = collection(firestore, 'leads');
         if (statusFilter) {
             return query(baseQuery, where('status', '==', statusFilter), orderBy('createdAt', 'desc'));
         }
         return query(baseQuery, orderBy('createdAt', 'desc'));
-    }, [firestore, isAdmin, statusFilter, isUserLoading]);
+    }, [firestore, isAdmin, statusFilter, isUserLoading, isProfileLoading]);
 
     const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
 
@@ -84,7 +87,7 @@ export default function AllLeadsPage() {
         updateDocumentNonBlocking(leadRef, { status });
     };
 
-    if (isUserLoading || !isAdmin) {
+    if (isUserLoading || isProfileLoading || !isAdmin) {
         return (
           <div className="container mx-auto py-12">
             <Skeleton className="h-12 w-1/3 mb-8" />

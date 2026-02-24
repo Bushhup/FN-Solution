@@ -1,34 +1,25 @@
 /**
  * Core Philosophy:
  * This ruleset implements a Role-Based Access Control (RBAC) model combined with
- * user ownership. It defines two primary roles: 'Admin' and 'User'.
- * The Admin role is assigned to a specific, hardcoded email address, granting
- * broad read and write permissions. Standard users have strict ownership
- * over their own profile and any leads they submit while authenticated.
- * Anonymous users have read-only access to public information and the ability
- * to submit leads.
+ * user ownership. It defines two primary roles: 'Admin' and 'User', stored in
+ * each user's profile document. The Admin role grants broad read and write
+ * permissions, while standard users have strict ownership over their own data.
  *
  * Data Structure:
- * The data is organized into several top-level collections:
- * - /users/{userId}: Stores private user profile data.
- * - /services/{serviceId}: A public catalog of company services.
- * - /leads/{leadId}: A collection of all user-submitted inquiries.
- * - /testimonials/{testimonialId}: A public collection of customer reviews.
- * This structure segregates public, private, and managed data for clarity
- * and security.
+ * - /users/{userId}: Stores user profiles, including the critical `role` field.
+ * - /services/{serviceId}: Public catalog of services.
+ * - /leads/{leadId}: Collection of user-submitted inquiries.
+ * - /testimonials/{testimonialId}: Public collection of reviews.
  *
  * Key Security Decisions:
- * - Admin status is determined by matching the user's email to a specific
- *   hardcoded value ('frank@gmail.com'). This is a simple and direct approach
- *   for a single-administrator system.
- * - Listing all users is explicitly disallowed for non-admins to protect user privacy.
- * - Public data (services, testimonials) is structurally segregated into its
- *   own collections, making list operations inherently safe.
- * - Leads can be created by anyone, but viewing is restricted. Authenticated
- *   users can only see their own leads, while admins can see all leads.
+ * - Admin status is determined by checking the `role` field in the user's
+ *   document: `get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Admin'`.
+ *   This is a scalable and manageable approach for multi-admin systems.
+ * - Listing all users is restricted to admins to protect privacy.
+ * - Public data (services, testimonials) is structurally segregated for safe listing.
+ * - Leads can be created by anyone, but viewing is restricted to the owner or an admin.
  *
  * Denormalization for Authorization:
- * To create simpler and more performant rules, we denormalize authorization data:
  * - leads.userId: Each lead document submitted by an authenticated user contains
  *   a denormalized 'userId' field. This allows a user to query for their own
  *   leads and for security rules to verify ownership without extra database reads.
@@ -36,8 +27,7 @@
  * Structural Segregation:
  * Public and private data are stored in separate top-level collections. For
  * example, /services and /testimonials are fully public for reads, while /users
- * is strictly private on a per-user basis (except for admins). This prevents accidental data
- * leakage from list queries.
+ * is strictly private on a per-user basis (except for admins).
  */
 rules_version = '2';
 service cloud.firestore {
@@ -56,23 +46,21 @@ service cloud.firestore {
 
     /**
      * Checks if the authenticated user's UID matches the provided userId.
-     * This is the primary function for verifying data ownership.
      */
     function isOwner(userId) {
       return isSignedIn() && request.auth.uid == userId;
     }
     
     /**
-     * Checks if the current user has administrative privileges.
-     * Admin status is granted if the user's email matches 'frank@gmail.com'.
+     * Checks if the current user has administrative privileges by reading their
+     * role from their user profile document.
      */
     function isAdmin() {
-      return isSignedIn() && request.auth.token.email == 'frank@gmail.com';
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Admin';
     }
 
     /**
      * Ensures that the document being modified already exists.
-     * CRITICAL for preventing writes to non-existent paths on update/delete.
      */
     function isExistingDoc() {
       return resource != null;
@@ -94,8 +82,6 @@ service cloud.firestore {
 
     /**
      * Validates a new lead document for relational integrity.
-     * - An authenticated user MUST set the `userId` field to their own UID.
-     * - An anonymous user MUST NOT provide a `userId` field.
      */
     function isLeadDataValidOnCreate() {
       let isAuthUserLead = isSignedIn() && request.resource.data.userId == request.auth.uid;
@@ -105,43 +91,46 @@ service cloud.firestore {
 
     /**
      * Enforces immutability of the lead's owner (`userId`) on update.
-     * A userId cannot be added, removed, or changed after creation.
      */
     function isLeadOwnerImmutable() {
-      // If the original doc had a userId, it cannot be changed.
-      // If the original doc did not have a userId, one cannot be added.
       return ('userId' in resource.data)
         ? request.resource.data.userId == resource.data.userId
         : !('userId' in request.resource.data);
     }
+    
+    /**
+    * Allows an admin to change any field except for the user's ID.
+    * A regular user can only change their own profile fields, but cannot change their own role.
+    */
+    function canUpdateUser(userId) {
+      let isOwnerUpdate = isOwner(userId) && request.resource.data.role == resource.data.role;
+      return (isAdmin() || isOwnerUpdate) && isExistingDoc() && isUserIdImmutable();
+    }
+
 
     // ----------------------------------------------------------------------
     // Collection Rules
     // ----------------------------------------------------------------------
 
     /**
-     * @description Stores individual user profiles. Access is restricted to the user themselves or administrators.
+     * @description Stores user profiles. The `role` field determines admin access.
      * @path /users/{userId}
      * @allow (get) An authenticated user reading their own profile, or an admin reading any profile.
-     * @allow (list) An admin listing all users for reporting purposes (e.g., total user count).
-     * @allow (create) An authenticated user creating their own profile document, e.g., POST /users/abc-123 with auth.uid = 'abc-123'.
-     * @deny (create) A user trying to create a profile for another user, e.g., POST /users/xyz-456 with auth.uid = 'abc-123'.
-     * @principle Restricts access to a user's own data tree and ensures relational integrity on creation.
+     * @allow (list) An admin listing all users.
+     * @allow (create) An authenticated user creating their own profile.
+     * @allow (update) An admin can update any profile. A user can update their own profile but cannot change their role.
      */
     match /users/{userId} {
       allow get: if isOwner(userId) || isAdmin();
-      allow list: if isAdmin(); // Allow admins to list users for dashboard counts.
+      allow list: if isAdmin();
       allow create: if isOwner(userId) && isConsistentUserDataOnCreate(userId);
-      allow update: if (isOwner(userId) || isAdmin()) && isExistingDoc() && isUserIdImmutable();
-      allow delete: if isAdmin() && isExistingDoc(); // Only admins can delete user profiles.
+      allow update: if canUpdateUser(userId);
+      allow delete: if isAdmin() && isExistingDoc();
     }
 
     /**
-     * @description Catalog of available services. Publicly readable by all, but writable only by admins.
+     * @description Catalog of available services. Publicly readable, admin writable.
      * @path /services/{serviceId}
-     * @allow (get) Any user, signed-in or anonymous, reading a service document.
-     * @deny (create) A non-admin user trying to add a new service.
-     * @principle Segregates public read-only data from protected write operations.
      */
     match /services/{serviceId} {
       allow get: if true;
@@ -152,12 +141,8 @@ service cloud.firestore {
     }
 
     /**
-     * @description Stores all service inquiries. Can be created by anyone, but viewing is restricted.
+     * @description Service inquiries. Creatable by anyone, readable by owner or admin.
      * @path /leads/{leadId}
-     * @allow (read) An admin can read any lead. An authenticated user can read (get/list) their own leads.
-     * @allow (create) An anonymous or authenticated user submitting a lead.
-     * @deny (read) A user attempting to read leads belonging to another user.
-     * @principle Enforces document ownership for reads and modifications, while allowing broad create access.
      */
     match /leads/{leadId} {
       allow read: if isAdmin() || isOwner(resource.data.userId);
@@ -167,11 +152,8 @@ service cloud.firestore {
     }
 
     /**
-     * @description Customer testimonials. Publicly readable by all, but writable only by admins.
+     * @description Customer testimonials. Publicly readable, admin writable.
      * @path /testimonials/{testimonialId}
-     * @allow (list) Any user, signed-in or anonymous, listing all testimonials.
-     * @deny (create) A non-admin user trying to add a fake testimonial.
-     * @principle Segregates public read-only data from protected write operations.
      */
     match /testimonials/{testimonialId} {
       allow get: if true;

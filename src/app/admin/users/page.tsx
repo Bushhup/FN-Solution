@@ -11,36 +11,46 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useUser, useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, orderBy, query } from 'firebase/firestore';
+import { useUser, useCollection, useFirestore, useMemoFirebase, useDoc, updateDocumentNonBlocking } from '@/firebase';
+import { collection, doc, orderBy, query } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { MoreHorizontal } from 'lucide-react';
 
 export default function AllUsersPage() {
     const { user, isUserLoading } = useUser();
     const router = useRouter();
     const firestore = useFirestore();
 
-    const isAdmin = useMemo(() => user?.email === 'frank@gmail.com', [user]);
+    const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+    const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
+    const isAdmin = useMemo(() => userProfile?.role === 'Admin', [userProfile]);
 
     useEffect(() => {
-        if (!isUserLoading && !user) {
+        if (!isUserLoading && !isProfileLoading && !user) {
           router.push('/login');
-        } else if (!isUserLoading && user && !isAdmin) {
+        } else if (!isUserLoading && !isProfileLoading && user && !isAdmin) {
           router.push('/dashboard');
         }
-    }, [user, isUserLoading, isAdmin, router]);
+    }, [user, isUserLoading, isProfileLoading, isAdmin, router]);
 
     const usersQuery = useMemoFirebase(() => {
-        if (isUserLoading || !isAdmin) return null;
+        if (isUserLoading || isProfileLoading || !isAdmin) return null;
         return query(collection(firestore, 'users'), orderBy('createdAt', 'desc'));
-    }, [firestore, isAdmin, isUserLoading]);
+    }, [firestore, isAdmin, isUserLoading, isProfileLoading]);
 
     const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
-    if (isUserLoading || !isAdmin) {
+    const handleRoleChange = (userId: string, newRole: 'Admin' | 'User') => {
+        if (!firestore || !user || userId === user.uid) return; // Prevent self-demotion
+        const targetUserDocRef = doc(firestore, 'users', userId);
+        updateDocumentNonBlocking(targetUserDocRef, { role: newRole });
+    };
+
+    if (isUserLoading || isProfileLoading || !isAdmin) {
         return (
           <div className="container mx-auto py-12">
             <Skeleton className="h-12 w-1/3 mb-8" />
@@ -68,11 +78,12 @@ export default function AllUsersPage() {
                                 <TableHead>Email</TableHead>
                                 <TableHead>Role</TableHead>
                                 <TableHead>Date Joined</TableHead>
+                                <TableHead><span className="sr-only">Actions</span></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {areUsersLoading && Array.from({ length: 10 }).map((_, i) => (
-                                <TableRow key={i}><TableCell colSpan={4}><Skeleton className="h-8 w-full" /></TableCell></TableRow>
+                                <TableRow key={i}><TableCell colSpan={5}><Skeleton className="h-8 w-full" /></TableCell></TableRow>
                             ))}
                             {users && users.length > 0 ? users.map((u) => (
                                 <TableRow key={u.id}>
@@ -80,10 +91,32 @@ export default function AllUsersPage() {
                                     <TableCell>{u.email}</TableCell>
                                     <TableCell>{u.role}</TableCell>
                                     <TableCell>{u.createdAt ? format(u.createdAt.toDate(), 'PP') : 'N/A'}</TableCell>
+                                    <TableCell>
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button aria-haspopup="true" size="icon" variant="ghost" disabled={u.id === user?.uid}>
+                                                    <MoreHorizontal className="h-4 w-4" /><span className="sr-only">Toggle menu</span>
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuLabel>Change Role</DropdownMenuLabel>
+                                                {u.role !== 'Admin' && (
+                                                    <DropdownMenuItem onClick={() => handleRoleChange(u.id, 'Admin')}>
+                                                        Make Admin
+                                                    </DropdownMenuItem>
+                                                )}
+                                                {u.role === 'Admin' && (
+                                                    <DropdownMenuItem onClick={() => handleRoleChange(u.id, 'User')}>
+                                                        Make User
+                                                    </DropdownMenuItem>
+                                                )}
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </TableCell>
                                 </TableRow>
                             )) : !areUsersLoading && (
                                 <TableRow>
-                                    <TableCell colSpan={4} className="text-center">No users found.</TableCell>
+                                    <TableCell colSpan={5} className="text-center">No users found.</TableCell>
                                 </TableRow>
                             )}
                         </TableBody>
