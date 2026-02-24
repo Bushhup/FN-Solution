@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, MapPin, Phone, Twitter } from 'lucide-react';
 import { services } from '@/lib/data';
 
 export function Footer() {
@@ -44,6 +44,16 @@ export function Footer() {
             <p className="mt-4 text-sm text-muted-foreground">
               Your trusted partner for financial compliance and growth.
             </p>
+            <div className="mt-6 space-y-4 text-sm text-muted-foreground">
+                <div className="flex items-start gap-3">
+                    <MapPin className="h-5 w-5 flex-shrink-0 text-primary" />
+                    <span>105, Rudra Sagar Apartment, Plot No 312, Sector 5, Navi Mumbai, Thane, Maharashtra - 400705</span>
+                </div>
+                <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 text-primary" />
+                    <span>+91 93211 92310</span>
+                </div>
+            </div>
             <div className="mt-6 flex space-x-4">
               {socialLinks.map((social) => (
                 <Button
