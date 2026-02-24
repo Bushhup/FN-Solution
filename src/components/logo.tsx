@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import { Landmark } from 'lucide-react';
 import Link from 'next/link';
 
 type LogoProps = {
@@ -11,12 +10,11 @@ export function Logo({ className }: LogoProps) {
     <Link
       href="/"
       className={cn(
-        'flex items-center gap-2 font-headline text-xl font-bold text-glow',
+        'flex items-center',
         className
       )}
     >
-      <Landmark className="h-6 w-6 text-primary" />
-      <span>FN Tax Solution</span>
+      <img src="/logo.png" alt="FN Tax Solution Logo" className="h-10" />
     </Link>
   );
 }
