@@ -1,15 +1,11 @@
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, MapPin, Phone, Twitter } from 'lucide-react';
+import { MapPin, Phone } from 'lucide-react';
 import { services } from '@/lib/data';
 
 export function Footer() {
-  const socialLinks = [
-    { icon: Twitter, href: 'https://twitter.com', name: 'Twitter' },
-    { icon: Linkedin, href: 'https://linkedin.com', name: 'LinkedIn' },
-    { icon: Github, href: 'https://github.com', name: 'GitHub' },
-  ];
+  const socialLinks: { icon: any; href: string; name: string }[] = [];
 
   const footerLinks = [
     {
