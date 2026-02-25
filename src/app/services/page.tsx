@@ -7,6 +7,24 @@ import Link from 'next/link';
 import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
 import { collection } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  Calculator,
+  Landmark,
+  FileText,
+  Building2,
+  Handshake,
+  ShieldCheck,
+  type LucideIcon,
+} from 'lucide-react';
+
+const serviceIconMap: { [key: string]: LucideIcon } = {
+  'GST Registration': Landmark,
+  'Income Tax Filing': FileText,
+  'Company Registration': Building2,
+  'LLP Registration': Handshake,
+  'Compliance Services': ShieldCheck,
+  'Accounting Services': Calculator,
+};
 
 // export const metadata: Metadata = {
 //   title: 'Our Services - FN Tax Solution',
@@ -16,7 +34,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function ServicesPage() {
   const firestore = useFirestore();
   const servicesQuery = useMemoFirebase(() => collection(firestore, 'services'), [firestore]);
-  const { data: services, isLoading } = useCollection<Omit<Service, 'details' | 'slug'>>(servicesQuery);
+  const { data: services, isLoading } = useCollection<Omit<Service, 'details' | 'slug' | 'icon'>>(servicesQuery);
 
 
   return (
@@ -37,7 +55,7 @@ export default function ServicesPage() {
         {services?.map((service) => (
           <Link href={`/services/${service.id}`} key={service.id}>
             <GlassCard
-              icon={Landmark} // TODO: make icon dynamic
+              icon={serviceIconMap[service.category] || Landmark}
               title={service.title}
               description={service.description}
               className="h-full"
@@ -51,13 +69,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-
-// TODO: fix this import hell
-import {
-  Calculator,
-  Landmark,
-  FileText,
-  Building2,
-  Handshake,
-  ShieldCheck,
-} from 'lucide-react';

@@ -5,10 +5,20 @@ import { notFound, useParams } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, ChevronRight, Landmark } from 'lucide-react';
+import { ArrowRight, ChevronRight, Landmark, Calculator, FileText, Building2, Handshake, ShieldCheck, type LucideIcon } from 'lucide-react';
 import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
 import { doc } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
+
+const serviceIconMap: { [key: string]: LucideIcon } = {
+  'GST Registration': Landmark,
+  'Income Tax Filing': FileText,
+  'Company Registration': Building2,
+  'LLP Registration': Handshake,
+  'Compliance Services': ShieldCheck,
+  'Accounting Services': Calculator,
+};
+
 
 // type Props = {
 //   params: { id: string };
@@ -35,7 +45,7 @@ export default function ServiceDetailPage() {
   const firestore = useFirestore();
 
   const serviceRef = useMemoFirebase(() => serviceId ? doc(firestore, 'services', serviceId) : null, [firestore, serviceId]);
-  const { data: service, isLoading } = useDoc<Service>(serviceRef);
+  const { data: service, isLoading } = useDoc<Omit<Service, 'icon' | 'slug' | 'details'>>(serviceRef);
 
   // This is temporary until we fetch other services from firestore
   const otherServices = services.filter((s) => s.slug !== serviceId).slice(0, 3);
@@ -62,6 +72,8 @@ export default function ServiceDetailPage() {
     notFound();
   }
 
+  const ServiceIcon = serviceIconMap[service.category] || Landmark;
+
   return (
     <div className="container mx-auto py-20 sm:py-28">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
@@ -74,7 +86,7 @@ export default function ServiceDetailPage() {
           </div>
           <div className="mb-8 flex items-center gap-4">
             <div className="rounded-lg bg-primary/10 p-4 text-primary">
-              <Landmark className="h-8 w-8" />
+              <ServiceIcon className="h-8 w-8" />
             </div>
             <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl">
               {service.title}

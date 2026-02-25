@@ -16,6 +16,7 @@ export type Service = {
   icon: LucideIcon;
   title: string;
   slug: string;
+  category: string;
   description: string;
   details: {
     heading: string;
@@ -28,6 +29,7 @@ export const services: Service[] = [
     icon: Landmark,
     title: 'GST Registration',
     slug: 'gst-registration',
+    category: 'GST Registration',
     description:
       'Navigate the complexities of GST registration with our expert guidance, ensuring a smooth and compliant process for your business.',
     details: [
@@ -49,6 +51,7 @@ export const services: Service[] = [
     icon: FileText,
     title: 'Income Tax Filing',
     slug: 'income-tax-filing',
+    category: 'Income Tax Filing',
     description:
       'Maximize your returns and minimize your liabilities with our precise and thorough income tax filing services for individuals and businesses.',
     details: [
@@ -70,6 +73,7 @@ export const services: Service[] = [
     icon: Building2,
     title: 'Company Registration',
     slug: 'company-registration',
+    category: 'Company Registration',
     description:
       'Launch your venture with confidence. We handle all aspects of company registration, from name approval to incorporation.',
     details: [
@@ -91,6 +95,7 @@ export const services: Service[] = [
     icon: Handshake,
     title: 'LLP Registration',
     slug: 'llp-registration',
+    category: 'LLP Registration',
     description:
       'Establish your Limited Liability Partnership with ease. Our streamlined process ensures your business is structured for success.',
     details: [
@@ -112,6 +117,7 @@ export const services: Service[] = [
     icon: ShieldCheck,
     title: 'Compliance Services',
     slug: 'compliance-services',
+    category: 'Compliance Services',
     description:
       'Stay ahead of regulatory changes. We provide comprehensive compliance services to keep your business secure and in good standing.',
     details: [
@@ -133,6 +139,7 @@ export const services: Service[] = [
     icon: Calculator,
     title: 'Accounting Services',
     slug: 'accounting-services',
+    category: 'Accounting Services',
     description:
       'From bookkeeping to financial reporting, our accounting services provide the clarity and insights you need to grow your business.',
     details: [

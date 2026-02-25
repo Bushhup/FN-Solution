@@ -16,10 +16,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { services } from '@/lib/data';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { addDocumentNonBlocking, useFirestore, useUser } from '@/firebase';
+import { addDocumentNonBlocking, useFirestore, useUser, useCollection, useMemoFirebase } from '@/firebase';
 import { collection, serverTimestamp } from 'firebase/firestore';
+import { Service } from '@/lib/data';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -33,6 +33,9 @@ export function ConsultationForm() {
   const { toast } = useToast();
   const firestore = useFirestore();
   const { user } = useUser();
+
+  const servicesQuery = useMemoFirebase(() => collection(firestore, 'services'), [firestore]);
+  const { data: services } = useCollection<Omit<Service, 'details' | 'slug' | 'icon'>>(servicesQuery);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -120,7 +123,7 @@ export function ConsultationForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {services.map(s => <SelectItem key={s.title} value={s.title}>{s.title}</SelectItem>)}
+                  {services?.map(s => <SelectItem key={s.id} value={s.title}>{s.title}</SelectItem>)}
                 </SelectContent>
               </Select>
               <FormMessage />
