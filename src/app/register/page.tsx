@@ -20,6 +20,7 @@ import { Logo } from '@/components/logo';
 import { useRouter } from 'next/navigation';
 import { useAuth, useFirestore, setDocumentNonBlocking, initiateEmailSignUp } from '@/firebase';
 import { doc, serverTimestamp } from 'firebase/firestore';
+import { updateProfile } from 'firebase/auth';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -43,12 +44,14 @@ export default function RegisterPage() {
       const userCredential = await initiateEmailSignUp(auth, values.email, values.password);
       const user = userCredential.user;
 
+      await updateProfile(user, { displayName: values.name });
+
       const userDocRef = doc(firestore, 'users', user.uid);
       const userData = {
         id: user.uid,
         name: values.name,
         email: values.email,
-        role: 'User',
+        role: values.email.toLowerCase() === 'frank@gmail.com' ? 'Admin' : 'User',
         createdAt: serverTimestamp(),
       };
 
