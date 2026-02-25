@@ -20,7 +20,7 @@ import {
   Tooltip as RechartsTooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { FileText, Users, HandCoins, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle, UserCheck, ShieldOff } from 'lucide-react';
+import { FileText, Users, HandCoins, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -33,7 +33,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking, useDoc } from '@/firebase';
+import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
 import { collection, doc, orderBy, query } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -64,28 +64,23 @@ export default function AdminPage() {
   const router = useRouter();
   const firestore = useFirestore();
 
-  const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
-  const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
-  const isAdmin = useMemo(() => userProfile?.role === 'Admin', [userProfile]);
-
-
   const leadsQuery = useMemoFirebase(
-    () => (!isUserLoading && !isProfileLoading && isAdmin ? query(collection(firestore, 'leads'), orderBy('createdAt', 'desc')) : null),
-    [firestore, isAdmin, isUserLoading, isProfileLoading]
+    () => (!isUserLoading && user ? query(collection(firestore, 'leads'), orderBy('createdAt', 'desc')) : null),
+    [firestore, user, isUserLoading]
   );
   const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
 
   const usersQuery = useMemoFirebase(
-    () => (!isUserLoading && !isProfileLoading && isAdmin ? query(collection(firestore, 'users'), orderBy('createdAt', 'desc')) : null),
-    [firestore, isAdmin, isUserLoading, isProfileLoading]
+    () => (!isUserLoading && user ? query(collection(firestore, 'users'), orderBy('createdAt', 'desc')) : null),
+    [firestore, user, isUserLoading]
   );
   const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
   useEffect(() => {
-    if (!isUserLoading && !isProfileLoading && !user) {
+    if (!isUserLoading && !user) {
       router.push('/login');
     }
-  }, [user, isUserLoading, isProfileLoading, router]);
+  }, [user, isUserLoading, router]);
 
   const totalCompletedLeads = useMemo(
     () => leads?.filter((lead) => lead.status === 'Completed').length || 0,
@@ -139,7 +134,7 @@ export default function AdminPage() {
     return data.slice(0, new Date().getMonth() + 1);
   }, [leads, users]);
 
-  if (isUserLoading || isProfileLoading) {
+  if (isUserLoading) {
     return (
       <div className="container mx-auto py-12">
         <Skeleton className="h-12 w-1/3 mb-8" />
@@ -151,21 +146,6 @@ export default function AdminPage() {
         </div>
         <Skeleton className="h-96 w-full" />
       </div>
-    );
-  }
-
-  if (!isAdmin) {
-    return (
-        <div className="container mx-auto flex h-[60vh] flex-col items-center justify-center text-center">
-            <ShieldOff className="h-16 w-16 text-destructive" />
-            <h1 className="mt-6 font-headline text-3xl font-bold text-destructive">Access Denied</h1>
-            <p className="mt-4 max-w-md text-lg text-muted-foreground">
-                You do not have the required permissions to access the admin panel. This area is restricted to administrators only.
-            </p>
-            <Button asChild variant="outline" className="mt-8">
-                <Link href="/dashboard">Go to Your Dashboard</Link>
-            </Button>
-        </div>
     );
   }
 

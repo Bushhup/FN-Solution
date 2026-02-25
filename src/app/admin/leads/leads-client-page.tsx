@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { FileText, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle, ShieldOff } from 'lucide-react';
+import { FileText, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -26,7 +26,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking, useDoc } from '@/firebase';
+import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
 import { collection, doc, orderBy, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -56,26 +56,22 @@ export default function AllLeadsClientPage() {
     const searchParams = useSearchParams();
     const firestore = useFirestore();
 
-    const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
-    const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
-    const isAdmin = useMemo(() => userProfile?.role === 'Admin', [userProfile]);
-
     const statusFilter = searchParams.get('status');
 
     useEffect(() => {
-        if (!isUserLoading && !isProfileLoading && !user) {
+        if (!isUserLoading && !user) {
           router.push('/login');
         }
-    }, [user, isUserLoading, isProfileLoading, router]);
+    }, [user, isUserLoading, router]);
 
     const leadsQuery = useMemoFirebase(() => {
-        if (isUserLoading || isProfileLoading || !isAdmin) return null;
+        if (isUserLoading || !user) return null;
         const baseQuery = collection(firestore, 'leads');
         if (statusFilter) {
             return query(baseQuery, where('status', '==', statusFilter), orderBy('createdAt', 'desc'));
         }
         return query(baseQuery, orderBy('createdAt', 'desc'));
-    }, [firestore, isAdmin, statusFilter, isUserLoading, isProfileLoading]);
+    }, [firestore, user, statusFilter, isUserLoading]);
 
     const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
 
@@ -85,27 +81,12 @@ export default function AllLeadsClientPage() {
         updateDocumentNonBlocking(leadRef, { status });
     };
 
-    if (isUserLoading || isProfileLoading) {
+    if (isUserLoading) {
         return (
           <div className="container mx-auto py-12">
             <Skeleton className="h-12 w-1/3 mb-8" />
             <Skeleton className="h-96 w-full" />
           </div>
-        );
-    }
-    
-    if (!isAdmin) {
-        return (
-            <div className="container mx-auto flex h-[60vh] flex-col items-center justify-center text-center">
-                <ShieldOff className="h-16 w-16 text-destructive" />
-                <h1 className="mt-6 font-headline text-3xl font-bold text-destructive">Access Denied</h1>
-                <p className="mt-4 max-w-md text-lg text-muted-foreground">
-                    You do not have permission to view this page.
-                </p>
-                <Button asChild variant="outline" className="mt-8">
-                    <Link href="/admin">Back to Admin Dashboard</Link>
-                </Button>
-            </div>
         );
     }
       

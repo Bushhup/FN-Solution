@@ -11,34 +11,30 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useUser, useCollection, useFirestore, useMemoFirebase, useDoc, updateDocumentNonBlocking } from '@/firebase';
+import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
 import { collection, doc, orderBy, query } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, ShieldOff } from 'lucide-react';
+import { MoreHorizontal } from 'lucide-react';
 
 export default function AllUsersPage() {
     const { user, isUserLoading } = useUser();
     const router = useRouter();
     const firestore = useFirestore();
 
-    const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
-    const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
-    const isAdmin = useMemo(() => userProfile?.role === 'Admin', [userProfile]);
-
     useEffect(() => {
-        if (!isUserLoading && !isProfileLoading && !user) {
+        if (!isUserLoading && !user) {
           router.push('/login');
         }
-    }, [user, isUserLoading, isProfileLoading, router]);
+    }, [user, isUserLoading, router]);
 
     const usersQuery = useMemoFirebase(() => {
-        if (isUserLoading || isProfileLoading || !isAdmin) return null;
+        if (isUserLoading || !user) return null;
         return query(collection(firestore, 'users'), orderBy('createdAt', 'desc'));
-    }, [firestore, isAdmin, isUserLoading, isProfileLoading]);
+    }, [firestore, user, isUserLoading]);
 
     const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
@@ -48,27 +44,12 @@ export default function AllUsersPage() {
         updateDocumentNonBlocking(targetUserDocRef, { role: newRole });
     };
 
-    if (isUserLoading || isProfileLoading) {
+    if (isUserLoading) {
         return (
           <div className="container mx-auto py-12">
             <Skeleton className="h-12 w-1/3 mb-8" />
             <Skeleton className="h-96 w-full" />
           </div>
-        );
-    }
-      
-    if (!isAdmin) {
-        return (
-            <div className="container mx-auto flex h-[60vh] flex-col items-center justify-center text-center">
-                <ShieldOff className="h-16 w-16 text-destructive" />
-                <h1 className="mt-6 font-headline text-3xl font-bold text-destructive">Access Denied</h1>
-                <p className="mt-4 max-w-md text-lg text-muted-foreground">
-                    You do not have permission to view this page.
-                </p>
-                <Button asChild variant="outline" className="mt-8">
-                    <Link href="/admin">Back to Admin Dashboard</Link>
-                </Button>
-            </div>
         );
     }
 
