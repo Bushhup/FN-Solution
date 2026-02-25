@@ -18,8 +18,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
 import { useRouter } from 'next/navigation';
-import { useAuth, initiateEmailSignIn, useFirestore, setDocumentNonBlocking } from '@/firebase';
-import { doc } from 'firebase/firestore';
+import { useAuth, initiateEmailSignIn, useFirestore } from '@/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address.'),
@@ -44,8 +44,10 @@ export default function LoginPage() {
       // Ensure frank@gmail.com always has admin role in Firestore
       if (user && values.email.toLowerCase() === 'frank@gmail.com') {
         const userDocRef = doc(firestore, 'users', user.uid);
-        // Use merge:true to create or update the role without overwriting other fields.
-        setDocumentNonBlocking(userDocRef, { role: 'Admin' }, { merge: true });
+        // Use await with setDoc to ensure the role is set before redirecting.
+        // This prevents a race condition where the user lands on the admin page
+        // before their permissions are updated in the database.
+        await setDoc(userDocRef, { role: 'Admin' }, { merge: true });
       }
 
       toast({

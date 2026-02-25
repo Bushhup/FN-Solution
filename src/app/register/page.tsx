@@ -18,8 +18,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
 import { useRouter } from 'next/navigation';
-import { useAuth, useFirestore, setDocumentNonBlocking, initiateEmailSignUp } from '@/firebase';
-import { doc, serverTimestamp } from 'firebase/firestore';
+import { useAuth, useFirestore, initiateEmailSignUp } from '@/firebase';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 
 const formSchema = z.object({
@@ -55,7 +55,7 @@ export default function RegisterPage() {
         createdAt: serverTimestamp(),
       };
 
-      setDocumentNonBlocking(userDocRef, userData, { merge: true });
+      await setDoc(userDocRef, userData, { merge: true });
 
       toast({
         title: 'Account Created!',
