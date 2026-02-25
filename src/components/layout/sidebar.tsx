@@ -13,7 +13,8 @@ import {
 } from '@/components/ui/sheet';
 import { Logo } from '@/components/logo';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { useUser } from '@/firebase';
+import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
+import { doc } from 'firebase/firestore';
 
 const navLinks = [
   { href: '/services', label: 'Services' },
@@ -25,6 +26,9 @@ const navLinks = [
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useUser();
+  const firestore = useFirestore();
+  const userProfileRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+  const { data: userProfile } = useDoc(userProfileRef);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -62,13 +66,15 @@ export function Sidebar() {
                         >
                             Dashboard
                         </Link>
-                        <Link
-                            href="/admin"
-                            className="font-bold text-primary transition-colors hover:text-primary/80"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Admin Portal
-                        </Link>
+                        {userProfile?.role === 'Admin' && (
+                            <Link
+                                href="/admin"
+                                className="font-bold text-primary transition-colors hover:text-primary/80"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Admin Portal
+                            </Link>
+                        )}
                     </>
                 )}
             </nav>

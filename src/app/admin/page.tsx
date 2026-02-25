@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo } from 'react';
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -33,13 +34,12 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
+import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking, useDoc } from '@/firebase';
 import { collection, doc, orderBy, query } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { format } from 'date-fns';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import Link from 'next/link';
 
 const statusVariant: { [key: string]: 'default' | 'secondary' | 'destructive' | 'outline' } = {
   'Completed': 'default',
@@ -64,23 +64,26 @@ export default function AdminPage() {
   const router = useRouter();
   const firestore = useFirestore();
 
-  const leadsQuery = useMemoFirebase(
-    () => (!isUserLoading && user ? query(collection(firestore, 'leads'), orderBy('createdAt', 'desc')) : null),
-    [firestore, user, isUserLoading]
-  );
-  const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
-
-  const usersQuery = useMemoFirebase(
-    () => (!isUserLoading && user ? query(collection(firestore, 'users'), orderBy('createdAt', 'desc')) : null),
-    [firestore, user, isUserLoading]
-  );
-  const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
+  const userProfileRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+  const { data: userProfile, isLoading: isProfileLoading } = useDoc(userProfileRef);
 
   useEffect(() => {
     if (!isUserLoading && !user) {
       router.push('/login');
     }
   }, [user, isUserLoading, router]);
+
+  const leadsQuery = useMemoFirebase(
+    () => (userProfile?.role === 'Admin' ? query(collection(firestore, 'leads'), orderBy('createdAt', 'desc')) : null),
+    [firestore, userProfile]
+  );
+  const { data: leads, isLoading: areLeadsLoading } = useCollection(leadsQuery);
+
+  const usersQuery = useMemoFirebase(
+    () => (userProfile?.role === 'Admin' ? query(collection(firestore, 'users'), orderBy('createdAt', 'desc')) : null),
+    [firestore, userProfile]
+  );
+  const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
   const totalCompletedLeads = useMemo(
     () => leads?.filter((lead) => lead.status === 'Completed').length || 0,
@@ -134,7 +137,7 @@ export default function AdminPage() {
     return data.slice(0, new Date().getMonth() + 1);
   }, [leads, users]);
 
-  if (isUserLoading) {
+  if (isUserLoading || isProfileLoading) {
     return (
       <div className="container mx-auto py-12">
         <Skeleton className="h-12 w-1/3 mb-8" />
@@ -145,6 +148,20 @@ export default function AdminPage() {
           <Skeleton className="h-32 w-full" />
         </div>
         <Skeleton className="h-96 w-full" />
+      </div>
+    );
+  }
+
+  if (userProfile?.role !== 'Admin') {
+    return (
+      <div className="container mx-auto flex h-[calc(100vh-8rem)] items-center justify-center text-center">
+        <div>
+          <h1 className="text-4xl font-bold text-destructive">Access Denied</h1>
+          <p className="mt-4 text-lg text-muted-foreground">You do not have the required permissions to view this page.</p>
+          <Button asChild className="mt-8">
+            <Link href="/dashboard">Return to Dashboard</Link>
+          </Button>
+        </div>
       </div>
     );
   }

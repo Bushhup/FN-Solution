@@ -18,7 +18,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
 import { useRouter } from 'next/navigation';
-import { useAuth, initiateEmailSignIn } from '@/firebase';
+import { useAuth, initiateEmailSignIn, useFirestore, setDocumentNonBlocking } from '@/firebase';
+import { doc } from 'firebase/firestore';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address.'),
@@ -29,6 +30,7 @@ export default function LoginPage() {
   const { toast } = useToast();
   const router = useRouter();
   const auth = useAuth();
+  const firestore = useFirestore();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { email: '', password: '' },
@@ -36,12 +38,28 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await initiateEmailSignIn(auth, values.email, values.password);
+      const userCredential = await initiateEmailSignIn(auth, values.email, values.password);
+      const user = userCredential.user;
+
+      // Ensure frank@gmail.com always has admin role in Firestore
+      if (user && values.email.toLowerCase() === 'frank@gmail.com') {
+        const userDocRef = doc(firestore, 'users', user.uid);
+        // Use merge:true to create or update the role without overwriting other fields.
+        setDocumentNonBlocking(userDocRef, { role: 'Admin' }, { merge: true });
+      }
+
       toast({
         title: 'Logged In!',
-        description: 'Redirecting you to your dashboard...',
+        description: 'Redirecting you...',
       });
-      router.push('/dashboard');
+
+      // Redirect to admin page for admin user, otherwise to dashboard
+      if (values.email.toLowerCase() === 'frank@gmail.com') {
+        router.push('/admin');
+      } else {
+        router.push('/dashboard');
+      }
+
     } catch (error: any) {
       let description = 'An unexpected error occurred. Please try again.';
       if (error.code === 'auth/invalid-credential') {

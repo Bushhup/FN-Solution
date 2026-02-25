@@ -5,17 +5,22 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { Sidebar } from '@/components/layout/sidebar';
-import { useAuth, useUser } from '@/firebase';
+import { useAuth, useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '../ui/skeleton';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { LayoutDashboard, LogOut, Shield } from 'lucide-react';
+import { doc } from 'firebase/firestore';
 
 export function Header() {
   const { user, isUserLoading } = useUser();
   const auth = useAuth();
   const router = useRouter();
+  const firestore = useFirestore();
+
+  const userProfileRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+  const { data: userProfile } = useDoc(userProfileRef);
 
   const handleLogout = async () => {
     await auth.signOut();
@@ -65,10 +70,12 @@ export function Header() {
                   <LayoutDashboard className="mr-2 h-4 w-4" />
                   <span>Dashboard</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => router.push('/admin')}>
-                  <Shield className="mr-2 h-4 w-4" />
-                  <span>Admin</span>
-                </DropdownMenuItem>
+                {userProfile?.role === 'Admin' && (
+                  <DropdownMenuItem onClick={() => router.push('/admin')}>
+                    <Shield className="mr-2 h-4 w-4" />
+                    <span>Admin</span>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4" />

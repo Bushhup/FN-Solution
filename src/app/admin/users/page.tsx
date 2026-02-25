@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
+import { useUser, useCollection, useFirestore, useMemoFirebase, updateDocumentNonBlocking, useDoc } from '@/firebase';
 import { collection, doc, orderBy, query } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -25,6 +25,9 @@ export default function AllUsersPage() {
     const router = useRouter();
     const firestore = useFirestore();
 
+    const userProfileRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+    const { data: userProfile, isLoading: isProfileLoading } = useDoc(userProfileRef);
+
     useEffect(() => {
         if (!isUserLoading && !user) {
           router.push('/login');
@@ -32,9 +35,9 @@ export default function AllUsersPage() {
     }, [user, isUserLoading, router]);
 
     const usersQuery = useMemoFirebase(() => {
-        if (isUserLoading || !user) return null;
+        if (userProfile?.role !== 'Admin') return null;
         return query(collection(firestore, 'users'), orderBy('createdAt', 'desc'));
-    }, [firestore, user, isUserLoading]);
+    }, [firestore, userProfile]);
 
     const { data: users, isLoading: areUsersLoading } = useCollection(usersQuery);
 
@@ -44,11 +47,25 @@ export default function AllUsersPage() {
         updateDocumentNonBlocking(targetUserDocRef, { role: newRole });
     };
 
-    if (isUserLoading) {
+    if (isUserLoading || isProfileLoading) {
         return (
           <div className="container mx-auto py-12">
             <Skeleton className="h-12 w-1/3 mb-8" />
             <Skeleton className="h-96 w-full" />
+          </div>
+        );
+    }
+    
+    if (userProfile?.role !== 'Admin') {
+        return (
+          <div className="container mx-auto flex h-[calc(100vh-8rem)] items-center justify-center text-center">
+            <div>
+              <h1 className="text-4xl font-bold text-destructive">Access Denied</h1>
+              <p className="mt-4 text-lg text-muted-foreground">You do not have the required permissions to view this page.</p>
+              <Button asChild className="mt-8">
+                <Link href="/dashboard">Return to Dashboard</Link>
+              </Button>
+            </div>
           </div>
         );
     }
