@@ -103,7 +103,13 @@ service cloud.firestore {
     * A regular user can only change their own profile fields, but cannot change their own role.
     */
     function canUpdateUser(userId) {
-      let isOwnerUpdate = isOwner(userId) && request.resource.data.role == resource.data.role;
+      // An owner can't normally change their role. This is the check for a valid owner update.
+      let isOwnerUpdate = isOwner(userId) && (
+        request.resource.data.role == resource.data.role ||
+        // Exception: allow frank@gmail.com to set their role to Admin to seed the first admin.
+        (request.auth.token.email == 'frank@gmail.com' && request.resource.data.role == 'Admin')
+      );
+      
       return (isAdmin() || isOwnerUpdate) && isExistingDoc() && isUserIdImmutable();
     }
 
