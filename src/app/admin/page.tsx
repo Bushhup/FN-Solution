@@ -20,7 +20,7 @@ import {
   Tooltip as RechartsTooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { FileText, Users, HandCoins, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle } from 'lucide-react';
+import { FileText, Users, HandCoins, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -94,6 +94,11 @@ export default function AdminPage() {
     [leads]
   );
 
+  const activeCustomers = useMemo(
+    () => (leads ? new Set(leads.filter(lead => lead.userId).map(lead => lead.userId)).size : 0),
+    [leads]
+  );
+
   const latestLead = useMemo(() => leads?.[0], [leads]);
   const latestUser = useMemo(() => users?.[0], [users]);
   const latestCompletedLead = useMemo(
@@ -140,7 +145,8 @@ export default function AdminPage() {
     return (
       <div className="container mx-auto py-12">
         <Skeleton className="h-12 w-1/3 mb-8" />
-        <div className="grid gap-6 md:grid-cols-3 mb-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
+          <Skeleton className="h-32 w-full" />
           <Skeleton className="h-32 w-full" />
           <Skeleton className="h-32 w-full" />
           <Skeleton className="h-32 w-full" />
@@ -155,7 +161,7 @@ export default function AdminPage() {
       <div className="container mx-auto py-12">
         <h1 className="mb-8 font-headline text-4xl font-bold">Admin Panel</h1>
 
-        <div className="mb-8 grid gap-6 md:grid-cols-3">
+        <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/admin/leads">
@@ -191,7 +197,7 @@ export default function AdminPage() {
               <Link href="/admin/users">
                 <Card className="glass-card">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+                    <CardTitle className="text-sm font-medium">Registered Users</CardTitle>
                     <Users className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
@@ -214,6 +220,25 @@ export default function AdminPage() {
               ) : (
                   <p className="text-xs text-muted-foreground">No users yet.</p>
               )}
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+                <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Active Customers</CardTitle>
+                    <UserCheck className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold">
+                    {areLeadsLoading ? <Skeleton className="h-8 w-16" /> : activeCustomers}
+                    </div>
+                    <p className="text-xs text-muted-foreground">Users with at least one lead.</p>
+                </CardContent>
+                </Card>
+            </TooltipTrigger>
+            <TooltipContent>
+                <p className="text-xs">Total unique users who have submitted a service request.</p>
             </TooltipContent>
           </Tooltip>
           <Tooltip>
