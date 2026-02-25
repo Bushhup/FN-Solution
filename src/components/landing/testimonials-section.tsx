@@ -1,15 +1,12 @@
 'use client';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Testimonial } from '@/lib/data';
+import { testimonials, type Testimonial } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection } from 'firebase/firestore';
-import { Skeleton } from '../ui/skeleton';
 
-function TestimonialCard({ testimonial, imageId }: { testimonial: Partial<Testimonial>, imageId: string }) {
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const imageData = PlaceHolderImages.find(
-    (img) => img.id === imageId
+    (img) => img.id === testimonial.imageId
   );
 
   return (
@@ -38,12 +35,6 @@ function TestimonialCard({ testimonial, imageId }: { testimonial: Partial<Testim
 }
 
 export function TestimonialsSection() {
-  const firestore = useFirestore();
-  const testimonialsQuery = useMemoFirebase(() => collection(firestore, 'testimonials'), [firestore]);
-  const { data: testimonials, isLoading } = useCollection<Testimonial>(testimonialsQuery);
-
-  const imageIds = ['testimonial-1', 'testimonial-2', 'testimonial-3'];
-
   return (
     <section id="testimonials" className="py-20 sm:py-28">
       <div className="container mx-auto">
@@ -57,13 +48,9 @@ export function TestimonialsSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {isLoading && Array.from({length: 3}).map((_, i) => <Skeleton key={i} className="h-64 w-full" />)}
-          {testimonials?.map((testimonial, index) => (
-            <TestimonialCard key={testimonial.id} testimonial={testimonial} imageId={imageIds[index % imageIds.length]} />
+          {testimonials.map((testimonial) => (
+            <TestimonialCard key={testimonial.name} testimonial={testimonial} />
           ))}
-          {!isLoading && testimonials?.length === 0 && (
-            <p className="col-span-full text-center text-muted-foreground">No testimonials yet. Be the first to share your experience!</p>
-          )}
         </div>
       </div>
     </section>
