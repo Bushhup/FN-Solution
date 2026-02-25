@@ -20,7 +20,7 @@ import {
   Tooltip as RechartsTooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { FileText, Users, HandCoins, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle, UserCheck } from 'lucide-react';
+import { FileText, Users, HandCoins, MoreHorizontal, CheckCircle, Clock, FilePlus, Loader, XCircle, UserCheck, ShieldOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -84,10 +84,8 @@ export default function AdminPage() {
   useEffect(() => {
     if (!isUserLoading && !isProfileLoading && !user) {
       router.push('/login');
-    } else if (!isUserLoading && !isProfileLoading && user && !isAdmin) {
-      router.push('/dashboard'); // Redirect non-admins
     }
-  }, [user, isUserLoading, isProfileLoading, isAdmin, router]);
+  }, [user, isUserLoading, isProfileLoading, router]);
 
   const totalCompletedLeads = useMemo(
     () => leads?.filter((lead) => lead.status === 'Completed').length || 0,
@@ -141,7 +139,7 @@ export default function AdminPage() {
     return data.slice(0, new Date().getMonth() + 1);
   }, [leads, users]);
 
-  if (isUserLoading || isProfileLoading || !isAdmin) {
+  if (isUserLoading || isProfileLoading) {
     return (
       <div className="container mx-auto py-12">
         <Skeleton className="h-12 w-1/3 mb-8" />
@@ -153,6 +151,21 @@ export default function AdminPage() {
         </div>
         <Skeleton className="h-96 w-full" />
       </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+        <div className="container mx-auto flex h-[60vh] flex-col items-center justify-center text-center">
+            <ShieldOff className="h-16 w-16 text-destructive" />
+            <h1 className="mt-6 font-headline text-3xl font-bold text-destructive">Access Denied</h1>
+            <p className="mt-4 max-w-md text-lg text-muted-foreground">
+                You do not have the required permissions to access the admin panel. This area is restricted to administrators only.
+            </p>
+            <Button asChild variant="outline" className="mt-8">
+                <Link href="/dashboard">Go to Your Dashboard</Link>
+            </Button>
+        </div>
     );
   }
 
