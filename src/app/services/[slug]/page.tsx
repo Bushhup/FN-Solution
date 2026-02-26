@@ -1,78 +1,25 @@
 'use client';
 
-import { Service, services } from '@/lib/data';
+import { services } from '@/lib/data';
 import { notFound, useParams } from 'next/navigation';
-import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, ChevronRight, Landmark, Calculator, FileText, Building2, Handshake, ShieldCheck, type LucideIcon } from 'lucide-react';
-import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
-import { doc } from 'firebase/firestore';
-import { Skeleton } from '@/components/ui/skeleton';
+import { ArrowRight, ChevronRight } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
-const serviceIconMap: { [key: string]: LucideIcon } = {
-  'GST Registration': Landmark,
-  'Income Tax Filing': FileText,
-  'Company Registration': Building2,
-  'LLP Registration': Handshake,
-  'Compliance Services': ShieldCheck,
-  'Accounting Services': Calculator,
-};
-
-
-// type Props = {
-//   params: { id: string };
-// };
-
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
-//   const service = services.find((s) => s.slug === params.id);
-
-//   if (!service) {
-//     return {
-//       title: 'Service Not Found',
-//     };
-//   }
-
-//   return {
-//     title: `${service.title} - FN Tax Solution`,
-//     description: service.description,
-//   };
-// }
 
 export default function ServiceDetailPage() {
   const params = useParams();
-  const serviceId = params.slug as string;
-  const firestore = useFirestore();
+  const slug = params.slug as string;
 
-  const serviceRef = useMemoFirebase(() => serviceId ? doc(firestore, 'services', serviceId) : null, [firestore, serviceId]);
-  const { data: service, isLoading } = useDoc<Omit<Service, 'icon' | 'slug' | 'details'>>(serviceRef);
-
-  // This is temporary until we fetch other services from firestore
-  const otherServices = services.filter((s) => s.slug !== serviceId).slice(0, 3);
-
-  if (isLoading) {
-    return (
-        <div className="container mx-auto py-20 sm:py-28">
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-                <div className="lg:col-span-2 space-y-8">
-                    <Skeleton className="h-12 w-1/2" />
-                    <Skeleton className="h-8 w-full" />
-                    <Skeleton className="h-24 w-full" />
-                    <Skeleton className="h-32 w-full" />
-                </div>
-                <div className="lg:col-span-1">
-                    <Skeleton className="h-64 w-full" />
-                </div>
-            </div>
-        </div>
-    )
-  }
+  const service = services.find((s) => s.slug === slug);
+  const otherServices = services.filter((s) => s.slug !== slug).slice(0, 3);
 
   if (!service) {
     notFound();
   }
 
-  const ServiceIcon = serviceIconMap[service.category] || Landmark;
+  const ServiceIcon = service.icon;
 
   return (
     <div className="container mx-auto py-20 sm:py-28">
@@ -96,7 +43,21 @@ export default function ServiceDetailPage() {
             {service.description}
           </p>
 
-          {/* Details section is removed as it's not in the DB schema */}
+          {service.details && service.details.length > 0 && (
+            <div className="space-y-8">
+                <h2 className="font-headline text-2xl font-bold">Service Details</h2>
+                 <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
+                    {service.details.map((detail, index) => (
+                        <AccordionItem value={`item-${index}`} key={index}>
+                            <AccordionTrigger className="text-lg font-semibold">{detail.heading}</AccordionTrigger>
+                            <AccordionContent className="text-base text-muted-foreground">
+                                {detail.text}
+                            </AccordionContent>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
+            </div>
+          )}
         </div>
 
         {/* Sidebar */}
