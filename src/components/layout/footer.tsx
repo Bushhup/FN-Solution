@@ -20,6 +20,7 @@ export function Footer() {
       links: [
         { label: 'About Us', href: '/about' },
         { label: 'Contact Us', href: '/contact' },
+        { label: 'Testimonials', href: '/testimonials' },
       ],
     },
     {

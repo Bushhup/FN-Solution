@@ -20,7 +20,7 @@ const navLinks = [
   { href: '/services', label: 'Services' },
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact Us' },
-  { href: '#testimonials', label: 'Testimonials' },
+  { href: '/testimonials', label: 'Testimonials' },
 ];
 
 export function Sidebar() {
