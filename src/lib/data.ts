@@ -46,10 +46,10 @@ export type Service = {
 };
 
 export const services: Service[] = [
-  // Business Formation & Registration
+  // Business Formation
   {
     icon: Building2,
-    title: 'Private Company Formation',
+    title: 'Formation of a Private Company.',
     slug: 'private-company-formation',
     category: 'Business Formation',
     description: 'Launch your private limited company with our expert, end-to-end registration services for a fast and compliant start.',
@@ -70,7 +70,7 @@ export const services: Service[] = [
   },
   {
     icon: Building,
-    title: 'Public Company Formation',
+    title: 'Formation of a Public Company.',
     slug: 'public-company-formation',
     category: 'Business Formation',
     description: 'Establish a public limited company, enabling you to raise capital from the public and list on stock exchanges.',
@@ -91,7 +91,7 @@ export const services: Service[] = [
   },
   {
     icon: User,
-    title: 'One Person Company (OPC) Formation',
+    title: 'Formation of a One Person Company (OPC)',
     slug: 'opc-formation',
     category: 'Business Formation',
     description: 'Start your own venture as a single entrepreneur with the benefits of a corporate structure and limited liability.',
@@ -112,7 +112,7 @@ export const services: Service[] = [
   },
   {
     icon: Handshake,
-    title: 'LLP Registration',
+    title: 'Formation of a Limited Liability Partnership (LLP)',
     slug: 'llp-registration',
     category: 'Business Formation',
     description: 'Combine the flexibility of a partnership with the advantage of limited liability by forming a Limited Liability Partnership (LLP).',
@@ -133,7 +133,7 @@ export const services: Service[] = [
   },
   {
     icon: Heart,
-    title: 'Section 8 Company (NPO) Formation',
+    title: 'Formation of a non-profit organization/ section 8 company.',
     slug: 'section-8-company-npo-formation',
     category: 'Business Formation',
     description: 'Form a non-profit organization to promote social welfare, arts, science, or charity with tax-exempt benefits.',
@@ -175,7 +175,7 @@ export const services: Service[] = [
   },
   {
     icon: User,
-    title: 'Proprietorship Business Formation',
+    title: 'Formation of a Proprietorship Business',
     slug: 'proprietorship-formation',
     category: 'Business Formation',
     description: 'The simplest way to start a business. We help you get the necessary registrations to operate as a sole proprietor.',
@@ -196,7 +196,7 @@ export const services: Service[] = [
   },
   {
     icon: Users,
-    title: 'Partnership Firm Formation',
+    title: 'Formation of a Partnership Firm',
     slug: 'partnership-firm-formation',
     category: 'Business Formation',
     description: 'Create a partnership firm with a well-drafted partnership deed to ensure clarity and protection for all partners involved.',
@@ -217,29 +217,50 @@ export const services: Service[] = [
   },
   {
     icon: Repeat,
-    title: 'Business Structure Conversion',
-    slug: 'business-conversion',
+    title: 'Conversion of a Proprietorship concern, Partnership firm, LLP into Private or Public Company.',
+    slug: 'firm-to-company-conversion',
     category: 'Business Formation',
-    description: 'Upgrade your business structure as you grow. We manage the seamless conversion of firms into companies and vice versa.',
+    description: 'Upgrade your business structure from a firm or LLP to a company to access limited liability, funding, and greater scalability.',
     details: [
       {
         heading: 'Scale Your Business',
         text: 'Convert your proprietorship, partnership, or LLP into a private or public company to benefit from limited liability, easier access to funding, and enhanced credibility.'
       },
       {
-        heading: 'Private to Public & Vice Versa',
-        text: 'We handle the complex process of converting a private company into a public one to raise capital, or a public company to private for greater control and reduced compliance.'
+        heading: 'Asset Transfer & Compliance',
+        text: 'We manage the complex process of asset and liability transfer, ensuring compliance with all legal and tax implications during the conversion.'
       },
       {
         heading: 'End-to-End Legal Management',
-        text: 'Our team manages all legal documentation, shareholder approvals, and filings with the ROC to ensure a smooth and compliant transition.'
+        text: 'Our team manages all legal documentation, partner/shareholder approvals, and filings with the ROC to ensure a smooth and compliant transition.'
+      }
+    ]
+  },
+  {
+    icon: Repeat,
+    title: 'Conversion of a Private Company into Public Company or vice versa.',
+    slug: 'company-structure-conversion',
+    category: 'Business Formation',
+    description: 'Strategically alter your company type between private and public to align with your capital needs and business strategy.',
+    details: [
+      {
+        heading: 'Private to Public',
+        text: 'Go public to raise capital from the general public through an IPO. We handle the complex process of converting to a public company, including prospectus filing and SEBI compliance.'
+      },
+      {
+        heading: 'Public to Private',
+        text: 'Convert your public company to a private one for greater operational control, reduced compliance overhead, and a more consolidated ownership structure.'
+      },
+      {
+        heading: 'Regulatory Navigation',
+        text: 'We manage all regulatory requirements, including shareholder approvals via special resolution, NCLT approvals where necessary, and all filings with the Registrar of Companies.'
       }
     ]
   },
   // Compliance & Filing
   {
     icon: FileText,
-    title: 'ROC Filing',
+    title: 'ROC FILING',
     slug: 'roc-filing',
     category: 'Compliance & Filing',
     description: 'Fulfill your company\'s mandatory annual and event-based filing requirements with the Registrar of Companies (ROC) accurately.',
@@ -260,7 +281,7 @@ export const services: Service[] = [
   },
   {
     icon: Landmark,
-    title: 'GST Filing',
+    title: 'GST FILING',
     slug: 'gst-filing',
     category: 'Compliance & Filing',
     description: 'Ensure timely and accurate GST return filings (GSTR-1, GSTR-3B) to maintain compliance and optimize your input tax credit.',
@@ -302,7 +323,7 @@ export const services: Service[] = [
   },
   {
     icon: MailCheck,
-    title: 'GST & Income Tax Notice Clearing',
+    title: 'Notice clearing of GST and income tax.',
     slug: 'notice-clearing',
     category: 'Compliance & Filing',
     description: 'Expertly handle and respond to notices from GST and Income Tax departments with our professional representation services.',
@@ -324,7 +345,7 @@ export const services: Service[] = [
   // Accounting & Advisory
   {
     icon: Calculator,
-    title: 'Accounting & Book-keeping',
+    title: 'Accounting and Book-keeping Services',
     slug: 'accounting-book-keeping',
     category: 'Accounting & Advisory',
     description: 'Maintain pristine financial records with our professional accounting and bookkeeping services, tailored to your business needs.',
@@ -345,7 +366,7 @@ export const services: Service[] = [
   },
   {
     icon: Users,
-    title: 'Payroll Processing',
+    title: 'Payroll Processing Services',
     slug: 'payroll-processing',
     category: 'Accounting & Advisory',
     description: 'Streamline your payroll process, from salary calculation to compliance, ensuring accuracy and timeliness for your employees.',
@@ -366,7 +387,7 @@ export const services: Service[] = [
   },
    {
     icon: BarChart,
-    title: 'Management Reporting (MIS)',
+    title: 'Management Reporting',
     slug: 'management-reporting',
     category: 'Accounting & Advisory',
     description: 'Gain critical insights into your business performance with customized Management Information System (MIS) reports.',
@@ -386,23 +407,23 @@ export const services: Service[] = [
     ]
   },
   {
-    icon: TrendingUp,
-    title: 'Cash Flow Planning',
-    slug: 'cash-flow-planning',
+    icon: Gavel,
+    title: 'Advance Ruling Representational Services',
+    slug: 'advance-ruling-services',
     category: 'Accounting & Advisory',
-    description: 'Optimize your working capital and ensure financial stability with our expert cash flow planning and forecasting services.',
+    description: 'Obtain clarity on ambiguous tax provisions by seeking an advance ruling from tax authorities with our expert representation.',
     details: [
       {
-        heading: 'Forecasting and Budgeting',
-        text: 'We help you create detailed cash flow forecasts and budgets, allowing you to anticipate future fund requirements and manage your resources effectively.'
+        heading: 'Clarity on Tax Positions',
+        text: 'An advance ruling provides certainty on the tax implications of a proposed transaction, helping you make informed business decisions and avoid future litigation.'
       },
       {
-        heading: 'Working Capital Management',
-        text: 'Our experts analyze your accounts receivable, accounts payable, and inventory cycles to suggest strategies for improving your working capital and liquidity.'
+        heading: 'Application & Documentation',
+        text: 'We prepare and file the application for advance ruling, ensuring that the question is framed correctly and all necessary facts and documentation are presented.'
       },
       {
-        heading: 'Financing & Investment Advice',
-        text: 'Based on your cash flow position, we provide advice on securing financing for expansion or identifying opportunities for short-term investments to maximize returns on surplus funds.'
+        heading: 'Representation Before Authority',
+        text: 'Our tax experts represent your case before the Authority for Advance Rulings (AAR), arguing your position effectively to secure a favorable ruling.'
       }
     ]
   },
@@ -428,23 +449,23 @@ export const services: Service[] = [
     ]
   },
   {
-    icon: Gavel,
-    title: 'Advance Ruling Representational Services',
-    slug: 'advance-ruling-services',
+    icon: TrendingUp,
+    title: 'Cash Flow Planning',
+    slug: 'cash-flow-planning',
     category: 'Accounting & Advisory',
-    description: 'Obtain clarity on ambiguous tax provisions by seeking an advance ruling from tax authorities with our expert representation.',
+    description: 'Optimize your working capital and ensure financial stability with our expert cash flow planning and forecasting services.',
     details: [
       {
-        heading: 'Clarity on Tax Positions',
-        text: 'An advance ruling provides certainty on the tax implications of a proposed transaction, helping you make informed business decisions and avoid future litigation.'
+        heading: 'Forecasting and Budgeting',
+        text: 'We help you create detailed cash flow forecasts and budgets, allowing you to anticipate future fund requirements and manage your resources effectively.'
       },
       {
-        heading: 'Application & Documentation',
-        text: 'We prepare and file the application for advance ruling, ensuring that the question is framed correctly and all necessary facts and documentation are presented.'
+        heading: 'Working Capital Management',
+        text: 'Our experts analyze your accounts receivable, accounts payable, and inventory cycles to suggest strategies for improving your working capital and liquidity.'
       },
       {
-        heading: 'Representation Before Authority',
-        text: 'Our tax experts represent your case before the Authority for Advance Rulings (AAR), arguing your position effectively to secure a favorable ruling.'
+        heading: 'Financing & Investment Advice',
+        text: 'Based on your cash flow position, we provide advice on securing financing for expansion or identifying opportunities for short-term investments to maximize returns on surplus funds.'
       }
     ]
   },
@@ -472,10 +493,10 @@ export const services: Service[] = [
   // Audit & Assurance
   {
     icon: Landmark,
-    title: 'Statutory Audit',
+    title: 'Statutory Audit as per Companies Act.',
     slug: 'statutory-audit',
     category: 'Audit & Assurance',
-    description: 'Ensure your financial statements present a true and fair view with our independent and rigorous statutory audit services as per the Companies Act.',
+    description: 'Ensure your financial statements present a true and fair view with our independent and rigorous statutory audit services.',
     details: [
         {
             heading: 'Compliance with Law',
@@ -492,8 +513,71 @@ export const services: Service[] = [
     ]
   },
   {
+    icon: ShieldCheck,
+    title: 'Internal Audits.',
+    slug: 'internal-audits',
+    category: 'Audit & Assurance',
+    description: 'Strengthen your corporate governance and operational efficiency with our risk-based internal audit services.',
+    details: [
+      {
+        heading: 'Risk-Based Approach',
+        text: 'Our internal audits focus on identifying and mitigating key operational and financial risks, helping you protect your assets and improve processes.'
+      },
+      {
+        heading: 'Process Improvement',
+        text: 'We go beyond compliance to provide actionable recommendations for improving efficiency, reducing costs, and strengthening internal controls.'
+      },
+      {
+        heading: 'Objective Assurance',
+        text: 'Our audits provide the board and senior management with an independent and objective assessment of the business operations and governance framework.'
+      }
+    ]
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Management Audits.',
+    slug: 'management-audits',
+    category: 'Audit & Assurance',
+    description: 'Evaluate the effectiveness of your management policies and procedures to drive strategic improvements.',
+    details: [
+      {
+        heading: 'Performance Evaluation',
+        text: 'Our management audits assess how effectively management is achieving the organization\'s objectives and utilizing its resources.'
+      },
+      {
+        heading: 'Strategic Review',
+        text: 'We review your business strategies, decision-making processes, and organizational structure to identify areas for strategic improvement.'
+      },
+      {
+        heading: 'Actionable Reporting',
+        text: 'Our reports provide senior leadership with clear, actionable insights to enhance managerial effectiveness and overall business performance.'
+      }
+    ]
+  },
+  {
+    icon: FileBadge,
+    title: 'Limited Reviews.',
+    slug: 'limited-reviews',
+    category: 'Audit & Assurance',
+    description: 'Fulfill quarterly regulatory requirements with our efficient limited review services for financial statements.',
+    details: [
+      {
+        heading: 'For Listed Entities',
+        text: 'We perform limited reviews of interim financial statements as required by SEBI regulations for listed companies.'
+      },
+      {
+        heading: 'Moderate Assurance',
+        text: 'A limited review consists primarily of inquiries and analytical procedures, providing a moderate level of assurance to stakeholders.'
+      },
+      {
+        heading: 'Timely Reporting',
+        text: 'We ensure timely completion and reporting to help you meet your stock exchange filing deadlines without hassle.'
+      }
+    ]
+  },
+  {
     icon: FileText,
-    title: 'Tax Audit',
+    title: 'Tax Audit as per Income Tax Act.',
     slug: 'tax-audit',
     category: 'Audit & Assurance',
     description: 'Fulfill your obligations under the Income Tax Act with our meticulous tax audit services, ensuring accurate reporting and compliance.',
@@ -513,53 +597,53 @@ export const services: Service[] = [
     ]
   },
   {
-    icon: ShieldCheck,
-    title: 'Internal & Management Audits',
-    slug: 'internal-management-audits',
+    icon: Landmark,
+    title: 'GST Audit.',
+    slug: 'gst-audit',
     category: 'Audit & Assurance',
-    description: 'Strengthen your corporate governance and operational efficiency with our risk-based internal and management audit services.',
+    description: 'Ensure GST compliance and identify potential tax savings with our comprehensive GST audit and reconciliation services.',
     details: [
       {
-        heading: 'Risk-Based Approach',
-        text: 'Our internal audits focus on identifying and mitigating key operational and financial risks, helping you protect your assets and improve processes.'
+        heading: 'Turnover-Based Audit',
+        text: 'We conduct GST audits for businesses whose turnover exceeds the prescribed limit, ensuring compliance with GST laws.'
       },
       {
-        heading: 'Process Improvement',
-        text: 'We go beyond compliance to provide actionable recommendations for improving efficiency, reducing costs, and strengthening internal controls.'
+        heading: 'Reconciliation and Reporting',
+        text: 'Our audit involves a detailed reconciliation of your annual returns with your audited financial statements, reported in Form GSTR-9C.'
       },
       {
-        heading: 'Objective Assurance',
-        text: 'Our management audits provide the board and senior management with an independent and objective assessment of the business operations and governance framework.'
+        heading: 'Compliance & ITC Optimization',
+        text: 'We verify your compliance with GST provisions and help you identify any unclaimed Input Tax Credit (ITC) or excess tax payments.'
       }
     ]
   },
-  {
+   {
     icon: FileBadge,
-    title: 'Special Audits & Certifications',
-    slug: 'special-audits-certifications',
+    title: 'VAT Audit.',
+    slug: 'vat-audit',
     category: 'Audit & Assurance',
-    description: 'We provide a wide range of special-purpose audits and certifications required for regulatory compliance, banking, or other needs.',
+    description: 'Conduct VAT audits as required under state-level regulations to ensure compliance and accurate reporting.',
     details: [
       {
-        heading: '15CB / 15CA Certifications',
-        text: 'We issue certifications in Form 15CB for foreign remittances, ensuring compliance with the Income Tax Act and DTAA provisions, followed by filing Form 15CA.'
+        heading: 'State-Level Compliance',
+        text: 'For businesses still under the VAT regime for certain goods (like petroleum), we conduct audits as per the respective state\'s VAT laws.'
       },
       {
-        heading: 'GST & VAT Audits',
-        text: 'We conduct audits under GST and other indirect tax laws to ensure compliance and proper reporting, helping you avoid penalties.'
+        heading: 'Accurate Reporting',
+        text: 'Our audit ensures that your VAT returns are accurate and all required forms and declarations are in order.'
       },
       {
-        heading: 'Limited Reviews',
-        text: 'We perform limited reviews of financial statements as per regulatory requirements, providing a moderate level of assurance to stakeholders.'
+        heading: 'Representation Support',
+        text: 'We provide support during assessments and inquiries from the state tax departments.'
       }
     ]
   },
   {
     icon: Warehouse,
-    title: 'Stock Audit',
+    title: 'Stock Audit.',
     slug: 'stock-audit',
     category: 'Audit & Assurance',
-    description: 'Verify and value your inventory accurately with our independent stock audit services, crucial for financial reporting and lender confidence.',
+    description: 'Verify and value your inventory accurately with our independent stock audit services, crucial for reporting and lender confidence.',
     details: [
         {
             heading: 'Physical Verification',
@@ -575,16 +659,16 @@ export const services: Service[] = [
         }
     ]
   },
-  {
+   {
     icon: Scale,
-    title: 'Transfer Pricing Audit',
+    title: 'Transfer Pricing audit as per Section 92E of Income Tax Act.',
     slug: 'transfer-pricing-audit',
     category: 'Audit & Assurance',
-    description: 'Ensure your international and specified domestic transactions are at arm\'s length with our expert Transfer Pricing audit and documentation services.',
+    description: 'Ensure your international and specified domestic transactions are at arm\'s length with our expert Transfer Pricing audit.',
     details: [
       {
         heading: 'Compliance with Section 92E',
-        text: 'We conduct the mandatory transfer pricing audit and issue the report in Form 3CEB for companies with international transactions.'
+        text: 'We conduct the mandatory transfer pricing audit and issue the report in Form 3CEB for companies with international or specified domestic transactions.'
       },
       {
         heading: 'Robust Documentation',
@@ -598,7 +682,7 @@ export const services: Service[] = [
   },
   {
     icon: Laptop,
-    title: 'Information Systems (IS) Audit',
+    title: 'Information Systems Audit.',
     slug: 'is-audit',
     category: 'Audit & Assurance',
     description: 'Assess the controls, security, and efficiency of your IT infrastructure with our comprehensive Information Systems audit.',
@@ -617,10 +701,10 @@ export const services: Service[] = [
       }
     ]
   },
-  // Certifications & Special Services
+  // Special Services
   {
     icon: Key,
-    title: 'Digital Signature Certificate (DSC)',
+    title: 'Digital Signature Certificate (DSC).',
     slug: 'dsc-services',
     category: 'Special Services',
     description: 'Obtain your secure Digital Signature Certificate (DSC) quickly for all your e-filing and online transaction needs.',
@@ -641,7 +725,7 @@ export const services: Service[] = [
   },
   {
     icon: CreditCard,
-    title: 'PAN Card Application',
+    title: 'PAN CARD APPLICATION',
     slug: 'pan-card-application',
     category: 'Special Services',
     description: 'Apply for your new PAN card or request corrections with our hassle-free application and processing assistance.',
@@ -662,7 +746,7 @@ export const services: Service[] = [
   },
   {
     icon: Factory,
-    title: 'Udyam Registration',
+    title: 'UDYAM REGISTRATION',
     slug: 'udyam-registration',
     category: 'Special Services',
     description: 'Register your enterprise as an MSME under the Udyam portal to access a wide range of government benefits and schemes.',
@@ -683,7 +767,7 @@ export const services: Service[] = [
   },
   {
     icon: Building,
-    title: 'RERA Registration',
+    title: 'RERA REGISTRATION',
     slug: 'rera-registration',
     category: 'Special Services',
     description: 'Ensure your real estate project is compliant with the Real Estate (Regulation and Development) Act with our expert registration services.',
@@ -704,7 +788,7 @@ export const services: Service[] = [
   },
   {
     icon: Globe,
-    title: 'Form 15CB/15CA Certification',
+    title: 'Foreign Exchange Remittance Certifications such as Form 15CB / 15CA.',
     slug: 'form-15cb-15ca-certification',
     category: 'Special Services',
     description: 'Facilitate foreign remittances with the required certifications from a Chartered Accountant, ensuring tax compliance.',
@@ -724,8 +808,29 @@ export const services: Service[] = [
     ]
   },
   {
+    icon: FileBadge,
+    title: 'Special Purpose Audits & Certifications.',
+    slug: 'special-audits-certifications',
+    category: 'Special Services',
+    description: 'We provide a wide range of special-purpose audits and certifications required for regulatory compliance or other specific needs.',
+    details: [
+      {
+        heading: 'Net Worth Certificates',
+        text: 'We issue Net Worth Certificates for individuals and companies, often required for visa applications, bank loans, or as part of franchise agreements.'
+      },
+      {
+        heading: 'Turnover Certificates',
+        text: 'We provide certified turnover figures for various purposes, including tender applications and regulatory submissions.'
+      },
+      {
+        heading: 'Customized Assurance',
+        text: 'Whatever your specific certification need, we provide tailored assurance services to meet your requirements with credibility and accuracy.'
+      }
+    ]
+  },
+  {
     icon: Info,
-    title: 'Documentation and Audit Support',
+    title: 'Documentation and Audit Support.',
     slug: 'documentation-audit-support',
     category: 'Special Services',
     description: 'Get expert assistance in preparing documentation for audits and assessments, ensuring you are always prepared for scrutiny.',
@@ -741,6 +846,27 @@ export const services: Service[] = [
         {
             heading: 'Peace of Mind',
             text: 'With our expert support, you can face any audit or assessment with confidence, knowing that your documentation is in order.'
+        }
+    ]
+  },
+  {
+    icon: FileQuestion,
+    title: 'Advisory and Assistance relating to preparation and filing',
+    slug: 'advisory-assistance-filing',
+    category: 'Special Services',
+    description: 'Receive expert guidance and hands-on assistance with the preparation and filing of various regulatory and business documents.',
+    details: [
+        {
+            heading: 'Comprehensive Filing Support',
+            text: 'We offer advisory and practical help for a wide range of filings beyond standard tax returns, including government grant applications, compliance reports, and more.'
+        },
+        {
+            heading: 'Document Preparation',
+            text: 'Our team assists in drafting and preparing complex documentation, ensuring accuracy and compliance with the relevant authorities\' requirements.'
+        },
+        {
+            heading: 'Strategic Guidance',
+            text: 'We provide strategic advice on the filing process, helping you understand the implications and choose the best course of action for your business.'
         }
     ]
   },
