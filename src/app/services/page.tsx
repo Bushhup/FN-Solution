@@ -1,14 +1,29 @@
 'use client';
 
-import { services } from '@/lib/data';
+import { services, type Service } from '@/lib/data';
 import { GlassCard } from '@/components/ui/glass-card';
-import type { Metadata } from 'next';
 import Link from 'next/link';
 
-// export const metadata: Metadata = {
-//   title: 'Our Services - FN Tax Solution',
-//   description: 'Explore our comprehensive suite of financial and legal services designed to support your business at every stage.',
-// };
+// Group services by category
+const servicesByCategory = services.reduce(
+  (acc, service) => {
+    const category = service.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(service);
+    return acc;
+  },
+  {} as Record<string, Service[]>
+);
+
+const categoryOrder = [
+  'Business Formation',
+  'Compliance & Filing',
+  'Accounting & Advisory',
+  'Audit & Assurance',
+  'Special Services',
+];
 
 export default function ServicesPage() {
   return (
@@ -22,21 +37,37 @@ export default function ServicesPage() {
           your business at every stage, from registration to ongoing compliance.
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((service) => (
-          <Link href={`/services/${service.slug}`} key={service.slug}>
-            <GlassCard
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              className="h-full"
-            />
-          </Link>
-        ))}
-         {services?.length === 0 && (
-          <p className="col-span-full text-center text-muted-foreground">No services available at the moment. Please check back later.</p>
-        )}
-      </div>
+
+      {services?.length > 0 ? (
+        <div className="space-y-16">
+          {categoryOrder.map(
+            (category) =>
+              servicesByCategory[category] && (
+                <div key={category}>
+                  <h2 className="font-headline text-3xl font-bold mb-8 text-glow">
+                    {category}
+                  </h2>
+                  <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {servicesByCategory[category].map((service) => (
+                      <Link href={`/services/${service.slug}`} key={service.slug}>
+                        <GlassCard
+                          icon={service.icon}
+                          title={service.title}
+                          description={service.description}
+                          className="h-full"
+                        />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
+        </div>
+      ) : (
+        <p className="col-span-full text-center text-muted-foreground">
+          No services available at the moment. Please check back later.
+        </p>
+      )}
     </div>
   );
 }
