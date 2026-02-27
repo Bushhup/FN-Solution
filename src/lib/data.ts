@@ -9,6 +9,27 @@ import {
   BadgeCheck,
   Users,
   Zap,
+  User,
+  Building,
+  Repeat,
+  Heart,
+  CreditCard,
+  Factory,
+  Key,
+  MailCheck,
+  BarChart,
+  Gavel,
+  Banknote,
+  TrendingUp,
+  ClipboardCheck,
+  Warehouse,
+  Globe,
+  FileBadge,
+  Laptop,
+  FileQuestion,
+  Scale,
+  Info,
+  ScrollText,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -25,135 +46,701 @@ export type Service = {
 };
 
 export const services: Service[] = [
+  // Business Formation & Registration
   {
-    icon: Landmark,
-    title: 'GST Registration',
-    slug: 'gst-registration',
-    category: 'GST Registration',
-    description:
-      'Navigate the complexities of GST registration with our expert guidance, ensuring a smooth and compliant process for your business.',
+    icon: Building2,
+    title: 'Private Company Formation',
+    slug: 'private-company-formation',
+    category: 'Business Formation',
+    description: 'Launch your private limited company with our expert, end-to-end registration services for a fast and compliant start.',
     details: [
       {
-        heading: 'Effortless Registration Process',
-        text: 'We handle everything from document submission to obtaining your GSTIN. Our experts ensure every detail is correct, preventing future complications and allowing you to focus on your business launch.'
+        heading: 'Ideal for Startups',
+        text: 'A Private Limited Company offers limited liability and a separate legal identity, making it a preferred structure for startups and growing businesses seeking credibility and funding opportunities.'
       },
       {
-        heading: 'Comprehensive Advisory',
-        text: 'Understand the implications of GST for your specific business model. We provide tailored advice on GST rates, input tax credits, and compliance requirements to optimize your tax strategy from day one.'
+        heading: 'All-Inclusive Package',
+        text: 'Our service covers Digital Signature Certificates (DSC), Director Identification Numbers (DIN), company name approval (RUN), and filing of all incorporation documents (SPICe+).'
       },
       {
-        heading: 'Post-Registration Support',
-        text: 'Our support doesn\'t end with registration. We assist with initial GST filings, invoicing setup, and any questions you have, ensuring you are fully equipped to manage your GST obligations.'
+        heading: 'Post-Incorporation Essentials',
+        text: 'We guide you through mandatory post-registration steps, including PAN/TAN application, opening a corporate bank account, and fulfilling initial statutory requirements.'
       }
     ]
   },
   {
-    icon: FileText,
-    title: 'Income Tax Filing',
-    slug: 'income-tax-filing',
-    category: 'Income Tax Filing',
-    description:
-      'Maximize your returns and minimize your liabilities with our precise and thorough income tax filing services for individuals and businesses.',
+    icon: Building,
+    title: 'Public Company Formation',
+    slug: 'public-company-formation',
+    category: 'Business Formation',
+    description: 'Establish a public limited company, enabling you to raise capital from the public and list on stock exchanges.',
     details: [
-        {
-            heading: 'For Individuals',
-            text: 'We help salaried individuals, freelancers, and professionals file their income tax returns accurately. Our service includes a review of all possible deductions and exemptions to ensure you get the maximum refund possible.'
-        },
-        {
-            heading: 'For Businesses',
-            text: 'Our corporate tax experts manage the entire tax filing process for your company, ensuring compliance with the latest tax laws and regulations. We help you with tax planning, computation of tax liability, and timely filing to avoid penalties.'
-        },
-        {
-            heading: 'Audit & Representation',
-            text: 'In case of scrutiny or audit by tax authorities, we provide expert representation to handle all queries and ensure a smooth resolution. We stand by you at every step of the process.'
-        }
+      {
+        heading: 'Access to Public Capital',
+        text: 'A public company can offer its shares to the general public, providing a significant avenue for raising capital for large-scale operations and expansion.'
+      },
+      {
+        heading: 'Strict Compliance Framework',
+        text: 'We navigate the stringent regulatory requirements for forming a public company, ensuring compliance with SEBI and Companies Act provisions from day one.'
+      },
+      {
+        heading: 'Complete Formation Support',
+        text: 'From drafting the Memorandum and Articles of Association to appointing directors and filing the prospectus, we manage the entire complex process for you.'
+      }
     ]
   },
   {
-    icon: Building2,
-    title: 'Company Registration',
-    slug: 'company-registration',
-    category: 'Company Registration',
-    description:
-      'Launch your venture with confidence. We handle all aspects of company registration, from name approval to incorporation.',
+    icon: User,
+    title: 'One Person Company (OPC) Formation',
+    slug: 'opc-formation',
+    category: 'Business Formation',
+    description: 'Start your own venture as a single entrepreneur with the benefits of a corporate structure and limited liability.',
     details: [
-        {
-            heading: 'Choosing the Right Structure',
-            text: 'We guide you in selecting the most suitable business structure—be it a Private Limited Company, One Person Company (OPC), or Section 8 Company—based on your vision, capital, and liability preferences.'
-        },
-        {
-            heading: 'End-to-End Incorporation',
-            text: 'Our service covers the entire incorporation process, including Director Identification Number (DIN) application, name reservation (RUN), drafting the Memorandum and Articles of Association (MoA & AoA), and filing all necessary forms with the MCA.'
-        },
-        {
-            heading: 'Post-Incorporation Compliance',
-            text: 'After your company is incorporated, we help you with essential post-registration compliance like applying for PAN/TAN, opening a bank account, and fulfilling initial statutory requirements.'
-        }
+      {
+        heading: 'Empowering Solo Entrepreneurs',
+        text: 'An OPC allows a single promoter to run a corporate entity with limited liability protection, combining the advantages of a sole proprietorship and a company.'
+      },
+      {
+        heading: 'Simplified Compliance',
+        text: 'OPCs enjoy relaxed compliance requirements compared to private limited companies, making them easier to manage for individual business owners.'
+      },
+      {
+        heading: 'Full Registration Service',
+        text: 'We handle everything from appointing a nominee to filing all necessary forms, ensuring your OPC is set up correctly and quickly.'
+      }
     ]
   },
   {
     icon: Handshake,
     title: 'LLP Registration',
     slug: 'llp-registration',
-    category: 'LLP Registration',
-    description:
-      'Establish your Limited Liability Partnership with ease. Our streamlined process ensures your business is structured for success.',
+    category: 'Business Formation',
+    description: 'Combine the flexibility of a partnership with the advantage of limited liability by forming a Limited Liability Partnership (LLP).',
+    details: [
+      {
+        heading: 'Hybrid Business Structure',
+        text: 'An LLP is a corporate body with a legal identity separate from its partners. It offers the best of both worlds: operational flexibility and limited liability protection.'
+      },
+      {
+        heading: 'Customized LLP Agreement',
+        text: 'We draft a comprehensive LLP Agreement that clearly defines the roles, responsibilities, and profit-sharing ratios of the partners, preventing future disputes.'
+      },
+      {
+        heading: 'Seamless Process',
+        text: 'Our streamlined process includes obtaining Designated Partner Identification Numbers (DPIN), name reservation, and filing the FiLLiP form for a hassle-free registration.'
+      }
+    ]
+  },
+  {
+    icon: Heart,
+    title: 'Section 8 Company (NPO) Formation',
+    slug: 'section-8-company-npo-formation',
+    category: 'Business Formation',
+    description: 'Form a non-profit organization to promote social welfare, arts, science, or charity with tax-exempt benefits.',
+    details: [
+      {
+        heading: 'For Charitable Objectives',
+        text: 'A Section 8 Company is a government-recognized non-profit entity established for promoting commerce, art, science, sports, education, research, social welfare, religion, or charity.'
+      },
+      {
+        heading: 'Tax Exemptions & Credibility',
+        text: 'These companies receive special tax exemptions and have higher credibility among donors and government bodies compared to trusts or societies.'
+      },
+      {
+        heading: 'Complete Legal Formalities',
+        text: 'We manage the entire process, including obtaining the license from the central government and handling all incorporation filings with the ROC.'
+      }
+    ]
+  },
+   {
+    icon: ScrollText,
+    title: 'Trust Formation',
+    slug: 'trust-formation',
+    category: 'Business Formation',
+    description: 'Establish a trust for charitable, religious, or private purposes with our expert guidance on legal drafting and registration.',
     details: [
         {
-            heading: 'Simple & Quick Process',
-            text: 'An LLP combines the benefits of a partnership and a company with limited liability. We make the registration process simple and fast, handling all legal formalities so you can start your partnership venture without delay.'
+            heading: 'Public & Private Trusts',
+            text: 'We assist in forming both public trusts for charitable purposes and private trusts for estate planning and managing family assets.'
         },
         {
-            heading: 'Drafting the LLP Agreement',
-            text: 'The LLP Agreement is a crucial document that outlines the rights and duties of the partners. Our legal experts draft a comprehensive agreement tailored to your partnership\'s specific needs, protecting the interests of all partners.'
+            heading: 'Drafting the Trust Deed',
+            text: 'The Trust Deed is the most critical document. Our legal experts draft a clear and legally sound deed that outlines the objectives, beneficiaries, and powers of the trustees.'
         },
         {
-            heading: 'Compliance & Advisory',
-            text: 'We ensure your LLP complies with all regulations under the LLP Act, 2008. From designated partner requirements to annual filings, we provide ongoing advisory to keep your LLP in good standing.'
+            heading: 'Registration & Compliance',
+            text: 'We handle the registration of the trust with the appropriate authorities and advise on ongoing compliance, including tax exemptions under Section 12A and 80G.'
         }
+    ]
+  },
+  {
+    icon: User,
+    title: 'Proprietorship Business Formation',
+    slug: 'proprietorship-formation',
+    category: 'Business Formation',
+    description: 'The simplest way to start a business. We help you get the necessary registrations to operate as a sole proprietor.',
+    details: [
+        {
+            heading: 'Easy to Start & Manage',
+            text: 'A sole proprietorship is the easiest business structure to set up, with minimal compliance requirements, giving you full control over your operations.'
+        },
+        {
+            heading: 'Essential Registrations',
+            text: 'While there is no formal registration, we assist you in obtaining key registrations like a GST number, Udyam Registration, or a professional license to establish your business identity.'
+        },
+        {
+            heading: 'Advisory on Growth',
+            text: 'We provide advice on how to manage your finances as a proprietor and guide you on when and how to convert to a more formal business structure as you grow.'
+        }
+    ]
+  },
+  {
+    icon: Users,
+    title: 'Partnership Firm Formation',
+    slug: 'partnership-firm-formation',
+    category: 'Business Formation',
+    description: 'Create a partnership firm with a well-drafted partnership deed to ensure clarity and protection for all partners involved.',
+    details: [
+        {
+            heading: 'Governed by Partnership Deed',
+            text: 'A partnership is governed by the Partnership Deed, an agreement that specifies the terms, conditions, profit/loss sharing, and responsibilities of each partner.'
+        },
+        {
+            heading: 'Expert Deed Drafting',
+            text: 'Our legal team drafts a robust Partnership Deed tailored to your business, covering all essential clauses to prevent future conflicts and protect your interests.'
+        },
+        {
+            heading: 'Optional Registration',
+            text: 'While registration is not mandatory, we advise on its benefits—such as the ability to sue third parties—and can manage the registration process with the Registrar of Firms.'
+        }
+    ]
+  },
+  {
+    icon: Repeat,
+    title: 'Business Structure Conversion',
+    slug: 'business-conversion',
+    category: 'Business Formation',
+    description: 'Upgrade your business structure as you grow. We manage the seamless conversion of firms into companies and vice versa.',
+    details: [
+      {
+        heading: 'Scale Your Business',
+        text: 'Convert your proprietorship, partnership, or LLP into a private or public company to benefit from limited liability, easier access to funding, and enhanced credibility.'
+      },
+      {
+        heading: 'Private to Public & Vice Versa',
+        text: 'We handle the complex process of converting a private company into a public one to raise capital, or a public company to private for greater control and reduced compliance.'
+      },
+      {
+        heading: 'End-to-End Legal Management',
+        text: 'Our team manages all legal documentation, shareholder approvals, and filings with the ROC to ensure a smooth and compliant transition.'
+      }
+    ]
+  },
+  // Compliance & Filing
+  {
+    icon: FileText,
+    title: 'ROC Filing',
+    slug: 'roc-filing',
+    category: 'Compliance & Filing',
+    description: 'Fulfill your company\'s mandatory annual and event-based filing requirements with the Registrar of Companies (ROC) accurately.',
+    details: [
+        {
+            heading: 'Annual Return (MGT-7/7A)',
+            text: 'We prepare and file your company\'s annual return, a comprehensive snapshot of your corporate structure, ensuring you meet statutory deadlines.'
+        },
+        {
+            heading: 'Financial Statements (AOC-4)',
+            text: 'Our experts file your audited financial statements, including the Balance Sheet and P&L Account, maintaining your company\'s financial transparency.'
+        },
+        {
+            heading: 'Event-Based Compliance',
+            text: 'We manage all event-based filings, such as changes in directors (DIR-12) or share capital (SH-7), keeping your company\'s records current with the ROC.'
+        }
+    ]
+  },
+  {
+    icon: Landmark,
+    title: 'GST Filing',
+    slug: 'gst-filing',
+    category: 'Compliance & Filing',
+    description: 'Ensure timely and accurate GST return filings (GSTR-1, GSTR-3B) to maintain compliance and optimize your input tax credit.',
+    details: [
+      {
+        heading: 'Monthly & Quarterly Filings',
+        text: 'We manage the timely filing of your GSTR-1 (outward supplies) and GSTR-3B (summary return) to ensure you are always compliant and avoid late fees.'
+      },
+      {
+        heading: 'Input Tax Credit (ITC) Reconciliation',
+        text: 'Our team performs detailed reconciliation of your purchase data with GSTR-2A/2B to ensure you claim the maximum eligible Input Tax Credit, optimizing your cash flow.'
+      },
+      {
+        heading: 'Annual GST Return',
+        text: 'We handle the preparation and filing of the annual GST return (GSTR-9) and reconciliation statement (GSTR-9C), providing a consolidated view of your yearly GST activity.'
+      }
+    ]
+  },
+   {
+    icon: FileText,
+    title: 'Income Tax Filing',
+    slug: 'income-tax-filing',
+    category: 'Compliance & Filing',
+    description: 'Maximize returns and ensure compliance with our precise income tax filing services for individuals, firms, and companies.',
+    details: [
+        {
+            heading: 'For Individuals & Salaried',
+            text: 'We help you file your income tax returns while maximizing deductions under sections like 80C, 80D, HRA, and more, ensuring you get the best possible refund.'
+        },
+        {
+            heading: 'For Businesses & Professionals',
+            text: 'Our corporate tax experts manage the entire tax filing process, from computing tax liability under various heads of income to timely filing of ITR to avoid penalties.'
+        },
+        {
+            heading: 'TDS & Advance Tax Compliance',
+            text: 'We provide advisory and assistance in TDS compliance, advance tax calculations, and payment to ensure you meet all your tax obligations throughout the year.'
+        }
+    ]
+  },
+  {
+    icon: MailCheck,
+    title: 'GST & Income Tax Notice Clearing',
+    slug: 'notice-clearing',
+    category: 'Compliance & Filing',
+    description: 'Expertly handle and respond to notices from GST and Income Tax departments with our professional representation services.',
+    details: [
+      {
+        heading: 'Analysis and Response Strategy',
+        text: 'Our tax experts analyze the notice to understand the department\'s query, prepare a robust strategy, and draft a detailed, legally sound response.'
+      },
+      {
+        heading: 'Professional Representation',
+        text: 'We represent you before the tax authorities, handling all communications and submissions to ensure your case is presented clearly and professionally.'
+      },
+      {
+        heading: 'Resolution and Closure',
+        text: 'Our goal is to achieve a swift and favorable resolution of the issue, minimizing any potential liability and ensuring the matter is formally closed with the department.'
+      }
+    ]
+  },
+  // Accounting & Advisory
+  {
+    icon: Calculator,
+    title: 'Accounting & Book-keeping',
+    slug: 'accounting-book-keeping',
+    category: 'Accounting & Advisory',
+    description: 'Maintain pristine financial records with our professional accounting and bookkeeping services, tailored to your business needs.',
+    details: [
+      {
+        heading: 'Accurate Record Keeping',
+        text: 'We use modern accounting software to manage your daily transactions, maintain ledgers, and ensure your books are always accurate and up-to-date.'
+      },
+      {
+        heading: 'Bank & Ledger Reconciliation',
+        text: 'Our team performs regular bank reconciliations and scrutinizes ledgers to identify and rectify discrepancies, ensuring the integrity of your financial data.'
+      },
+      {
+        heading: 'Compliance with Accounting Standards',
+        text: 'We ensure that your books of accounts are maintained in accordance with the applicable accounting standards, providing a solid foundation for audits and financial reporting.'
+      }
+    ]
+  },
+  {
+    icon: Users,
+    title: 'Payroll Processing',
+    slug: 'payroll-processing',
+    category: 'Accounting & Advisory',
+    description: 'Streamline your payroll process, from salary calculation to compliance, ensuring accuracy and timeliness for your employees.',
+    details: [
+      {
+        heading: 'End-to-End Management',
+        text: 'We handle everything from calculating salaries, deductions, and reimbursements to generating payslips and managing employee records.'
+      },
+      {
+        heading: 'Statutory Compliance',
+        text: 'Our service includes managing all payroll-related statutory compliance, including Provident Fund (PF), Employee State Insurance (ESI), and TDS deductions.'
+      },
+      {
+        heading: 'Confidential & Secure',
+        text: 'We ensure complete confidentiality and security of your employee and payroll data, providing a reliable and trustworthy outsourcing solution.'
+      }
+    ]
+  },
+   {
+    icon: BarChart,
+    title: 'Management Reporting (MIS)',
+    slug: 'management-reporting',
+    category: 'Accounting & Advisory',
+    description: 'Gain critical insights into your business performance with customized Management Information System (MIS) reports.',
+    details: [
+        {
+            heading: 'Customized Dashboards',
+            text: 'We create tailored dashboards and reports that track key performance indicators (KPIs) relevant to your industry and business goals.'
+        },
+        {
+            heading: 'Financial Analysis',
+            text: 'Our reports provide in-depth analysis of your revenue, expenses, profitability, and cash flow, helping you make informed, data-driven decisions.'
+        },
+        {
+            heading: 'Strategic Insights',
+            text: 'Beyond numbers, we provide strategic insights and recommendations based on financial trends, helping you identify opportunities for growth and cost optimization.'
+        }
+    ]
+  },
+  {
+    icon: TrendingUp,
+    title: 'Cash Flow Planning',
+    slug: 'cash-flow-planning',
+    category: 'Accounting & Advisory',
+    description: 'Optimize your working capital and ensure financial stability with our expert cash flow planning and forecasting services.',
+    details: [
+      {
+        heading: 'Forecasting and Budgeting',
+        text: 'We help you create detailed cash flow forecasts and budgets, allowing you to anticipate future fund requirements and manage your resources effectively.'
+      },
+      {
+        heading: 'Working Capital Management',
+        text: 'Our experts analyze your accounts receivable, accounts payable, and inventory cycles to suggest strategies for improving your working capital and liquidity.'
+      },
+      {
+        heading: 'Financing & Investment Advice',
+        text: 'Based on your cash flow position, we provide advice on securing financing for expansion or identifying opportunities for short-term investments to maximize returns on surplus funds.'
+      }
+    ]
+  },
+  {
+    icon: Banknote,
+    title: 'Project Reports for Bank Approvals',
+    slug: 'project-reports-for-banks',
+    category: 'Accounting & Advisory',
+    description: 'Secure bank loans and funding with professionally prepared, data-driven project reports that showcase your venture\'s viability.',
+    details: [
+        {
+            heading: 'Comprehensive Financial Projections',
+            text: 'We create detailed financial projections, including projected profit and loss, balance sheets, and cash flow statements, that banks require for loan applications.'
+        },
+        {
+            heading: 'Market & Viability Analysis',
+            text: 'Our reports include a thorough analysis of your market, business model, and overall viability, presenting a strong case to lenders.'
+        },
+        {
+            heading: 'CMA Data Preparation',
+            text: 'We prepare Credit Monitoring Arrangement (CMA) data in the standard format required by banks, ensuring your loan application is processed smoothly.'
+        }
+    ]
+  },
+  {
+    icon: Gavel,
+    title: 'Advance Ruling Representational Services',
+    slug: 'advance-ruling-services',
+    category: 'Accounting & Advisory',
+    description: 'Obtain clarity on ambiguous tax provisions by seeking an advance ruling from tax authorities with our expert representation.',
+    details: [
+      {
+        heading: 'Clarity on Tax Positions',
+        text: 'An advance ruling provides certainty on the tax implications of a proposed transaction, helping you make informed business decisions and avoid future litigation.'
+      },
+      {
+        heading: 'Application & Documentation',
+        text: 'We prepare and file the application for advance ruling, ensuring that the question is framed correctly and all necessary facts and documentation are presented.'
+      },
+      {
+        heading: 'Representation Before Authority',
+        text: 'Our tax experts represent your case before the Authority for Advance Rulings (AAR), arguing your position effectively to secure a favorable ruling.'
+      }
+    ]
+  },
+  {
+    icon: ClipboardCheck,
+    title: 'Valuation & Verification of Fixed Assets',
+    slug: 'fixed-asset-valuation-verification',
+    category: 'Accounting & Advisory',
+    description: 'Get an accurate valuation and physical verification of your fixed assets for financial reporting, mergers, or insurance purposes.',
+    details: [
+      {
+        heading: 'Physical Verification',
+        text: 'Our team conducts a physical verification of all fixed assets, tagging them and reconciling the physical count with your fixed asset register.'
+      },
+      {
+        heading: 'Accurate Valuation',
+        text: 'We provide an independent valuation of your assets based on established methodologies, crucial for financial reporting, M&A, or disposal.'
+      },
+      {
+        heading: 'FAR Maintenance',
+        text: 'We help you maintain a clean and updated Fixed Asset Register (FAR), ensuring compliance with CARO reporting and internal control requirements.'
+      }
+    ]
+  },
+  // Audit & Assurance
+  {
+    icon: Landmark,
+    title: 'Statutory Audit',
+    slug: 'statutory-audit',
+    category: 'Audit & Assurance',
+    description: 'Ensure your financial statements present a true and fair view with our independent and rigorous statutory audit services as per the Companies Act.',
+    details: [
+        {
+            heading: 'Compliance with Law',
+            text: 'We conduct a thorough examination of your financial records to ensure they comply with the Companies Act, 2013 and applicable Accounting Standards.'
+        },
+        {
+            heading: 'Independent Opinion',
+            text: 'Our audit report provides an independent and credible opinion on your financial statements, enhancing trust among shareholders, investors, and lenders.'
+        },
+        {
+            heading: 'Internal Control Review',
+            text: 'As part of the audit, we review your internal control systems and provide valuable recommendations for strengthening them.'
+        }
+    ]
+  },
+  {
+    icon: FileText,
+    title: 'Tax Audit',
+    slug: 'tax-audit',
+    category: 'Audit & Assurance',
+    description: 'Fulfill your obligations under the Income Tax Act with our meticulous tax audit services, ensuring accurate reporting and compliance.',
+    details: [
+      {
+        heading: 'Mandatory Compliance',
+        text: 'We conduct tax audits as required under Section 44AB of the Income Tax Act for businesses exceeding specified turnover limits.'
+      },
+      {
+        heading: 'Accurate Reporting in Form 3CD',
+        text: 'Our team ensures that all the particulars required in Form 3CD are correctly and completely reported, minimizing the risk of scrutiny from the tax department.'
+      },
+      {
+        heading: 'Tax Planning Opportunities',
+        text: 'During the audit, we identify potential tax planning opportunities and areas for tax savings, providing value beyond simple compliance.'
+      }
     ]
   },
   {
     icon: ShieldCheck,
-    title: 'Compliance Services',
-    slug: 'compliance-services',
-    category: 'Compliance Services',
-    description:
-      'Stay ahead of regulatory changes. We provide comprehensive compliance services to keep your business secure and in good standing.',
+    title: 'Internal & Management Audits',
+    slug: 'internal-management-audits',
+    category: 'Audit & Assurance',
+    description: 'Strengthen your corporate governance and operational efficiency with our risk-based internal and management audit services.',
+    details: [
+      {
+        heading: 'Risk-Based Approach',
+        text: 'Our internal audits focus on identifying and mitigating key operational and financial risks, helping you protect your assets and improve processes.'
+      },
+      {
+        heading: 'Process Improvement',
+        text: 'We go beyond compliance to provide actionable recommendations for improving efficiency, reducing costs, and strengthening internal controls.'
+      },
+      {
+        heading: 'Objective Assurance',
+        text: 'Our management audits provide the board and senior management with an independent and objective assessment of the business operations and governance framework.'
+      }
+    ]
+  },
+  {
+    icon: FileBadge,
+    title: 'Special Audits & Certifications',
+    slug: 'special-audits-certifications',
+    category: 'Audit & Assurance',
+    description: 'We provide a wide range of special-purpose audits and certifications required for regulatory compliance, banking, or other needs.',
+    details: [
+      {
+        heading: '15CB / 15CA Certifications',
+        text: 'We issue certifications in Form 15CB for foreign remittances, ensuring compliance with the Income Tax Act and DTAA provisions, followed by filing Form 15CA.'
+      },
+      {
+        heading: 'GST & VAT Audits',
+        text: 'We conduct audits under GST and other indirect tax laws to ensure compliance and proper reporting, helping you avoid penalties.'
+      },
+      {
+        heading: 'Limited Reviews',
+        text: 'We perform limited reviews of financial statements as per regulatory requirements, providing a moderate level of assurance to stakeholders.'
+      }
+    ]
+  },
+  {
+    icon: Warehouse,
+    title: 'Stock Audit',
+    slug: 'stock-audit',
+    category: 'Audit & Assurance',
+    description: 'Verify and value your inventory accurately with our independent stock audit services, crucial for financial reporting and lender confidence.',
     details: [
         {
-            heading: 'Annual ROC Filings',
-            text: 'We manage all your annual filing requirements with the Registrar of Companies (ROC), including financial statements and annual returns, to ensure you avoid heavy penalties for non-compliance.'
+            heading: 'Physical Verification',
+            text: 'Our team conducts a physical verification of your inventory to ensure the quantities match your book records, identifying any discrepancies.'
         },
         {
-            heading: 'Secretarial Services',
-            text: 'Our team can act as your virtual secretarial department, maintaining statutory registers, preparing minutes for board and general meetings, and ensuring all corporate governance norms are met.'
+            heading: 'Valuation and Ageing Analysis',
+            text: 'We verify the valuation of your stock according to accounting standards and provide an ageing analysis to identify slow-moving or obsolete items.'
         },
         {
-            heading: 'Regulatory Updates',
-            text: 'The legal landscape is always changing. We keep you informed of important regulatory updates that affect your business and help you adapt your compliance strategies accordingly.'
+            heading: 'Report for Lenders',
+            text: 'Our independent stock audit report is a vital document for banks and financial institutions that have provided funding against inventory.'
         }
     ]
   },
   {
-    icon: Calculator,
-    title: 'Accounting Services',
-    slug: 'accounting-services',
-    category: 'Accounting Services',
-    description:
-      'From bookkeeping to financial reporting, our accounting services provide the clarity and insights you need to grow your business.',
+    icon: Scale,
+    title: 'Transfer Pricing Audit',
+    slug: 'transfer-pricing-audit',
+    category: 'Audit & Assurance',
+    description: 'Ensure your international and specified domestic transactions are at arm\'s length with our expert Transfer Pricing audit and documentation services.',
+    details: [
+      {
+        heading: 'Compliance with Section 92E',
+        text: 'We conduct the mandatory transfer pricing audit and issue the report in Form 3CEB for companies with international transactions.'
+      },
+      {
+        heading: 'Robust Documentation',
+        text: 'We help you prepare and maintain robust transfer pricing documentation that substantiates the arm\'s length nature of your transactions, serving as a key defense during assessments.'
+      },
+      {
+        heading: 'Advisory and Assistance',
+        text: 'Our experts advise on structuring your inter-company transactions in a tax-efficient manner while remaining compliant with transfer pricing regulations.'
+      }
+    ]
+  },
+  {
+    icon: Laptop,
+    title: 'Information Systems (IS) Audit',
+    slug: 'is-audit',
+    category: 'Audit & Assurance',
+    description: 'Assess the controls, security, and efficiency of your IT infrastructure with our comprehensive Information Systems audit.',
+    details: [
+      {
+        heading: 'IT Governance Review',
+        text: 'We evaluate your IT governance framework to ensure it aligns with your business objectives and best practices.'
+      },
+      {
+        heading: 'Security & Vulnerability Assessment',
+        text: 'Our audit identifies vulnerabilities in your IT systems, data security protocols, and access controls, providing recommendations to mitigate risks.'
+      },
+      {
+        heading: 'Data Integrity & System Efficiency',
+        text: 'We assess the integrity of the data processed by your systems and evaluate the efficiency of your IT operations to ensure they support business needs effectively.'
+      }
+    ]
+  },
+  // Certifications & Special Services
+  {
+    icon: Key,
+    title: 'Digital Signature Certificate (DSC)',
+    slug: 'dsc-services',
+    category: 'Special Services',
+    description: 'Obtain your secure Digital Signature Certificate (DSC) quickly for all your e-filing and online transaction needs.',
+    details: [
+      {
+        heading: 'Essential for E-Filing',
+        text: 'A DSC is mandatory for filing returns with the MCA and Income Tax department, as well as for participating in e-tenders and signing documents electronically.'
+      },
+      {
+        heading: 'Fast & Secure Issuance',
+        text: 'We offer a quick and secure process for obtaining Class 3 DSCs for individuals and organizations, with a validity of up to 3 years.'
+      },
+      {
+        heading: 'Complete Support',
+        text: 'Our team guides you through the entire process, from document submission and video verification to DSC installation and usage.'
+      }
+    ]
+  },
+  {
+    icon: CreditCard,
+    title: 'PAN Card Application',
+    slug: 'pan-card-application',
+    category: 'Special Services',
+    description: 'Apply for your new PAN card or request corrections with our hassle-free application and processing assistance.',
+    details: [
+      {
+        heading: 'New PAN Application',
+        text: 'We assist individuals and entities in applying for a new Permanent Account Number (PAN), a unique identifier essential for all financial transactions in India.'
+      },
+      {
+        heading: 'Correction & Updates',
+        text: 'Need to update your name, address, or other details on your PAN card? We manage the entire correction process for you.'
+      },
+      {
+        heading: 'Lost or Damaged PAN',
+        text: 'We help you apply for a duplicate PAN card in case the original is lost, stolen, or damaged, ensuring you have your essential document.'
+      }
+    ]
+  },
+  {
+    icon: Factory,
+    title: 'Udyam Registration',
+    slug: 'udyam-registration',
+    category: 'Special Services',
+    description: 'Register your enterprise as an MSME under the Udyam portal to access a wide range of government benefits and schemes.',
+    details: [
+      {
+        heading: 'Gateway to MSME Benefits',
+        text: 'Udyam Registration is the new process for registering as a Micro, Small, or Medium Enterprise (MSME), making you eligible for various government schemes.'
+      },
+      {
+        heading: 'Priority Sector Lending',
+        text: 'Registered MSMEs get easier access to credit and loans from banks under priority sector lending norms.'
+      },
+      {
+        heading: 'Other Benefits',
+        text: 'Benefits include protection against delayed payments, subsidies for patent registration, and eligibility for various government tenders and subsidies.'
+      }
+    ]
+  },
+  {
+    icon: Building,
+    title: 'RERA Registration',
+    slug: 'rera-registration',
+    category: 'Special Services',
+    description: 'Ensure your real estate project is compliant with the Real Estate (Regulation and Development) Act with our expert registration services.',
+    details: [
+      {
+        heading: 'Mandatory for Real Estate Projects',
+        text: 'RERA registration is mandatory for all commercial and residential real estate projects, bringing transparency and protecting the interests of homebuyers.'
+      },
+      {
+        heading: 'Project & Agent Registration',
+        text: 'We assist real estate developers in registering their projects and also help real estate agents register themselves under RERA.'
+      },
+      {
+        heading: 'Compliance & Documentation',
+        text: 'Our team manages the extensive documentation and compliance requirements for RERA registration, ensuring your application is approved without delays.'
+      }
+    ]
+  },
+  {
+    icon: Globe,
+    title: 'Form 15CB/15CA Certification',
+    slug: 'form-15cb-15ca-certification',
+    category: 'Special Services',
+    description: 'Facilitate foreign remittances with the required certifications from a Chartered Accountant, ensuring tax compliance.',
+    details: [
+      {
+        heading: 'Certification for Foreign Payments',
+        text: 'Form 15CB is a certificate issued by a Chartered Accountant to ensure that taxes have been correctly deducted on payments made to non-residents.'
+      },
+      {
+        heading: 'Determination of Tax Liability',
+        text: 'We examine the remittance details in light of the Income Tax Act and applicable Double Taxation Avoidance Agreements (DTAA) to determine the correct tax liability.'
+      },
+      {
+        heading: 'Filing of Form 15CA',
+        text: 'Once Form 15CB is issued, we assist you in filing the corresponding Form 15CA with the Income Tax Department, a necessary step to complete the remittance process.'
+      }
+    ]
+  },
+  {
+    icon: Info,
+    title: 'Documentation and Audit Support',
+    slug: 'documentation-audit-support',
+    category: 'Special Services',
+    description: 'Get expert assistance in preparing documentation for audits and assessments, ensuring you are always prepared for scrutiny.',
     details: [
         {
-            heading: 'Bookkeeping & Record-Keeping',
-            text: 'Maintain accurate and up-to-date financial records without the overhead of an in-house team. We use modern accounting software to manage your books efficiently.'
+            heading: 'Preparation for Scrutiny',
+            text: 'We help you organize and prepare all necessary documents and information required by auditors or tax authorities for a smooth assessment process.'
         },
         {
-            heading: 'Financial Reporting',
-            text: 'Get a clear view of your financial health with periodic reports, including Profit & Loss statements, Balance Sheets, and Cash Flow statements. These insights are vital for strategic decision-making.'
+            heading: 'Reconciliation & Support',
+            text: 'Our team provides support in reconciling data, preparing schedules, and drafting responses to queries raised during an audit.'
         },
         {
-            heading: 'Payroll Management',
-            text: 'We handle all aspects of payroll processing, from salary calculation to TDS compliance and payslip generation, ensuring your employees are paid accurately and on time.'
+            heading: 'Peace of Mind',
+            text: 'With our expert support, you can face any audit or assessment with confidence, knowing that your documentation is in order.'
         }
     ]
   },
