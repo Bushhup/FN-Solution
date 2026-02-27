@@ -30,6 +30,8 @@ import {
   Scale,
   Info,
   ScrollText,
+  Smartphone,
+  Store,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -263,19 +265,19 @@ export const services: Service[] = [
     title: 'ROC FILING',
     slug: 'roc-filing',
     category: 'Compliance & Filing',
-    description: 'Fulfill your company\'s mandatory annual and event-based filing requirements with the Registrar of Companies (ROC) accurately.',
+    description: "Fulfill your company's mandatory annual and event-based filing requirements with the Registrar of Companies (ROC) accurately.",
     details: [
         {
             heading: 'Annual Return (MGT-7/7A)',
-            text: 'We prepare and file your company\'s annual return, a comprehensive snapshot of your corporate structure, ensuring you meet statutory deadlines.'
+            text: "We prepare and file your company's annual return, a comprehensive snapshot of your corporate structure, ensuring you meet statutory deadlines."
         },
         {
             heading: 'Financial Statements (AOC-4)',
-            text: 'Our experts file your audited financial statements, including the Balance Sheet and P&L Account, maintaining your company\'s financial transparency.'
+            text: "Our experts file your audited financial statements, including the Balance Sheet and P&L Account, maintaining your company's financial transparency."
         },
         {
             heading: 'Event-Based Compliance',
-            text: 'We manage all event-based filings, such as changes in directors (DIR-12) or share capital (SH-7), keeping your company\'s records current with the ROC.'
+            text: "We manage all event-based filings, such as changes in directors (DIR-12) or share capital (SH-7), keeping your company's records current with the ROC."
         }
     ]
   },
@@ -330,7 +332,7 @@ export const services: Service[] = [
     details: [
       {
         heading: 'Analysis and Response Strategy',
-        text: 'Our tax experts analyze the notice to understand the department\'s query, prepare a robust strategy, and draft a detailed, legally sound response.'
+        text: "Our tax experts analyze the notice to understand the department's query, prepare a robust strategy, and draft a detailed, legally sound response."
       },
       {
         heading: 'Professional Representation',
@@ -423,7 +425,7 @@ export const services: Service[] = [
       },
       {
         heading: 'Representation Before Authority',
-        text: 'Our tax experts represent your case before the Authority for Advance Rulings (AAR), arguing your position effectively to secure a favorable ruling.'
+        text: "Our tax experts represent your case before the Authority for Advance Rulings (AAR), arguing your position effectively to secure a favorable ruling."
       }
     ]
   },
@@ -432,7 +434,7 @@ export const services: Service[] = [
     title: 'Project Reports for Bank Approvals',
     slug: 'project-reports-for-banks',
     category: 'Accounting & Advisory',
-    description: 'Secure bank loans and funding with professionally prepared, data-driven project reports that showcase your venture\'s viability.',
+    description: "Secure bank loans and funding with professionally prepared, data-driven project reports that showcase your venture's viability.",
     details: [
         {
             heading: 'Comprehensive Financial Projections',
@@ -542,11 +544,11 @@ export const services: Service[] = [
     details: [
       {
         heading: 'Performance Evaluation',
-        text: 'Our management audits assess how effectively management is achieving the organization\'s objectives and utilizing its resources.'
+        text: "Our management audits assess how effectively management is achieving the organization's objectives and utilizing its resources."
       },
       {
         heading: 'Strategic Review',
-        text: 'We review your business strategies, decision-making processes, and organizational structure to identify areas for strategic improvement.'
+        text: "We review your business strategies, decision-making processes, and organizational structure to identify areas for strategic improvement."
       },
       {
         heading: 'Actionable Reporting',
@@ -626,7 +628,7 @@ export const services: Service[] = [
     details: [
       {
         heading: 'State-Level Compliance',
-        text: 'For businesses still under the VAT regime for certain goods (like petroleum), we conduct audits as per the respective state\'s VAT laws.'
+        text: "For businesses still under the VAT regime for certain goods (like petroleum), we conduct audits as per the respective state's VAT laws."
       },
       {
         heading: 'Accurate Reporting',
@@ -664,7 +666,7 @@ export const services: Service[] = [
     title: 'Transfer Pricing audit as per Section 92E of Income Tax Act.',
     slug: 'transfer-pricing-audit',
     category: 'Audit & Assurance',
-    description: 'Ensure your international and specified domestic transactions are at arm\'s length with our expert Transfer Pricing audit.',
+    description: "Ensure your international and specified domestic transactions are at arm's length with our expert Transfer Pricing audit.",
     details: [
       {
         heading: 'Compliance with Section 92E',
@@ -672,7 +674,7 @@ export const services: Service[] = [
       },
       {
         heading: 'Robust Documentation',
-        text: 'We help you prepare and maintain robust transfer pricing documentation that substantiates the arm\'s length nature of your transactions, serving as a key defense during assessments.'
+        text: "We help you prepare and maintain robust transfer pricing documentation that substantiates the arm's length nature of your transactions, serving as a key defense during assessments."
       },
       {
         heading: 'Advisory and Assistance',
@@ -868,6 +870,125 @@ export const services: Service[] = [
             heading: 'Strategic Guidance',
             text: 'We provide strategic advice on the filing process, helping you understand the implications and choose the best course of action for your business.'
         }
+    ]
+  },
+  {
+    icon: CreditCard,
+    title: 'Pan card',
+    slug: 'pan-card',
+    category: 'Special Services',
+    description: 'Hassle-free application and processing assistance for your PAN card needs, including new applications and corrections.',
+    details: [
+      {
+        heading: 'New PAN Card',
+        text: 'We assist individuals, firms, and companies in applying for a new Permanent Account Number (PAN), which is essential for all financial transactions in India.'
+      },
+      {
+        heading: 'Corrections and Updates',
+        text: 'Need to update your details on your PAN card? We manage the entire process for you, ensuring your information is current.'
+      }
+    ]
+  },
+  {
+    icon: Smartphone,
+    title: 'Gadget',
+    slug: 'gadget-service',
+    category: 'Special Services',
+    description: 'Specialized assistance related to gadget and electronics compliance and registration matters.',
+    details: [
+      {
+        heading: 'Gadget Compliance',
+        text: 'Navigating the regulatory landscape for electronic gadgets can be complex. We provide advisory services to ensure your products meet all necessary standards.'
+      },
+      {
+        heading: 'Registration Support',
+        text: 'We assist with any required registrations for electronic devices, helping you bring your products to market legally and efficiently.'
+      }
+    ]
+  },
+  {
+    icon: Store,
+    title: 'Gumasta License',
+    slug: 'gumasta-license',
+    category: 'Special Services',
+    description: 'Obtain your Shop and Establishment Act license (Gumasta) to legally operate your business within municipal limits.',
+    details: [
+      {
+        heading: 'Mandatory for Businesses',
+        text: "A Gumasta license is required for all shops and commercial establishments to operate within their respective state. It serves as proof of your business's legal existence."
+      },
+      {
+        heading: 'Simplified Application Process',
+        text: 'We handle the entire application process, from document preparation to submission with the local municipal corporation, ensuring a smooth and quick registration.'
+      }
+    ]
+  },
+  {
+    icon: Factory,
+    title: 'Udyam',
+    slug: 'udyam',
+    category: 'Special Services',
+    description: 'Register your business under the Udyam portal to be recognized as an MSME and unlock various government benefits.',
+    details: [
+      {
+        heading: 'MSME Recognition',
+        text: 'Udyam Registration provides your business with an official recognition certificate as a Micro, Small, or Medium Enterprise (MSME).'
+      },
+      {
+        heading: 'Access Government Schemes',
+        text: 'Registered MSMEs are eligible for numerous benefits, including priority sector lending, subsidies, and easier access to government tenders.'
+      }
+    ]
+  },
+  {
+    icon: FileText,
+    title: 'Income Certificate',
+    slug: 'income-certificate',
+    category: 'Special Services',
+    description: 'Obtain an official Income Certificate from the relevant government authority for various personal and professional needs.',
+    details: [
+      {
+        heading: 'Official Proof of Income',
+        text: 'An Income Certificate is an official document that states your annual income. It is required for various purposes, including applying for loans, scholarships, and government schemes.'
+      },
+      {
+        heading: 'Application Assistance',
+        text: "We guide you through the application process, helping you prepare the necessary documents and file the application with the local authorities like the District Magistrate/Collector's office."
+      }
+    ]
+  },
+    {
+    icon: Landmark,
+    title: 'GST filing',
+    slug: 'gst-filing-service',
+    category: 'Compliance & Filing',
+    description: 'Ensure timely and accurate GST return filings to maintain compliance and optimize your input tax credit with our expert services.',
+    details: [
+      {
+        heading: 'Monthly & Quarterly Returns',
+        text: 'We manage the timely filing of your GSTR-1 and GSTR-3B, ensuring you are always compliant and avoid penalties.'
+      },
+      {
+        heading: 'ITC Reconciliation',
+        text: 'Our team performs detailed reconciliation to ensure you claim the maximum eligible Input Tax Credit (ITC), optimizing your cash flow.'
+      }
+    ]
+  },
+  {
+    icon: Calculator,
+    title: 'Book keeping and accounting',
+    slug: 'book-keeping-and-accounting',
+    category: 'Accounting & Advisory',
+    description: 'Maintain pristine financial records with our professional accounting and bookkeeping services, tailored for your business.',
+    details: [
+      {
+        heading: 'Accurate Record Keeping',
+        text: 'We use modern accounting software to manage your daily transactions, maintain ledgers, and ensure your books are always accurate and up-to-date.'
+      },
+      {
+        heading: 'Financial Reporting',
+        text: 'We prepare essential financial statements like the Profit & Loss Account and Balance Sheet, giving you a clear view of your financial health.'
+      }
     ]
   },
 ];
