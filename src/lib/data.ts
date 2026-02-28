@@ -153,7 +153,7 @@ export const services: Service[] = [
   },
   {
     icon: Building2,
-    title: 'FORMATION OF A PRIVATE COMPANY.',
+    title: 'FORMATION OF A PRIVATE COMPANY',
     slug: 'private-company-formation',
     category: 'Business Formation',
     description: 'Launch your private limited company with our expert, end-to-end registration services for a fast and compliant start.',
@@ -174,7 +174,7 @@ export const services: Service[] = [
   },
   {
     icon: Building,
-    title: 'FORMATION OF A PUBLIC COMPANY.',
+    title: 'FORMATION OF A PUBLIC COMPANY',
     slug: 'public-company-formation',
     category: 'Business Formation',
     description: 'Establish a public limited company, enabling you to raise capital from the public and list on stock exchanges.',
@@ -237,7 +237,7 @@ export const services: Service[] = [
   },
   {
     icon: Heart,
-    title: 'FORMATION OF A NON-PROFIT ORGANIZATION/ SECTION 8 COMPANY.',
+    title: 'FORMATION OF A NON-PROFIT ORGANIZATION/ SECTION 8 COMPANY',
     slug: 'section-8-company-npo-formation',
     category: 'Business Formation',
     description: 'Form a non-profit organization to promote social welfare, arts, science, or charity with tax-exempt benefits.',
@@ -321,7 +321,7 @@ export const services: Service[] = [
   },
   {
     icon: Repeat,
-    title: 'CONVERSION OF A PROPRIETORSHIP CONCERN, PARTNERSHIP FIRM, LLP INTO PRIVATE OR PUBLIC COMPANY.',
+    title: 'CONVERSION OF A PROPRIETORSHIP CONCERN, PARTNERSHIP FIRM, LLP INTO PRIVATE OR PUBLIC COMPANY',
     slug: 'firm-to-company-conversion',
     category: 'Business Formation',
     description: 'Upgrade your business structure from a firm or LLP to a company to access limited liability, funding, and greater scalability.',
@@ -342,7 +342,7 @@ export const services: Service[] = [
   },
   {
     icon: Repeat,
-    title: 'CONVERSION OF A PRIVATE COMPANY INTO PUBLIC COMPANY OR VICE VERSA.',
+    title: 'CONVERSION OF A PRIVATE COMPANY INTO PUBLIC COMPANY OR VICE VERSA',
     slug: 'company-structure-conversion',
     category: 'Business Formation',
     description: 'Strategically alter your company type between private and public to align with your capital needs and business strategy.',
@@ -406,7 +406,7 @@ export const services: Service[] = [
   },
   {
     icon: MailCheck,
-    title: 'NOTICE CLEARING OF GST AND INCOME TAX.',
+    title: 'NOTICE CLEARING OF GST AND INCOME TAX',
     slug: 'notice-clearing',
     category: 'Compliance & Filing',
     description: 'Expertly handle and respond to notices from GST and Income Tax departments with our professional representation services.',
@@ -576,7 +576,7 @@ export const services: Service[] = [
   // Audit & Assurance
   {
     icon: Landmark,
-    title: 'STATUTORY AUDIT AS PER COMPANIES ACT.',
+    title: 'STATUTORY AUDIT AS PER COMPANIES ACT',
     slug: 'statutory-audit',
     category: 'Audit & Assurance',
     description: 'Ensure your financial statements present a true and fair view with our independent and rigorous statutory audit services.',
@@ -597,7 +597,7 @@ export const services: Service[] = [
   },
   {
     icon: ShieldCheck,
-    title: 'INTERNAL AUDITS.',
+    title: 'INTERNAL AUDITS',
     slug: 'internal-audits',
     category: 'Audit & Assurance',
     description: 'Strengthen your corporate governance and operational efficiency with our risk-based internal audit services.',
@@ -618,7 +618,7 @@ export const services: Service[] = [
   },
   {
     icon: ShieldCheck,
-    title: 'MANAGEMENT AUDITS.',
+    title: 'MANAGEMENT AUDITS',
     slug: 'management-audits',
     category: 'Audit & Assurance',
     description: 'Evaluate the effectiveness of your management policies and procedures to drive strategic improvements.',
@@ -639,7 +639,7 @@ export const services: Service[] = [
   },
   {
     icon: FileBadge,
-    title: 'LIMITED REVIEWS.',
+    title: 'LIMITED REVIEWS',
     slug: 'limited-reviews',
     category: 'Audit & Assurance',
     description: 'Fulfill quarterly regulatory requirements with our efficient limited review services for financial statements.',
@@ -660,7 +660,7 @@ export const services: Service[] = [
   },
   {
     icon: FileText,
-    title: 'TAX AUDIT AS PER INCOME TAX ACT.',
+    title: 'TAX AUDIT AS PER INCOME TAX ACT',
     slug: 'tax-audit',
     category: 'Audit & Assurance',
     description: 'Fulfill your obligations under the Income Tax Act with our meticulous tax audit services, ensuring accurate reporting and compliance.',
@@ -681,7 +681,7 @@ export const services: Service[] = [
   },
   {
     icon: Landmark,
-    title: 'GST AUDIT.',
+    title: 'GST AUDIT',
     slug: 'gst-audit',
     category: 'Audit & Assurance',
     description: 'Ensure GST compliance and identify potential tax savings with our comprehensive GST audit and reconciliation services.',
@@ -702,7 +702,7 @@ export const services: Service[] = [
   },
    {
     icon: FileBadge,
-    title: 'VAT AUDIT.',
+    title: 'VAT AUDIT',
     slug: 'vat-audit',
     category: 'Audit & Assurance',
     description: 'Conduct VAT audits as required under state-level regulations to ensure compliance and accurate reporting.',
@@ -723,7 +723,7 @@ export const services: Service[] = [
   },
   {
     icon: Warehouse,
-    title: 'STOCK AUDIT.',
+    title: 'STOCK AUDIT',
     slug: 'stock-audit',
     category: 'Audit & Assurance',
     description: 'Verify and value your inventory accurately with our independent stock audit services, crucial for reporting and lender confidence.',
@@ -744,7 +744,7 @@ export const services: Service[] = [
   },
    {
     icon: Scale,
-    title: 'TRANSFER PRICING AUDIT AS PER SECTION 92E OF INCOME TAX ACT.',
+    title: 'TRANSFER PRICING AUDIT AS PER SECTION 92E OF INCOME TAX ACT',
     slug: 'transfer-pricing-audit',
     category: 'Audit & Assurance',
     description: "Ensure your international and specified domestic transactions are at arm's length with our expert Transfer Pricing audit.",
@@ -765,7 +765,7 @@ export const services: Service[] = [
   },
   {
     icon: Laptop,
-    title: 'INFORMATION SYSTEMS AUDIT.',
+    title: 'INFORMATION SYSTEMS AUDIT',
     slug: 'is-audit',
     category: 'Audit & Assurance',
     description: 'Assess the controls, security, and efficiency of your IT infrastructure with our comprehensive Information Systems audit.',
@@ -787,7 +787,7 @@ export const services: Service[] = [
   // Special Services
   {
     icon: Key,
-    title: 'DIGITAL SIGNATURE CERTIFICATE (DSC).',
+    title: 'DIGITAL SIGNATURE CERTIFICATE (DSC)',
     slug: 'dsc-services',
     category: 'Special Services',
     description: 'Obtain your secure Digital Signature Certificate (DSC) quickly for all your e-filing and online transaction needs.',
@@ -871,7 +871,7 @@ export const services: Service[] = [
   },
   {
     icon: Globe,
-    title: 'FOREIGN EXCHANGE REMITTANCE CERTIFICATIONS SUCH AS FORM 15CB / 15CA.',
+    title: 'FOREIGN EXCHANGE REMITTANCE CERTIFICATIONS SUCH AS FORM 15CB / 15CA',
     slug: 'form-15cb-15ca-certification',
     category: 'Special Services',
     description: 'Facilitate foreign remittances with the required certifications from a Chartered Accountant, ensuring tax compliance.',
@@ -892,7 +892,7 @@ export const services: Service[] = [
   },
   {
     icon: FileBadge,
-    title: 'SPECIAL PURPOSE AUDITS & CERTIFICATIONS.',
+    title: 'SPECIAL PURPOSE AUDITS & CERTIFICATIONS',
     slug: 'special-audits-certifications',
     category: 'Special Services',
     description: 'We provide a wide range of special-purpose audits and certifications required for regulatory compliance or other specific needs.',
@@ -913,7 +913,7 @@ export const services: Service[] = [
   },
   {
     icon: Info,
-    title: 'DOCUMENTATION AND AUDIT SUPPORT.',
+    title: 'DOCUMENTATION AND AUDIT SUPPORT',
     slug: 'documentation-audit-support',
     category: 'Special Services',
     description: 'Get expert assistance in preparing documentation for audits and assessments, ensuring you are always prepared for scrutiny.',

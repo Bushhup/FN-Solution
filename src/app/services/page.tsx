@@ -4,8 +4,25 @@ import { services, type Service } from '@/lib/data';
 import { GlassCard } from '@/components/ui/glass-card';
 import Link from 'next/link';
 
-// Group services by category
-const servicesByCategory = services.reduce(
+// Slugs for the services to feature at the top
+const topServiceSlugs = [
+  'pan-card',
+  'gumasta-license',
+  'udyam',
+  'income-certificate',
+  'gst-filing-service',
+  'gadget-service',
+];
+
+// Separate top services from the rest
+const topServices = topServiceSlugs
+  .map(slug => services.find(service => service.slug === slug))
+  .filter((service): service is Service => !!service);
+
+const otherServices = services.filter(service => !topServiceSlugs.includes(service.slug));
+
+// Group the remaining services by category
+const servicesByCategory = otherServices.reduce(
   (acc, service) => {
     const category = service.category;
     if (!acc[category]) {
@@ -40,9 +57,31 @@ export default function ServicesPage() {
 
       {services?.length > 0 ? (
         <div className="space-y-16">
+          {/* Top Services Section */}
+          {topServices.length > 0 && (
+            <div>
+              <h2 className="font-headline text-3xl font-bold mb-8 text-glow">
+                Mainly Used Services
+              </h2>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {topServices.map((service) => (
+                  <Link href={`/services/${service.slug}`} key={service.slug}>
+                    <GlassCard
+                      icon={service.icon}
+                      title={service.title}
+                      description={service.description}
+                      className="h-full"
+                    />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Other Services by Category */}
           {categoryOrder.map(
             (category) =>
-              servicesByCategory[category] && (
+              servicesByCategory[category] && servicesByCategory[category].length > 0 && (
                 <div key={category}>
                   <h2 className="font-headline text-3xl font-bold mb-8 text-glow">
                     {category}
