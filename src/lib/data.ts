@@ -50,8 +50,110 @@ export type Service = {
 export const services: Service[] = [
   // Business Formation
   {
+    icon: CreditCard,
+    title: 'PAN CARD',
+    slug: 'pan-card',
+    category: 'Special Services',
+    description: 'Hassle-free application and processing assistance for your PAN card needs, including new applications and corrections.',
+    details: [
+      {
+        heading: 'New PAN Card',
+        text: 'We assist individuals, firms, and companies in applying for a new Permanent Account Number (PAN), which is essential for all financial transactions in India.'
+      },
+      {
+        heading: 'Corrections and Updates',
+        text: 'Need to update your details on your PAN card? We manage the entire process for you, ensuring your information is current.'
+      }
+    ]
+  },
+  {
+    icon: Store,
+    title: 'GUMASTA LICENSE',
+    slug: 'gumasta-license',
+    category: 'Special Services',
+    description: 'Obtain your Shop and Establishment Act license (Gumasta) to legally operate your business within municipal limits.',
+    details: [
+      {
+        heading: 'Mandatory for Businesses',
+        text: "A Gumasta license is required for all shops and commercial establishments to operate within their respective state. It serves as proof of your business's legal existence."
+      },
+      {
+        heading: 'Simplified Application Process',
+        text: 'We handle the entire application process, from document preparation to submission with the local municipal corporation, ensuring a smooth and quick registration.'
+      }
+    ]
+  },
+  {
+    icon: Factory,
+    title: 'UDYAM',
+    slug: 'udyam',
+    category: 'Special Services',
+    description: 'Register your business under the Udyam portal to be recognized as an MSME and unlock various government benefits.',
+    details: [
+      {
+        heading: 'MSME Recognition',
+        text: 'Udyam Registration provides your business with an official recognition certificate as a Micro, Small, or Medium Enterprise (MSME).'
+      },
+      {
+        heading: 'Access Government Schemes',
+        text: 'Registered MSMEs are eligible for numerous benefits, including priority sector lending, subsidies, and easier access to government tenders.'
+      }
+    ]
+  },
+  {
+    icon: FileText,
+    title: 'INCOME CERTIFICATE',
+    slug: 'income-certificate',
+    category: 'Special Services',
+    description: 'Obtain an official Income Certificate from the relevant government authority for various personal and professional needs.',
+    details: [
+      {
+        heading: 'Official Proof of Income',
+        text: 'An Income Certificate is an official document that states your annual income. It is required for various purposes, including applying for loans, scholarships, and government schemes.'
+      },
+      {
+        heading: 'Application Assistance',
+        text: "We guide you through the application process, helping you prepare the necessary documents and file the application with the local authorities like the District Magistrate/Collector's office."
+      }
+    ]
+  },
+    {
+    icon: Landmark,
+    title: 'GST FILING',
+    slug: 'gst-filing-service',
+    category: 'Compliance & Filing',
+    description: 'Ensure timely and accurate GST return filings to maintain compliance and optimize your input tax credit with our expert services.',
+    details: [
+      {
+        heading: 'Monthly & Quarterly Returns',
+        text: 'We manage the timely filing of your GSTR-1 and GSTR-3B, ensuring you are always compliant and avoid penalties.'
+      },
+      {
+        heading: 'ITC Reconciliation',
+        text: 'Our team performs detailed reconciliation to ensure you claim the maximum eligible Input Tax Credit (ITC), optimizing your cash flow.'
+      }
+    ]
+  },
+  {
+    icon: Smartphone,
+    title: 'GADGET',
+    slug: 'gadget-service',
+    category: 'Special Services',
+    description: 'Specialized assistance related to gadget and electronics compliance and registration matters.',
+    details: [
+      {
+        heading: 'Gadget Compliance',
+        text: 'Navigating the regulatory landscape for electronic gadgets can be complex. We provide advisory services to ensure your products meet all necessary standards.'
+      },
+      {
+        heading: 'Registration Support',
+        text: 'We assist with any required registrations for electronic devices, helping you bring your products to market legally and efficiently.'
+      }
+    ]
+  },
+  {
     icon: Building2,
-    title: 'Formation of a Private Company.',
+    title: 'FORMATION OF A PRIVATE COMPANY.',
     slug: 'private-company-formation',
     category: 'Business Formation',
     description: 'Launch your private limited company with our expert, end-to-end registration services for a fast and compliant start.',
@@ -72,7 +174,7 @@ export const services: Service[] = [
   },
   {
     icon: Building,
-    title: 'Formation of a Public Company.',
+    title: 'FORMATION OF A PUBLIC COMPANY.',
     slug: 'public-company-formation',
     category: 'Business Formation',
     description: 'Establish a public limited company, enabling you to raise capital from the public and list on stock exchanges.',
@@ -93,7 +195,7 @@ export const services: Service[] = [
   },
   {
     icon: User,
-    title: 'Formation of a One Person Company (OPC)',
+    title: 'FORMATION OF A ONE PERSON COMPANY (OPC)',
     slug: 'opc-formation',
     category: 'Business Formation',
     description: 'Start your own venture as a single entrepreneur with the benefits of a corporate structure and limited liability.',
@@ -114,7 +216,7 @@ export const services: Service[] = [
   },
   {
     icon: Handshake,
-    title: 'Formation of a Limited Liability Partnership (LLP)',
+    title: 'FORMATION OF A LIMITED LIABILITY PARTNERSHIP (LLP)',
     slug: 'llp-registration',
     category: 'Business Formation',
     description: 'Combine the flexibility of a partnership with the advantage of limited liability by forming a Limited Liability Partnership (LLP).',
@@ -135,7 +237,7 @@ export const services: Service[] = [
   },
   {
     icon: Heart,
-    title: 'Formation of a non-profit organization/ section 8 company.',
+    title: 'FORMATION OF A NON-PROFIT ORGANIZATION/ SECTION 8 COMPANY.',
     slug: 'section-8-company-npo-formation',
     category: 'Business Formation',
     description: 'Form a non-profit organization to promote social welfare, arts, science, or charity with tax-exempt benefits.',
@@ -156,7 +258,7 @@ export const services: Service[] = [
   },
    {
     icon: ScrollText,
-    title: 'Trust Formation',
+    title: 'TRUST FORMATION',
     slug: 'trust-formation',
     category: 'Business Formation',
     description: 'Establish a trust for charitable, religious, or private purposes with our expert guidance on legal drafting and registration.',
@@ -177,7 +279,7 @@ export const services: Service[] = [
   },
   {
     icon: User,
-    title: 'Formation of a Proprietorship Business',
+    title: 'FORMATION OF A PROPRIETORSHIP BUSINESS',
     slug: 'proprietorship-formation',
     category: 'Business Formation',
     description: 'The simplest way to start a business. We help you get the necessary registrations to operate as a sole proprietor.',
@@ -198,7 +300,7 @@ export const services: Service[] = [
   },
   {
     icon: Users,
-    title: 'Formation of a Partnership Firm',
+    title: 'FORMATION OF A PARTNERSHIP FIRM',
     slug: 'partnership-firm-formation',
     category: 'Business Formation',
     description: 'Create a partnership firm with a well-drafted partnership deed to ensure clarity and protection for all partners involved.',
@@ -219,7 +321,7 @@ export const services: Service[] = [
   },
   {
     icon: Repeat,
-    title: 'Conversion of a Proprietorship concern, Partnership firm, LLP into Private or Public Company.',
+    title: 'CONVERSION OF A PROPRIETORSHIP CONCERN, PARTNERSHIP FIRM, LLP INTO PRIVATE OR PUBLIC COMPANY.',
     slug: 'firm-to-company-conversion',
     category: 'Business Formation',
     description: 'Upgrade your business structure from a firm or LLP to a company to access limited liability, funding, and greater scalability.',
@@ -240,7 +342,7 @@ export const services: Service[] = [
   },
   {
     icon: Repeat,
-    title: 'Conversion of a Private Company into Public Company or vice versa.',
+    title: 'CONVERSION OF A PRIVATE COMPANY INTO PUBLIC COMPANY OR VICE VERSA.',
     slug: 'company-structure-conversion',
     category: 'Business Formation',
     description: 'Strategically alter your company type between private and public to align with your capital needs and business strategy.',
@@ -281,30 +383,9 @@ export const services: Service[] = [
         }
     ]
   },
-  {
-    icon: Landmark,
-    title: 'GST FILING',
-    slug: 'gst-filing',
-    category: 'Compliance & Filing',
-    description: 'Ensure timely and accurate GST return filings (GSTR-1, GSTR-3B) to maintain compliance and optimize your input tax credit.',
-    details: [
-      {
-        heading: 'Monthly & Quarterly Filings',
-        text: 'We manage the timely filing of your GSTR-1 (outward supplies) and GSTR-3B (summary return) to ensure you are always compliant and avoid late fees.'
-      },
-      {
-        heading: 'Input Tax Credit (ITC) Reconciliation',
-        text: 'Our team performs detailed reconciliation of your purchase data with GSTR-2A/2B to ensure you claim the maximum eligible Input Tax Credit, optimizing your cash flow.'
-      },
-      {
-        heading: 'Annual GST Return',
-        text: 'We handle the preparation and filing of the annual GST return (GSTR-9) and reconciliation statement (GSTR-9C), providing a consolidated view of your yearly GST activity.'
-      }
-    ]
-  },
    {
     icon: FileText,
-    title: 'Income Tax Filing',
+    title: 'INCOME TAX FILING',
     slug: 'income-tax-filing',
     category: 'Compliance & Filing',
     description: 'Maximize returns and ensure compliance with our precise income tax filing services for individuals, firms, and companies.',
@@ -325,7 +406,7 @@ export const services: Service[] = [
   },
   {
     icon: MailCheck,
-    title: 'Notice clearing of GST and income tax.',
+    title: 'NOTICE CLEARING OF GST AND INCOME TAX.',
     slug: 'notice-clearing',
     category: 'Compliance & Filing',
     description: 'Expertly handle and respond to notices from GST and Income Tax departments with our professional representation services.',
@@ -347,7 +428,7 @@ export const services: Service[] = [
   // Accounting & Advisory
   {
     icon: Calculator,
-    title: 'Accounting and Book-keeping Services',
+    title: 'ACCOUNTING AND BOOK-KEEPING SERVICES',
     slug: 'accounting-book-keeping',
     category: 'Accounting & Advisory',
     description: 'Maintain pristine financial records with our professional accounting and bookkeeping services, tailored to your business needs.',
@@ -368,7 +449,7 @@ export const services: Service[] = [
   },
   {
     icon: Users,
-    title: 'Payroll Processing Services',
+    title: 'PAYROLL PROCESSING SERVICES',
     slug: 'payroll-processing',
     category: 'Accounting & Advisory',
     description: 'Streamline your payroll process, from salary calculation to compliance, ensuring accuracy and timeliness for your employees.',
@@ -389,7 +470,7 @@ export const services: Service[] = [
   },
    {
     icon: BarChart,
-    title: 'Management Reporting',
+    title: 'MANAGEMENT REPORTING',
     slug: 'management-reporting',
     category: 'Accounting & Advisory',
     description: 'Gain critical insights into your business performance with customized Management Information System (MIS) reports.',
@@ -410,7 +491,7 @@ export const services: Service[] = [
   },
   {
     icon: Gavel,
-    title: 'Advance Ruling Representational Services',
+    title: 'ADVANCE RULING REPRESENTATIONAL SERVICES',
     slug: 'advance-ruling-services',
     category: 'Accounting & Advisory',
     description: 'Obtain clarity on ambiguous tax provisions by seeking an advance ruling from tax authorities with our expert representation.',
@@ -431,7 +512,7 @@ export const services: Service[] = [
   },
   {
     icon: Banknote,
-    title: 'Project Reports for Bank Approvals',
+    title: 'PROJECT REPORTS FOR BANK APPROVALS',
     slug: 'project-reports-for-banks',
     category: 'Accounting & Advisory',
     description: "Secure bank loans and funding with professionally prepared, data-driven project reports that showcase your venture's viability.",
@@ -452,7 +533,7 @@ export const services: Service[] = [
   },
   {
     icon: TrendingUp,
-    title: 'Cash Flow Planning',
+    title: 'CASH FLOW PLANNING',
     slug: 'cash-flow-planning',
     category: 'Accounting & Advisory',
     description: 'Optimize your working capital and ensure financial stability with our expert cash flow planning and forecasting services.',
@@ -473,7 +554,7 @@ export const services: Service[] = [
   },
   {
     icon: ClipboardCheck,
-    title: 'Valuation & Verification of Fixed Assets',
+    title: 'VALUATION & VERIFICATION OF FIXED ASSETS',
     slug: 'fixed-asset-valuation-verification',
     category: 'Accounting & Advisory',
     description: 'Get an accurate valuation and physical verification of your fixed assets for financial reporting, mergers, or insurance purposes.',
@@ -495,7 +576,7 @@ export const services: Service[] = [
   // Audit & Assurance
   {
     icon: Landmark,
-    title: 'Statutory Audit as per Companies Act.',
+    title: 'STATUTORY AUDIT AS PER COMPANIES ACT.',
     slug: 'statutory-audit',
     category: 'Audit & Assurance',
     description: 'Ensure your financial statements present a true and fair view with our independent and rigorous statutory audit services.',
@@ -516,7 +597,7 @@ export const services: Service[] = [
   },
   {
     icon: ShieldCheck,
-    title: 'Internal Audits.',
+    title: 'INTERNAL AUDITS.',
     slug: 'internal-audits',
     category: 'Audit & Assurance',
     description: 'Strengthen your corporate governance and operational efficiency with our risk-based internal audit services.',
@@ -537,7 +618,7 @@ export const services: Service[] = [
   },
   {
     icon: ShieldCheck,
-    title: 'Management Audits.',
+    title: 'MANAGEMENT AUDITS.',
     slug: 'management-audits',
     category: 'Audit & Assurance',
     description: 'Evaluate the effectiveness of your management policies and procedures to drive strategic improvements.',
@@ -558,7 +639,7 @@ export const services: Service[] = [
   },
   {
     icon: FileBadge,
-    title: 'Limited Reviews.',
+    title: 'LIMITED REVIEWS.',
     slug: 'limited-reviews',
     category: 'Audit & Assurance',
     description: 'Fulfill quarterly regulatory requirements with our efficient limited review services for financial statements.',
@@ -579,7 +660,7 @@ export const services: Service[] = [
   },
   {
     icon: FileText,
-    title: 'Tax Audit as per Income Tax Act.',
+    title: 'TAX AUDIT AS PER INCOME TAX ACT.',
     slug: 'tax-audit',
     category: 'Audit & Assurance',
     description: 'Fulfill your obligations under the Income Tax Act with our meticulous tax audit services, ensuring accurate reporting and compliance.',
@@ -600,7 +681,7 @@ export const services: Service[] = [
   },
   {
     icon: Landmark,
-    title: 'GST Audit.',
+    title: 'GST AUDIT.',
     slug: 'gst-audit',
     category: 'Audit & Assurance',
     description: 'Ensure GST compliance and identify potential tax savings with our comprehensive GST audit and reconciliation services.',
@@ -621,7 +702,7 @@ export const services: Service[] = [
   },
    {
     icon: FileBadge,
-    title: 'VAT Audit.',
+    title: 'VAT AUDIT.',
     slug: 'vat-audit',
     category: 'Audit & Assurance',
     description: 'Conduct VAT audits as required under state-level regulations to ensure compliance and accurate reporting.',
@@ -642,7 +723,7 @@ export const services: Service[] = [
   },
   {
     icon: Warehouse,
-    title: 'Stock Audit.',
+    title: 'STOCK AUDIT.',
     slug: 'stock-audit',
     category: 'Audit & Assurance',
     description: 'Verify and value your inventory accurately with our independent stock audit services, crucial for reporting and lender confidence.',
@@ -663,7 +744,7 @@ export const services: Service[] = [
   },
    {
     icon: Scale,
-    title: 'Transfer Pricing audit as per Section 92E of Income Tax Act.',
+    title: 'TRANSFER PRICING AUDIT AS PER SECTION 92E OF INCOME TAX ACT.',
     slug: 'transfer-pricing-audit',
     category: 'Audit & Assurance',
     description: "Ensure your international and specified domestic transactions are at arm's length with our expert Transfer Pricing audit.",
@@ -684,7 +765,7 @@ export const services: Service[] = [
   },
   {
     icon: Laptop,
-    title: 'Information Systems Audit.',
+    title: 'INFORMATION SYSTEMS AUDIT.',
     slug: 'is-audit',
     category: 'Audit & Assurance',
     description: 'Assess the controls, security, and efficiency of your IT infrastructure with our comprehensive Information Systems audit.',
@@ -706,7 +787,7 @@ export const services: Service[] = [
   // Special Services
   {
     icon: Key,
-    title: 'Digital Signature Certificate (DSC).',
+    title: 'DIGITAL SIGNATURE CERTIFICATE (DSC).',
     slug: 'dsc-services',
     category: 'Special Services',
     description: 'Obtain your secure Digital Signature Certificate (DSC) quickly for all your e-filing and online transaction needs.',
@@ -790,7 +871,7 @@ export const services: Service[] = [
   },
   {
     icon: Globe,
-    title: 'Foreign Exchange Remittance Certifications such as Form 15CB / 15CA.',
+    title: 'FOREIGN EXCHANGE REMITTANCE CERTIFICATIONS SUCH AS FORM 15CB / 15CA.',
     slug: 'form-15cb-15ca-certification',
     category: 'Special Services',
     description: 'Facilitate foreign remittances with the required certifications from a Chartered Accountant, ensuring tax compliance.',
@@ -811,7 +892,7 @@ export const services: Service[] = [
   },
   {
     icon: FileBadge,
-    title: 'Special Purpose Audits & Certifications.',
+    title: 'SPECIAL PURPOSE AUDITS & CERTIFICATIONS.',
     slug: 'special-audits-certifications',
     category: 'Special Services',
     description: 'We provide a wide range of special-purpose audits and certifications required for regulatory compliance or other specific needs.',
@@ -832,7 +913,7 @@ export const services: Service[] = [
   },
   {
     icon: Info,
-    title: 'Documentation and Audit Support.',
+    title: 'DOCUMENTATION AND AUDIT SUPPORT.',
     slug: 'documentation-audit-support',
     category: 'Special Services',
     description: 'Get expert assistance in preparing documentation for audits and assessments, ensuring you are always prepared for scrutiny.',
@@ -853,7 +934,7 @@ export const services: Service[] = [
   },
   {
     icon: FileQuestion,
-    title: 'Advisory and Assistance relating to preparation and filing',
+    title: 'ADVISORY AND ASSISTANCE RELATING TO PREPARATION AND FILING',
     slug: 'advisory-assistance-filing',
     category: 'Special Services',
     description: 'Receive expert guidance and hands-on assistance with the preparation and filing of various regulatory and business documents.',
@@ -873,110 +954,8 @@ export const services: Service[] = [
     ]
   },
   {
-    icon: CreditCard,
-    title: 'Pan card',
-    slug: 'pan-card',
-    category: 'Special Services',
-    description: 'Hassle-free application and processing assistance for your PAN card needs, including new applications and corrections.',
-    details: [
-      {
-        heading: 'New PAN Card',
-        text: 'We assist individuals, firms, and companies in applying for a new Permanent Account Number (PAN), which is essential for all financial transactions in India.'
-      },
-      {
-        heading: 'Corrections and Updates',
-        text: 'Need to update your details on your PAN card? We manage the entire process for you, ensuring your information is current.'
-      }
-    ]
-  },
-  {
-    icon: Smartphone,
-    title: 'Gadget',
-    slug: 'gadget-service',
-    category: 'Special Services',
-    description: 'Specialized assistance related to gadget and electronics compliance and registration matters.',
-    details: [
-      {
-        heading: 'Gadget Compliance',
-        text: 'Navigating the regulatory landscape for electronic gadgets can be complex. We provide advisory services to ensure your products meet all necessary standards.'
-      },
-      {
-        heading: 'Registration Support',
-        text: 'We assist with any required registrations for electronic devices, helping you bring your products to market legally and efficiently.'
-      }
-    ]
-  },
-  {
-    icon: Store,
-    title: 'Gumasta License',
-    slug: 'gumasta-license',
-    category: 'Special Services',
-    description: 'Obtain your Shop and Establishment Act license (Gumasta) to legally operate your business within municipal limits.',
-    details: [
-      {
-        heading: 'Mandatory for Businesses',
-        text: "A Gumasta license is required for all shops and commercial establishments to operate within their respective state. It serves as proof of your business's legal existence."
-      },
-      {
-        heading: 'Simplified Application Process',
-        text: 'We handle the entire application process, from document preparation to submission with the local municipal corporation, ensuring a smooth and quick registration.'
-      }
-    ]
-  },
-  {
-    icon: Factory,
-    title: 'Udyam',
-    slug: 'udyam',
-    category: 'Special Services',
-    description: 'Register your business under the Udyam portal to be recognized as an MSME and unlock various government benefits.',
-    details: [
-      {
-        heading: 'MSME Recognition',
-        text: 'Udyam Registration provides your business with an official recognition certificate as a Micro, Small, or Medium Enterprise (MSME).'
-      },
-      {
-        heading: 'Access Government Schemes',
-        text: 'Registered MSMEs are eligible for numerous benefits, including priority sector lending, subsidies, and easier access to government tenders.'
-      }
-    ]
-  },
-  {
-    icon: FileText,
-    title: 'Income Certificate',
-    slug: 'income-certificate',
-    category: 'Special Services',
-    description: 'Obtain an official Income Certificate from the relevant government authority for various personal and professional needs.',
-    details: [
-      {
-        heading: 'Official Proof of Income',
-        text: 'An Income Certificate is an official document that states your annual income. It is required for various purposes, including applying for loans, scholarships, and government schemes.'
-      },
-      {
-        heading: 'Application Assistance',
-        text: "We guide you through the application process, helping you prepare the necessary documents and file the application with the local authorities like the District Magistrate/Collector's office."
-      }
-    ]
-  },
-    {
-    icon: Landmark,
-    title: 'GST filing',
-    slug: 'gst-filing-service',
-    category: 'Compliance & Filing',
-    description: 'Ensure timely and accurate GST return filings to maintain compliance and optimize your input tax credit with our expert services.',
-    details: [
-      {
-        heading: 'Monthly & Quarterly Returns',
-        text: 'We manage the timely filing of your GSTR-1 and GSTR-3B, ensuring you are always compliant and avoid penalties.'
-      },
-      {
-        heading: 'ITC Reconciliation',
-        text: 'Our team performs detailed reconciliation to ensure you claim the maximum eligible Input Tax Credit (ITC), optimizing your cash flow.'
-      }
-    ]
-  },
-  {
     icon: Calculator,
-    title: 'Book keeping and accounting',
+    title: 'BOOK KEEPING AND ACCOUNTING',
     slug: 'book-keeping-and-accounting',
     category: 'Accounting & Advisory',
     description: 'Maintain pristine financial records with our professional accounting and bookkeeping services, tailored for your business.',
