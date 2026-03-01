@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { services } from '@/lib/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = 'https://www.yourdomain.com'; // IMPORTANT: Replace with your actual domain
+  const siteUrl = 'https://fntaxsolution.in'; // IMPORTANT: Replace with your actual domain
 
   // Get all service pages
   const serviceUrls = services.map(service => ({
