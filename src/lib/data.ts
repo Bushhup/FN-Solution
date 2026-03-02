@@ -981,25 +981,25 @@ export type Feature = {
 export const features: Feature[] = [
   {
     icon: Lock,
-    title: 'Secure & Confidential',
+    title: 'SECURE & CONFIDENTIAL',
     description:
       'We use bank-level encryption and strict data protocols to ensure your financial information is always protected.',
   },
   {
     icon: BadgeCheck,
-    title: 'Guaranteed Reliability',
+    title: 'GUARANTEED RELIABILITY',
     description:
       'Our seasoned professionals deliver accurate, timely, and reliable services you can count on, every time.',
   },
   {
     icon: Users,
-    title: 'Expert Advisors',
+    title: 'EXPERT ADVISORS',
     description:
       'Access a dedicated team of chartered accountants and legal experts to guide you through complex financial landscapes.',
   },
   {
     icon: Zap,
-    title: 'Fast Processing',
+    title: 'FAST PROCESSING',
     description:
       'Our technology-driven approach streamlines processes, ensuring quick turnaround times without compromising on quality.',
   },
@@ -1007,29 +1007,25 @@ export const features: Feature[] = [
 
 export type Testimonial = {
   name: string;
-  role: string;
   review: string;
   imageId: string;
 };
 
 export const testimonials: Testimonial[] = [
   {
-    name: 'Sarah L.',
-    role: 'Founder, TechStart Inc.',
+    name: 'Priya Sharma',
     review:
       'FN Tax Solution revolutionized how we handle compliance. Their expert team made the entire process seamless and stress-free. We can now focus on our core business with complete peace of mind.',
     imageId: 'testimonial-1',
   },
   {
-    name: 'Michael B.',
-    role: 'CEO, BuildRight Corp.',
+    name: 'Rajesh Kumar',
     review:
       'The professionalism and speed of FN Tax Solution are unmatched. They handled our company registration flawlessly. Highly recommended for any business looking for reliable financial services.',
     imageId: 'testimonial-2',
   },
   {
-    name: 'Emily C.',
-    role: 'Freelance Designer',
+    name: 'Anjali Singh',
     review:
       'As a freelancer, tax filing was always a nightmare. FN Tax Solution simplified everything. Their advisors are knowledgeable and incredibly patient. I finally feel in control of my finances.',
     imageId: 'testimonial-3',
