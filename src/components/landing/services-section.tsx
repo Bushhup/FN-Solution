@@ -13,35 +13,35 @@ import {
 const serviceCategories = [
   {
     icon: Building2,
-    title: 'Business Formation',
+    title: 'BUSINESS FORMATION',
     description:
       'End-to-end registration services for all company types, from private firms to non-profits.',
     href: '/services',
   },
   {
     icon: FileText,
-    title: 'Compliance & Filing',
+    title: 'COMPLIANCE & FILING',
     description:
       'Timely and accurate filings for ROC, GST, and Income Tax to keep your business compliant.',
     href: '/services',
   },
   {
     icon: Calculator,
-    title: 'Accounting & Advisory',
+    title: 'ACCOUNTING & ADVISORY',
     description:
       'Professional bookkeeping, payroll, and financial planning to drive business growth.',
     href: '/services',
   },
   {
     icon: ShieldCheck,
-    title: 'Audit & Assurance',
+    title: 'AUDIT & ASSURANCE',
     description:
       'Statutory, internal, and tax audits to ensure financial accuracy and strengthen governance.',
     href: '/services',
   },
   {
     icon: Zap,
-    title: 'Special Services',
+    title: 'SPECIAL SERVICES',
     description:
       'Essential services like DSC, PAN/RERA registration, and certifications for business operations.',
     href: '/services',
