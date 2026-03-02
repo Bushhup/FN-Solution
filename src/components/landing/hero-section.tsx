@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden py-24 md:py-32 lg:py-40">
+    <section className="relative overflow-hidden pt-24 pb-28 md:pt-32 md:pb-40 lg:pt-40 lg:pb-48">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-background"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,hsl(var(--primary)/0.1),transparent)]"></div>
