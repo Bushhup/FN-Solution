@@ -12,9 +12,17 @@ export function HeroSection() {
       </div>
       <div className="container mx-auto text-center">
         <div className="mx-auto max-w-3xl">
-          <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl lg:text-6xl uppercase">
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <img src="/logo.png" alt="FN Tax Solution Logo" className="h-16 w-auto" />
+            <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl lg:text-6xl uppercase">
+              FN Tax Solution
+            </h1>
+          </div>
+
+          <h2 className="font-headline text-3xl font-bold tracking-tight text-glow/80 sm:text-4xl uppercase">
             Simplify Your Finances, Amplify Your Success
-          </h1>
+          </h2>
+
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
             Your trusted partner for expert tax, compliance, and business
             registration services. We handle the complexity so you can focus on
