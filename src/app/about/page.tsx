@@ -12,22 +12,19 @@ export const metadata: Metadata = {
 
 const teamMembers = [
   {
-    name: 'John Doe',
-    role: 'Founder & CEO',
+    name: 'Rajesh Kumar',
     imageId: 'testimonial-2',
-    bio: 'John is a certified Chartered Accountant with over 15 years of experience in financial consulting and tax advisory. He founded FN Tax Solution to make expert financial services accessible to all businesses.'
+    bio: 'With over 15 years of experience in financial consulting and tax advisory, Rajesh is dedicated to making expert financial services accessible to all businesses.'
   },
   {
-    name: 'Jane Smith',
-    role: 'Head of Legal & Compliance',
+    name: 'Priya Singh',
     imageId: 'testimonial-1',
-    bio: 'Jane is a corporate lawyer specializing in business law and regulatory compliance. She ensures our clients are always ahead of legal requirements.'
+    bio: 'Priya specializes in business law and regulatory compliance. She has a talent for ensuring our clients are always ahead of legal requirements and operate with confidence.'
   },
   {
-    name: 'Emily Chen',
-    role: 'Lead Accounting Specialist',
+    name: 'Anjali Mehta',
     imageId: 'testimonial-3',
-    bio: 'Emily leads our accounting team with a passion for numbers and a commitment to accuracy. She helps clients maintain pristine financial records for sustainable growth.'
+    bio: 'Anjali approaches her work with a passion for numbers and a strong commitment to accuracy. She helps clients maintain pristine financial records for sustainable growth.'
   },
 ];
 
@@ -97,8 +94,7 @@ export default function AboutPage() {
                                             data-ai-hint={imageData.imageHint}
                                         />
                                     )}
-                                    <h3 className="font-headline text-xl font-semibold">{member.name}</h3>
-                                    <p className="text-sm font-medium text-primary">{member.role}</p>
+                                    <h3 className="font-headline text-xl font-semibold uppercase">{member.name}</h3>
                                     <p className="mt-4 text-muted-foreground">{member.bio}</p>
                                 </CardContent>
                             </Card>
