@@ -1,27 +1,11 @@
 'use client';
-import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { testimonials, type Testimonial } from '@/lib/data';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  const imageData = PlaceHolderImages.find(
-    (img) => img.id === testimonial.imageId
-  );
-
   return (
     <Card className="h-full glass-card text-foreground">
       <CardContent className="flex flex-col items-center p-8 text-center">
-        {imageData && (
-          <Image
-            src={imageData.imageUrl}
-            alt={`Photo of ${testimonial.name}`}
-            width={64}
-            height={64}
-            className="mb-4 rounded-full"
-            data-ai-hint={imageData.imageHint}
-          />
-        )}
         <blockquote className="italic text-muted-foreground">
           &quot;{testimonial.review}&quot;
         </blockquote>
