@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-24 pb-40 md:pt-32 md:pb-48 lg:pt-40 lg:pb-56">
+    <section className="relative overflow-hidden pt-24 pb-48 md:pt-32 md:pb-56 lg:pt-40 lg:pb-64">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-background"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,hsl(var(--primary)/0.1),transparent)]"></div>
@@ -13,7 +13,7 @@ export function HeroSection() {
       <div className="container mx-auto text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mb-6 animate-in fade-in duration-500">
-            <img src="/logo.png" alt="FN Tax Solution Logo" className="h-20 w-auto mx-auto" />
+            <img src="/main.png" alt="FN Tax Solution Logo" className="h-28 w-auto mx-auto" />
           </div>
 
           <h2 className="font-headline text-3xl font-bold tracking-tight text-glow/80 sm:text-4xl uppercase animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
