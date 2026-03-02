@@ -14,7 +14,7 @@ export function Logo({ className }: LogoProps) {
         className
       )}
     >
-      <img src="/main.png" alt="FN Tax Solution Logo" className="h-12 w-auto" />
+      <img src="/logo.png" alt="FN Tax Solution Logo" className="h-12 w-auto" />
     </Link>
   );
 }
