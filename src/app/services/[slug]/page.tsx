@@ -35,7 +35,7 @@ export default function ServiceDetailPage() {
             <div className="rounded-lg bg-primary/10 p-4 text-primary">
               <ServiceIcon className="h-8 w-8" />
             </div>
-            <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl">
+            <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl uppercase">
               {service.title}
             </h1>
           </div>
@@ -45,7 +45,7 @@ export default function ServiceDetailPage() {
 
           {service.details && service.details.length > 0 && (
             <div className="space-y-8">
-                <h2 className="font-headline text-2xl font-bold">Service Details</h2>
+                <h2 className="font-headline text-2xl font-bold uppercase">Service Details</h2>
                  <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
                     {service.details.map((detail, index) => (
                         <AccordionItem value={`item-${index}`} key={index}>
@@ -64,7 +64,7 @@ export default function ServiceDetailPage() {
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-8">
             <div className="glass-card rounded-xl p-6">
-              <h3 className="font-headline text-lg font-semibold mb-4">
+              <h3 className="font-headline text-lg font-semibold mb-4 uppercase">
                 Get Started
               </h3>
               <p className="text-muted-foreground mb-6">
@@ -77,7 +77,7 @@ export default function ServiceDetailPage() {
               </Button>
             </div>
             <div className="glass-card rounded-xl p-6">
-              <h3 className="font-headline text-lg font-semibold mb-4">
+              <h3 className="font-headline text-lg font-semibold mb-4 uppercase">
                 Other Services
               </h3>
               <ul className="space-y-3">

@@ -60,7 +60,7 @@ export default function AllUsersPage() {
         return (
           <div className="container mx-auto flex h-[calc(100vh-8rem)] items-center justify-center text-center">
             <div>
-              <h1 className="text-4xl font-bold text-destructive">Access Denied</h1>
+              <h1 className="text-4xl font-bold text-destructive uppercase">Access Denied</h1>
               <p className="mt-4 text-lg text-muted-foreground">You do not have the required permissions to view this page.</p>
               <Button asChild className="mt-8">
                 <Link href="/dashboard">Return to Dashboard</Link>
@@ -79,7 +79,7 @@ export default function AllUsersPage() {
             </div>
             <Card className="glass-card">
                 <CardHeader>
-                    <CardTitle>All Users</CardTitle>
+                    <CardTitle className="uppercase">All Users</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <Table>

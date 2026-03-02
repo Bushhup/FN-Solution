@@ -46,7 +46,7 @@ export default function ServicesPage() {
   return (
     <div className="container mx-auto py-20 sm:py-28">
       <div className="mx-auto mb-16 max-w-2xl text-center">
-        <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl">
+        <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl uppercase">
           Our Comprehensive Services
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
@@ -60,7 +60,7 @@ export default function ServicesPage() {
           {/* Top Services Section */}
           {topServices.length > 0 && (
             <div>
-              <h2 className="font-headline text-3xl font-bold mb-8 text-glow">
+              <h2 className="font-headline text-3xl font-bold mb-8 text-glow uppercase">
                 Mainly Used Services
               </h2>
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -83,7 +83,7 @@ export default function ServicesPage() {
             (category) =>
               servicesByCategory[category] && servicesByCategory[category].length > 0 && (
                 <div key={category}>
-                  <h2 className="font-headline text-3xl font-bold mb-8 text-glow">
+                  <h2 className="font-headline text-3xl font-bold mb-8 text-glow uppercase">
                     {category}
                   </h2>
                   <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

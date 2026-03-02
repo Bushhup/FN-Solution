@@ -97,7 +97,7 @@ export default function AllLeadsClientPage() {
         return (
           <div className="container mx-auto flex h-[calc(100vh-8rem)] items-center justify-center text-center">
             <div>
-              <h1 className="text-4xl font-bold text-destructive">Access Denied</h1>
+              <h1 className="text-4xl font-bold text-destructive uppercase">Access Denied</h1>
               <p className="mt-4 text-lg text-muted-foreground">You do not have the required permissions to view this page.</p>
               <Button asChild className="mt-8">
                 <Link href="/dashboard">Return to Dashboard</Link>
@@ -116,7 +116,7 @@ export default function AllLeadsClientPage() {
             </div>
             <Card className="glass-card">
                 <CardHeader>
-                    <CardTitle>
+                    <CardTitle className="uppercase">
                         {statusFilter ? `${statusFilter} Leads` : 'All Leads'}
                     </CardTitle>
                 </CardHeader>

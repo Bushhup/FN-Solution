@@ -85,7 +85,7 @@ export default function RegisterPage() {
           <div className="mx-auto mb-4">
             <Logo />
           </div>
-          <CardTitle className="font-headline text-2xl">Create an Account</CardTitle>
+          <CardTitle className="font-headline text-2xl uppercase">Create an Account</CardTitle>
           <CardDescription>Join FN Tax Solution to manage your services.</CardDescription>
         </CardHeader>
         <CardContent>

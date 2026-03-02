@@ -37,7 +37,7 @@ export function StatsSection() {
                 </div>
               </CardHeader>
               <CardContent>
-                <CardTitle className="text-lg font-semibold">{stat.label}</CardTitle>
+                <CardTitle className="text-lg font-semibold uppercase">{stat.label}</CardTitle>
                 <p className="text-sm text-muted-foreground mt-2">{stat.description}</p>
               </CardContent>
             </Card>

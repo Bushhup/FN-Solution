@@ -43,7 +43,7 @@ export default function TestimonialsPage() {
   return (
     <div className="container mx-auto py-20 sm:py-28">
       <div className="mx-auto mb-16 max-w-2xl text-center">
-        <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl">
+        <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl uppercase">
           Trusted by Growing Businesses
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">

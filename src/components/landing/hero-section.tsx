@@ -12,7 +12,7 @@ export function HeroSection() {
       </div>
       <div className="container mx-auto text-center">
         <div className="mx-auto max-w-3xl">
-          <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl lg:text-6xl">
+          <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl lg:text-6xl uppercase">
             Simplify Your Finances, Amplify Your Success
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">

@@ -11,7 +11,7 @@ export function CtaSection() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/10 via-background to-background"></div>
       <div className="container mx-auto text-center">
         <div className="mx-auto max-w-3xl">
-            <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl">
+            <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl uppercase">
               Ready to Take Control of Your Finances?
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">

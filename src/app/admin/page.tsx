@@ -156,7 +156,7 @@ export default function AdminPage() {
     return (
       <div className="container mx-auto flex h-[calc(100vh-8rem)] items-center justify-center text-center">
         <div>
-          <h1 className="text-4xl font-bold text-destructive">Access Denied</h1>
+          <h1 className="text-4xl font-bold text-destructive uppercase">Access Denied</h1>
           <p className="mt-4 text-lg text-muted-foreground">You do not have the required permissions to view this page.</p>
           <Button asChild className="mt-8">
             <Link href="/dashboard">Return to Dashboard</Link>
@@ -169,7 +169,7 @@ export default function AdminPage() {
   return (
     <TooltipProvider>
       <div className="container mx-auto py-12">
-        <h1 className="mb-8 font-headline text-4xl font-bold">Admin Panel</h1>
+        <h1 className="mb-8 font-headline text-4xl font-bold uppercase">Admin Panel</h1>
 
         <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Tooltip>
@@ -286,7 +286,7 @@ export default function AdminPage() {
         <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-5">
           <Card className="glass-card col-span-1 lg:col-span-3">
             <CardHeader>
-              <CardTitle>Recent Leads</CardTitle>
+              <CardTitle className="uppercase">Recent Leads</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
@@ -370,7 +370,7 @@ export default function AdminPage() {
           </Card>
           <Card className="glass-card col-span-1 lg:col-span-2">
             <CardHeader>
-              <CardTitle>Leads & User Growth ({new Date().getFullYear()})</CardTitle>
+              <CardTitle className="uppercase">Leads & User Growth ({new Date().getFullYear()})</CardTitle>
             </CardHeader>
             <CardContent className="px-2">
               <ResponsiveContainer width="100%" height={300}>

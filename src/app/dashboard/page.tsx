@@ -62,12 +62,12 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto py-12">
-      <h1 className="mb-8 font-headline text-4xl font-bold">User Dashboard</h1>
+      <h1 className="mb-8 font-headline text-4xl font-bold uppercase">User Dashboard</h1>
       <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-2">
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 uppercase">
                 <FileText />
                 My Service Requests
               </CardTitle>
@@ -110,7 +110,7 @@ export default function DashboardPage() {
         <div>
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 uppercase">
                 <User />
                 Profile Information
               </CardTitle>
