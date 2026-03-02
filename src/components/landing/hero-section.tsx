@@ -12,11 +12,8 @@ export function HeroSection() {
       </div>
       <div className="container mx-auto text-center">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-6 flex items-center justify-center gap-4 animate-in fade-in duration-500">
-            <img src="/logo.png" alt="FN Tax Solution Logo" className="h-16 w-auto" />
-            <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl lg:text-6xl uppercase">
-              FN TAX SOLUTION
-            </h1>
+          <div className="mb-6 animate-in fade-in duration-500">
+            <img src="/logo.png" alt="FN Tax Solution Logo" className="h-20 w-auto mx-auto" />
           </div>
 
           <h2 className="font-headline text-3xl font-bold tracking-tight text-glow/80 sm:text-4xl uppercase animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
