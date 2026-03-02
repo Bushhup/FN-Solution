@@ -37,7 +37,7 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials" className="py-20 sm:py-28">
       <div className="container mx-auto">
-        <div className="mx-auto mb-16 max-w-2xl text-center">
+        <div className="mx-auto mb-16 max-w-2xl text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl uppercase">
             TRUSTED BY GROWING BUSINESSES
           </h2>
@@ -47,8 +47,10 @@ export function TestimonialsSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard key={testimonial.name} testimonial={testimonial} />
+          {testimonials.map((testimonial, index) => (
+            <div key={testimonial.name} className="h-full animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${100 * (index + 1)}ms` }}>
+              <TestimonialCard testimonial={testimonial} />
+            </div>
           ))}
         </div>
       </div>

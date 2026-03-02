@@ -29,7 +29,7 @@ export function StatsSection() {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {stats.map((stat, index) => (
-            <Card key={index} className="glass-card text-center">
+            <Card key={index} className="glass-card text-center animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${100 * (index + 1)}ms` }}>
               <CardHeader className="flex flex-col items-center justify-center space-y-2 pb-2">
                 <stat.icon className="h-10 w-10 text-primary" />
                 <div className="text-4xl font-bold text-glow">

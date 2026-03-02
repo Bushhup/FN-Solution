@@ -62,14 +62,14 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto py-12">
-      <h1 className="mb-8 font-headline text-4xl font-bold uppercase">User Dashboard</h1>
+      <h1 className="mb-8 font-headline text-4xl font-bold uppercase animate-in fade-in duration-500">USER DASHBOARD</h1>
       <div className="grid gap-8 md:grid-cols-3">
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 animate-in fade-in slide-in-from-left-4 duration-500 delay-100">
           <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 uppercase">
                 <FileText />
-                My Service Requests
+                MY SERVICE REQUESTS
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -107,12 +107,12 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className="animate-in fade-in slide-in-from-right-4 duration-500 delay-200">
           <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 uppercase">
                 <User />
-                Profile Information
+                PROFILE INFORMATION
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">

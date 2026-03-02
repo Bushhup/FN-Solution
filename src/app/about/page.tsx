@@ -32,9 +32,9 @@ const teamMembers = [
 export default function AboutPage() {
     return (
         <div className="container mx-auto py-20 sm:py-28">
-            <div className="mx-auto mb-16 max-w-3xl text-center">
+            <div className="mx-auto mb-16 max-w-3xl text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl uppercase">
-                    Your Partner in Financial Clarity
+                    YOUR PARTNER IN FINANCIAL CLARITY
                 </h1>
                 <p className="mt-6 text-lg text-muted-foreground">
                     At FN Tax Solution, we are more than just accountants and lawyers; we are your strategic partners. Our mission is to simplify complex financial and legal landscapes, empowering you to focus on what you do best—growing your business.
@@ -42,17 +42,17 @@ export default function AboutPage() {
             </div>
 
             <section id="why-us" className="mb-20 sm:mb-28">
-                <div className="mx-auto mb-16 max-w-2xl text-center">
+                <div className="mx-auto mb-16 max-w-2xl text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl uppercase">
-                        The FN Tax Solution Advantage
+                        THE FN TAX SOLUTION ADVANTAGE
                     </h2>
                     <p className="mt-4 text-lg text-muted-foreground">
                         Experience the peace of mind that comes with having a dedicated, expert team by your side.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
-                    {features.map((feature) => (
-                        <div key={feature.title} className="text-center">
+                    {features.map((feature, index) => (
+                        <div key={feature.title} className="text-center animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${100 * (index + 1)}ms` }}>
                             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                                 <feature.icon className="h-6 w-6" />
                             </div>
@@ -68,21 +68,21 @@ export default function AboutPage() {
             </section>
             
             <section id="team">
-                <div className="mx-auto mb-16 max-w-2xl text-center">
+                <div className="mx-auto mb-16 max-w-2xl text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl uppercase">
-                        Meet Our Experts
+                        MEET OUR EXPERTS
                     </h2>
                     <p className="mt-4 text-lg text-muted-foreground">
                         Our strength lies in our team of dedicated and experienced professionals.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {teamMembers.map((member) => {
+                    {teamMembers.map((member, index) => {
                          const imageData = PlaceHolderImages.find(
                             (img) => img.id === member.imageId
                         );
                         return (
-                            <Card key={member.name} className="glass-card text-center">
+                            <Card key={member.name} className="glass-card text-center animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${100 * (index + 1)}ms` }}>
                                 <CardContent className="pt-6">
                                     {imageData && (
                                         <Image

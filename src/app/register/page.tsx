@@ -80,7 +80,7 @@ export default function RegisterPage() {
 
   return (
     <div className="container flex min-h-[calc(100vh-4rem)] items-center justify-center py-12">
-      <Card className="w-full max-w-md glass-card">
+      <Card className="w-full max-w-md glass-card animate-in fade-in zoom-in-95 duration-500">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <Logo />

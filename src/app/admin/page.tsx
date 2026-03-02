@@ -169,12 +169,12 @@ export default function AdminPage() {
   return (
     <TooltipProvider>
       <div className="container mx-auto py-12">
-        <h1 className="mb-8 font-headline text-4xl font-bold uppercase">Admin Panel</h1>
+        <h1 className="mb-8 font-headline text-4xl font-bold uppercase animate-in fade-in duration-500">Admin Panel</h1>
 
         <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/admin/leads">
+              <Link href="/admin/leads" className="block animate-in fade-in zoom-in-95 duration-300 delay-100">
                 <Card className="glass-card">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Total Leads</CardTitle>
@@ -204,7 +204,7 @@ export default function AdminPage() {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/admin/users">
+              <Link href="/admin/users" className="block animate-in fade-in zoom-in-95 duration-300 delay-200">
                 <Card className="glass-card">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Registered Users</CardTitle>
@@ -234,18 +234,20 @@ export default function AdminPage() {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-                <Card className="glass-card">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Active Customers</CardTitle>
-                    <UserCheck className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">
-                    {areLeadsLoading ? <Skeleton className="h-8 w-16" /> : activeCustomers}
-                    </div>
-                    <p className="text-xs text-muted-foreground">Users with at least one lead.</p>
-                </CardContent>
-                </Card>
+                <div className="animate-in fade-in zoom-in-95 duration-300 delay-300">
+                    <Card className="glass-card">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">Active Customers</CardTitle>
+                        <UserCheck className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">
+                        {areLeadsLoading ? <Skeleton className="h-8 w-16" /> : activeCustomers}
+                        </div>
+                        <p className="text-xs text-muted-foreground">Users with at least one lead.</p>
+                    </CardContent>
+                    </Card>
+                </div>
             </TooltipTrigger>
             <TooltipContent>
                 <p className="text-xs">Total unique users who have submitted a service request.</p>
@@ -253,7 +255,7 @@ export default function AdminPage() {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/admin/leads?status=Completed">
+              <Link href="/admin/leads?status=Completed" className="block animate-in fade-in zoom-in-95 duration-300 delay-400">
                 <Card className="glass-card">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Completed Leads</CardTitle>
@@ -284,7 +286,7 @@ export default function AdminPage() {
         </div>
 
         <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-5">
-          <Card className="glass-card col-span-1 lg:col-span-3">
+          <Card className="glass-card col-span-1 lg:col-span-3 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-500">
             <CardHeader>
               <CardTitle className="uppercase">Recent Leads</CardTitle>
             </CardHeader>
@@ -368,7 +370,7 @@ export default function AdminPage() {
               </Table>
             </CardContent>
           </Card>
-          <Card className="glass-card col-span-1 lg:col-span-2">
+          <Card className="glass-card col-span-1 lg:col-span-2 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-600">
             <CardHeader>
               <CardTitle className="uppercase">Leads & User Growth ({new Date().getFullYear()})</CardTitle>
             </CardHeader>

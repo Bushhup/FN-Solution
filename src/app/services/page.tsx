@@ -45,9 +45,9 @@ const categoryOrder = [
 export default function ServicesPage() {
   return (
     <div className="container mx-auto py-20 sm:py-28">
-      <div className="mx-auto mb-16 max-w-2xl text-center">
+      <div className="mx-auto mb-16 max-w-2xl text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
         <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl uppercase">
-          Our Comprehensive Services
+          OUR COMPREHENSIVE SERVICES
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
           We provide a full suite of financial and legal services to support
@@ -59,13 +59,13 @@ export default function ServicesPage() {
         <div className="space-y-16">
           {/* Top Services Section */}
           {topServices.length > 0 && (
-            <div>
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
               <h2 className="font-headline text-3xl font-bold mb-8 text-glow uppercase">
-                Mainly Used Services
+                MAINLY USED SERVICES
               </h2>
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {topServices.map((service) => (
-                  <Link href={`/services/${service.slug}`} key={service.slug}>
+                {topServices.map((service, index) => (
+                  <Link href={`/services/${service.slug}`} key={service.slug} className="animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${100 * index}ms` }}>
                     <GlassCard
                       icon={service.icon}
                       title={service.title}
@@ -82,13 +82,13 @@ export default function ServicesPage() {
           {categoryOrder.map(
             (category) =>
               servicesByCategory[category] && servicesByCategory[category].length > 0 && (
-                <div key={category}>
+                <div key={category} className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300">
                   <h2 className="font-headline text-3xl font-bold mb-8 text-glow uppercase">
-                    {category}
+                    {category.toUpperCase()}
                   </h2>
                   <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {servicesByCategory[category].map((service) => (
-                      <Link href={`/services/${service.slug}`} key={service.slug}>
+                    {servicesByCategory[category].map((service, index) => (
+                      <Link href={`/services/${service.slug}`} key={service.slug} className="animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${100 * index}ms` }}>
                         <GlassCard
                           icon={service.icon}
                           title={service.title}

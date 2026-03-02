@@ -25,7 +25,7 @@ export default function ServiceDetailPage() {
     <div className="container mx-auto py-20 sm:py-28">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
         {/* Main Content */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 animate-in fade-in slide-in-from-left-4 duration-500">
           <div className="mb-8">
             <Link href="/services" className="text-sm font-medium text-primary hover:underline">
               &larr; Back to all services
@@ -61,11 +61,11 @@ export default function ServiceDetailPage() {
         </div>
 
         {/* Sidebar */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 animate-in fade-in slide-in-from-right-4 duration-500 delay-100">
           <div className="sticky top-24 space-y-8">
             <div className="glass-card rounded-xl p-6">
               <h3 className="font-headline text-lg font-semibold mb-4 uppercase">
-                Get Started
+                GET STARTED
               </h3>
               <p className="text-muted-foreground mb-6">
                 Ready to take the next step? Schedule a free consultation with our experts.
@@ -78,7 +78,7 @@ export default function ServiceDetailPage() {
             </div>
             <div className="glass-card rounded-xl p-6">
               <h3 className="font-headline text-lg font-semibold mb-4 uppercase">
-                Other Services
+                OTHER SERVICES
               </h3>
               <ul className="space-y-3">
                 {otherServices.map((s) => (

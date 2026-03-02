@@ -52,9 +52,9 @@ export function ServicesSection() {
   return (
     <section id="services" className="py-20 sm:py-28">
       <div className="container mx-auto">
-        <div className="mx-auto mb-16 max-w-2xl text-center">
+        <div className="mx-auto mb-16 max-w-2xl text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl uppercase">
-            Our Service Categories
+            OUR SERVICE CATEGORIES
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
             We provide a full suite of financial and legal services organized
@@ -62,8 +62,8 @@ export function ServicesSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {serviceCategories.map((category) => (
-            <Link href={category.href} key={category.title}>
+          {serviceCategories.map((category, index) => (
+            <Link href={category.href} key={category.title} className="animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${100 * (index + 1)}ms` }}>
               <GlassCard
                 icon={category.icon}
                 title={category.title}
@@ -73,7 +73,7 @@ export function ServicesSection() {
             </Link>
           ))}
         </div>
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center animate-in fade-in slide-in-from-bottom-4 duration-500 delay-500">
           <Button asChild variant="outline" size="lg">
             <Link href="/services">
               View All Services <ArrowRight className="ml-2 h-4 w-4" />

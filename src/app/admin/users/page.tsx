@@ -71,7 +71,7 @@ export default function AllUsersPage() {
     }
 
     return (
-        <div className="container mx-auto py-12">
+        <div className="container mx-auto py-12 animate-in fade-in duration-500">
             <div className="mb-8">
                 <Button variant="outline" asChild>
                     <Link href="/admin">&larr; Back to Dashboard</Link>
