@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { FirebaseClientProvider } from '@/firebase';
+import Script from 'next/script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,6 +38,19 @@ export default function RootLayout({
           'min-h-screen bg-background font-body antialiased'
         )}
       >
+        <Script
+            src="https://www.googletagmanager.com/gtag/js?id=AW-17910034951"
+            strategy="afterInteractive"
+        />
+        <Script id="google-analytics-config" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'AW-17910034951');
+            `}
+        </Script>
         <FirebaseClientProvider>
           <Header />
           <main className="flex-1">{children}</main>
