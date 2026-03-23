@@ -43,14 +43,13 @@ export default function RootLayout({
             strategy="afterInteractive"
         />
         <Script id="google-analytics-config" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'AW-17910034951');
-            `}
-        </Script>
+  {`
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17910034951');
+  `}
+</Script>
         <FirebaseClientProvider>
           <Header />
           <main className="flex-1">{children}</main>
