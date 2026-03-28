@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/services`, lastModified: new Date() },
     { url: `${siteUrl}/login`, lastModified: new Date() },
     { url: `${siteUrl}/register`, lastModified: new Date() },
+    // Add new local SEO pages
+    { url: `${siteUrl}/gst-registration-navi-mumbai`, lastModified: new Date() },
+    { url: `${siteUrl}/pan-card-services-navi-mumbai`, lastModified: new Date() },
+    { url: `${siteUrl}/udyam-registration-navi-mumbai`, lastModified: new Date() },
+    { url: `${siteUrl}/company-registration-thane`, lastModified: new Date() },
+    { url: `${siteUrl}/income-tax-filing-navi-mumbai`, lastModified: new Date() },
   ];
 
   return [
