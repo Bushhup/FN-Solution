@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/udyam-registration-navi-mumbai`, lastModified: new Date() },
     { url: `${siteUrl}/company-registration-thane`, lastModified: new Date() },
     { url: `${siteUrl}/income-tax-filing-navi-mumbai`, lastModified: new Date() },
+    { url: `${siteUrl}/special-service`, lastModified: new Date() },
   ];
 
   return [
