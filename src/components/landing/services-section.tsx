@@ -1,3 +1,5 @@
+'use client';
+
 import { GlassCard } from '@/components/ui/glass-card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -8,6 +10,7 @@ import {
   Calculator,
   ShieldCheck,
   Zap,
+  Laptop,
 } from 'lucide-react';
 
 const serviceCategories = [
@@ -45,6 +48,12 @@ const serviceCategories = [
     description:
       'Essential services like DSC, PAN/RERA registration, and certifications for business operations.',
     href: '/services',
+  },
+  {
+    icon: Laptop,
+    title: 'WEBSITE DESIGN',
+    description: 'Modern, mobile-friendly websites to help your business grow online and attract more customers.',
+    href: '/special-service',
   },
 ];
 

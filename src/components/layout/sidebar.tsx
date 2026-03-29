@@ -18,6 +18,7 @@ import { doc } from 'firebase/firestore';
 
 const navLinks = [
   { href: '/services', label: 'Services' },
+  { href: '/special-service', label: 'Website Services' },
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact Us' },
   { href: '/testimonials', label: 'Testimonials' },
