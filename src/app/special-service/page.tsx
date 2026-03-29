@@ -19,14 +19,15 @@ const pricingPlans = [
     {
         tier: 'Starter',
         price: '₹7,999',
-        description: 'Perfect for small businesses getting started online.',
+        description: 'Perfect for getting your business online quickly. If you’re just starting out, this is the fastest way to build a professional online presence and start getting inquiries.',
         features: [
             '1–3 pages',
             'Mobile-friendly design',
-            'Contact form',
-            'Basic SEO setup',
-            'Delivery in 3–5 days'
+            'Contact form & Basic SEO',
+            'Ideal for small shops & freelancers',
+            'Launch in just 3–5 days',
         ],
+        summary: 'Best choice if you want something simple, affordable, and effective.',
         cta: 'Get Started',
         ctaLink: '/contact',
         color: 'text-green-500',
@@ -35,15 +36,15 @@ const pricingPlans = [
     {
         tier: 'Business',
         price: '₹14,999',
-        description: 'Best for growing businesses that want more visibility.',
+        description: 'For businesses that want more customers, not just a website. This plan is designed to convert visitors into real leads through strategic design and clear calls-to-action.',
         features: [
-            '5–7 pages',
-            'Custom design',
-            'WhatsApp integration',
-            'SEO optimization',
-            'Google Maps integration',
-            'Delivery in 5–7 days'
+            '5–7 pages with custom design',
+            'Designed to increase calls & inquiries',
+            'WhatsApp & Google Maps integration',
+            'Professional look that builds trust',
+            'SEO optimized to rank higher',
         ],
+        summary: 'Best choice if you want your website to actually generate business.',
         cta: 'Get Started',
         ctaLink: '/contact',
         color: 'text-blue-500',
@@ -53,15 +54,15 @@ const pricingPlans = [
     {
         tier: 'Premium',
         price: '₹24,999+',
-        description: 'For businesses that want advanced features and a premium look.',
+        description: 'For businesses that want to stand out and scale. We build a powerful, high-end web experience with advanced features tailored to your brand.',
         features: [
-            'Up to 10 pages',
-            'Advanced UI/UX design',
-            'Booking / payment integration',
-            'Speed optimization',
-            'Priority support',
-            'Delivery in 7–10 days'
+            'Up to 10 pages with advanced UI/UX',
+            'Custom design that reflects your brand',
+            'Booking / payment system integration',
+            'Built for long-term growth',
+            'Priority support & speed optimization',
         ],
+        summary: 'Best choice if you want a high-end website that sets you apart.',
         cta: 'Contact Us',
         ctaLink: '/contact',
         color: 'text-purple-500',
@@ -112,10 +113,10 @@ export default function SpecialServicePage() {
                 {plan.popular && <div className="text-center mb-2"><span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase">Best Value</span></div>}
                 <CardTitle className={`font-headline text-center text-2xl uppercase ${plan.color}`}>{plan.tier}</CardTitle>
                 <p className="text-center text-4xl font-bold">{plan.price}</p>
-                <p className="text-center text-muted-foreground text-sm">{plan.description}</p>
+                <p className="text-center text-muted-foreground text-sm h-24">{plan.description}</p>
               </CardHeader>
-              <CardContent className="flex-grow">
-                <ul className="space-y-3 text-muted-foreground">
+              <CardContent className="flex-grow flex flex-col">
+                <ul className="space-y-3 text-muted-foreground flex-grow">
                   {plan.features.map(feature => (
                     <li key={feature} className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
@@ -123,6 +124,11 @@ export default function SpecialServicePage() {
                     </li>
                   ))}
                 </ul>
+                {plan.summary && (
+                    <p className="mt-6 pt-4 border-t border-border/20 text-sm font-semibold text-foreground text-center">
+                        {plan.summary}
+                    </p>
+                )}
               </CardContent>
               <CardFooter>
                  <Button asChild className="w-full btn-gradient">
@@ -133,6 +139,16 @@ export default function SpecialServicePage() {
           ))}
         </div>
       </section>
+
+      <div className="mx-auto max-w-2xl text-center -mt-16 mb-20 sm:mb-28 animate-in fade-in duration-500 delay-500">
+        <Card className="glass-card p-6">
+            <p className="text-muted-foreground">
+                Not sure which plan is right for you?
+                <br />
+                No problem—just message us on WhatsApp and we’ll guide you based on your business needs.
+            </p>
+        </Card>
+      </div>
 
       <section id="add-ons" className="mb-20 sm:mb-28">
          <div className="mx-auto mb-12 max-w-2xl text-center">
