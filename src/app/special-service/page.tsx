@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { Check, Rocket, Zap, Smartphone, CheckCircle } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 
@@ -14,6 +13,8 @@ const trustElements = [
     { icon: Smartphone, text: 'Mobile-Friendly' },
     { icon: CheckCircle, text: 'Designed for Results' },
 ];
+
+const phoneNumber = '919702667213';
 
 const pricingPlans = [
     {
@@ -29,7 +30,7 @@ const pricingPlans = [
         ],
         summary: 'Best choice if you want something simple, affordable, and effective.',
         cta: 'Get Started',
-        ctaLink: '/contact',
+        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Starter' website plan (₹7,999). Please provide more details.")}`,
         color: 'text-green-500',
         cardClass: 'border-green-500/20 hover:border-green-500/50'
     },
@@ -46,7 +47,7 @@ const pricingPlans = [
         ],
         summary: 'Best choice if you want your website to actually generate business.',
         cta: 'Get Started',
-        ctaLink: '/contact',
+        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Business' website plan (₹14,999). Please provide more details.")}`,
         color: 'text-blue-500',
         cardClass: 'border-primary/20 hover:border-primary/50 md:scale-105',
         popular: true
@@ -64,7 +65,7 @@ const pricingPlans = [
         ],
         summary: 'Best choice if you want a high-end website that sets you apart.',
         cta: 'Contact Us',
-        ctaLink: '/contact',
+        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Premium' website plan (₹24,999+). Please provide more details.")}`,
         color: 'text-purple-500',
         cardClass: 'border-purple-500/20 hover:border-purple-500/50'
     }
@@ -138,7 +139,7 @@ export default function SpecialServicePage() {
                       </CardContent>
                       <CardFooter>
                           <Button asChild className="w-full btn-gradient">
-                              <Link href={plan.ctaLink}>{plan.cta}</Link>
+                              <a href={plan.ctaLink} target="_blank" rel="noopener noreferrer">{plan.cta}</a>
                           </Button>
                       </CardFooter>
                     </Card>
