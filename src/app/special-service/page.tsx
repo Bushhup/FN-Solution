@@ -84,7 +84,7 @@ export default function SpecialServicePage() {
         <div className="mx-auto mb-16 max-w-4xl text-center">
             <Rocket className="mx-auto h-12 w-12 text-primary mb-4 animate-in fade-in zoom-in-50 duration-700" />
             <h1 className="font-headline text-4xl font-bold tracking-tight text-glow sm:text-5xl uppercase animate-in fade-in slide-in-from-bottom-3 duration-700 delay-100">
-              Our Website Services
+              OUR WEBSITE SERVICES
             </h1>
             <p className="mt-6 text-lg text-muted-foreground animate-in fade-in slide-in-from-bottom-3 duration-700 delay-200">
               We create fast, modern, and mobile-friendly websites that help your business attract more customers and grow online.

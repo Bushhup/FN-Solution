@@ -51,8 +51,8 @@ const serviceCategories = [
   },
   {
     icon: Laptop,
-    title: 'WEBSITE DESIGN',
-    description: 'Modern, mobile-friendly websites to help your business grow online and attract more customers.',
+    title: 'GROW YOUR BUSINESS ONLINE',
+    description: 'Launch a professional, modern website designed to attract customers and convert visitors. Explore our affordable plans.',
     href: '/special-service',
   },
 ];
