@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Check, Rocket, Zap, Smartphone, CheckCircle, Search, Palette, Code } from 'lucide-react';
+import { Check, Rocket, Zap, Smartphone, CheckCircle, Search, Palette, Code, Layout, Layers, Component } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 
 export const metadata: Metadata = {
@@ -20,8 +19,7 @@ const phoneNumber = '919702667213';
 const pricingPlans = [
     {
         tier: 'Starter',
-        imageSrc: 'https://picsum.photos/seed/starterplan/600/400',
-        imageHint: 'simple website homepage',
+        icon: Layout,
         description: "If you’re just starting out, this is the fastest way to build a professional online presence and start getting inquiries. No confusion, no technical headache. Just a simple website that works.",
         features: [
             '1–3 pages',
@@ -38,8 +36,7 @@ const pricingPlans = [
     },
     {
         tier: 'Business',
-        imageSrc: 'https://picsum.photos/seed/businessplan/600/400',
-        imageHint: 'professional business website',
+        icon: Layers,
         description: "This isn’t just a website—it’s a lead generation machine. We structure it to build trust, explain your services, and push visitors to contact you. It's optimized to convert visitors into customers.",
         features: [
             '5–7 pages with custom design',
@@ -57,8 +54,7 @@ const pricingPlans = [
     },
     {
         tier: 'Premium',
-        imageSrc: 'https://picsum.photos/seed/premiumplan/600/400',
-        imageHint: 'advanced e-commerce website',
+        icon: Component,
         description: "For brands that want a powerful, high-end web experience that sets them apart. We build a custom site with advanced features tailored to your brand, ready for long-term growth.",
         features: [
             'Up to 10 pages with advanced UI/UX',
@@ -136,50 +132,47 @@ export default function SpecialServicePage() {
                 </h2>
             </div>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 items-end">
-              {pricingPlans.map((plan, index) => (
-                <div key={plan.tier} className="transform transition-transform duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${150 * (index + 1)}ms` }}>
-                    <Card className={`glass-card h-full flex flex-col relative overflow-hidden ${plan.cardClass} transition-all duration-300 group`}>
-                      {plan.popular && (
-                          <div className="absolute top-0 right-0">
-                              <div className="bg-primary text-primary-foreground text-xs font-bold px-8 py-1 transform rotate-45 translate-x-8 translate-y-3 uppercase">Best</div>
-                          </div>
-                      )}
-                      <CardHeader className="pt-8">
-                          <CardTitle className={`font-headline text-center text-2xl uppercase font-bold ${plan.color}`}>{plan.tier}</CardTitle>
-                          <div className="relative aspect-video my-4 rounded-lg overflow-hidden border border-border/20 shadow-inner">
-                            <Image
-                                src={plan.imageSrc}
-                                alt={`${plan.tier} website design example`}
-                                fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-ai-hint={plan.imageHint}
-                            />
-                          </div>
-                          <p className="text-center text-muted-foreground text-sm min-h-[6rem] pt-2">{plan.description}</p>
-                      </CardHeader>
-                      <CardContent className="flex-grow flex flex-col">
-                          <ul className="space-y-3 text-muted-foreground flex-grow">
-                            {plan.features.map(feature => (
-                              <li key={feature} className="flex items-start gap-3">
-                                <Check className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
-                                <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          {plan.summary && (
-                              <p className="mt-6 pt-4 border-t border-border/20 text-sm font-semibold text-foreground text-center">
-                                  {plan.summary}
-                              </p>
-                          )}
-                      </CardContent>
-                      <CardFooter>
-                          <Button asChild className="w-full btn-gradient">
-                              <a href={plan.ctaLink} target="_blank" rel="noopener noreferrer">{plan.cta}</a>
-                          </Button>
-                      </CardFooter>
-                    </Card>
-                </div>
-              ))}
+              {pricingPlans.map((plan, index) => {
+                const PlanIcon = plan.icon;
+                return (
+                    <div key={plan.tier} className="transform transition-transform duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${150 * (index + 1)}ms` }}>
+                        <Card className={`glass-card h-full flex flex-col relative overflow-hidden ${plan.cardClass} transition-all duration-300 group`}>
+                        {plan.popular && (
+                            <div className="absolute top-0 right-0">
+                                <div className="bg-primary text-primary-foreground text-xs font-bold px-8 py-1 transform rotate-45 translate-x-8 translate-y-3 uppercase">Best</div>
+                            </div>
+                        )}
+                        <CardHeader className="pt-8">
+                            <CardTitle className={`font-headline text-center text-2xl uppercase font-bold ${plan.color}`}>{plan.tier}</CardTitle>
+                            <div className="relative flex aspect-video my-4 items-center justify-center rounded-lg overflow-hidden border border-border/20 shadow-inner bg-muted/20">
+                                <PlanIcon className="h-24 w-24 text-primary/70 transition-all duration-500 group-hover:scale-110 group-hover:text-accent group-hover:rotate-6" />
+                            </div>
+                            <p className="text-center text-muted-foreground text-sm min-h-[6rem] pt-2">{plan.description}</p>
+                        </CardHeader>
+                        <CardContent className="flex-grow flex flex-col">
+                            <ul className="space-y-3 text-muted-foreground flex-grow">
+                                {plan.features.map(feature => (
+                                <li key={feature} className="flex items-start gap-3">
+                                    <Check className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                                    <span>{feature}</span>
+                                </li>
+                                ))}
+                            </ul>
+                            {plan.summary && (
+                                <p className="mt-6 pt-4 border-t border-border/20 text-sm font-semibold text-foreground text-center">
+                                    {plan.summary}
+                                </p>
+                            )}
+                        </CardContent>
+                        <CardFooter>
+                            <Button asChild className="w-full btn-gradient">
+                                <a href={plan.ctaLink} target="_blank" rel="noopener noreferrer">{plan.cta}</a>
+                            </Button>
+                        </CardFooter>
+                        </Card>
+                    </div>
+                )
+              })}
             </div>
         </section>
 
