@@ -11,7 +11,7 @@ export function Footer() {
     {
       title: 'Services',
       links: [
-        { label: 'Website Services', href: '/special-service' },
+        { label: 'WEBSITE SERVICES', href: '/special-service' },
         ...services.slice(0, 3).map(s => ({ label: s.title, href: `/services/${s.slug}` })),
         { label: 'View All...', href: '/services' },
       ],

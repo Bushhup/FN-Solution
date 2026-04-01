@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Check, Rocket, Zap, Smartphone, CheckCircle } from 'lucide-react';
+import { Check, Rocket, Zap, Smartphone, CheckCircle, Search, Palette, Code } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 
 export const metadata: Metadata = {
@@ -19,7 +20,8 @@ const phoneNumber = '919702667213';
 const pricingPlans = [
     {
         tier: 'Starter',
-        price: '₹7,999',
+        imageSrc: 'https://picsum.photos/seed/starterplan/600/400',
+        imageHint: 'simple website homepage',
         description: "If you’re just starting out, this is the fastest way to build a professional online presence and start getting inquiries. No confusion, no technical headache. Just a simple website that works.",
         features: [
             '1–3 pages',
@@ -30,13 +32,14 @@ const pricingPlans = [
         ],
         summary: 'Best choice if you want something simple, affordable, and effective.',
         cta: 'Get Started',
-        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Starter' website plan (₹7,999). Please provide more details.")}`,
+        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Starter' website plan. Please provide more details.")}`,
         color: 'text-green-500',
         cardClass: 'border-green-500/20 hover:border-green-500/50'
     },
     {
         tier: 'Business',
-        price: '₹14,999',
+        imageSrc: 'https://picsum.photos/seed/businessplan/600/400',
+        imageHint: 'professional business website',
         description: "This isn’t just a website—it’s a lead generation machine. We structure it to build trust, explain your services, and push visitors to contact you. It's optimized to convert visitors into customers.",
         features: [
             '5–7 pages with custom design',
@@ -47,14 +50,15 @@ const pricingPlans = [
         ],
         summary: 'Best choice if you want your website to actually generate business.',
         cta: 'Get Started',
-        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Business' website plan (₹14,999). Please provide more details.")}`,
+        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Business' website plan. Please provide more details.")}`,
         color: 'text-blue-500',
         cardClass: 'border-primary/20 hover:border-primary/50 md:scale-105',
         popular: true
     },
     {
         tier: 'Premium',
-        price: '₹24,999+',
+        imageSrc: 'https://picsum.photos/seed/premiumplan/600/400',
+        imageHint: 'advanced e-commerce website',
         description: "For brands that want a powerful, high-end web experience that sets them apart. We build a custom site with advanced features tailored to your brand, ready for long-term growth.",
         features: [
             'Up to 10 pages with advanced UI/UX',
@@ -65,11 +69,34 @@ const pricingPlans = [
         ],
         summary: 'Best choice if you want a high-end website that sets you apart.',
         cta: 'Contact Us',
-        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Premium' website plan (₹24,999+). Please provide more details.")}`,
+        ctaLink: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hi, I'm interested in your 'Premium' website plan. Please provide more details.")}`,
         color: 'text-purple-500',
         cardClass: 'border-purple-500/20 hover:border-purple-500/50'
     }
 ];
+
+const processSteps = [
+    {
+        icon: Search,
+        title: '1. Discovery',
+        description: 'We learn about your business, goals, and target audience to create a tailored strategy.',
+    },
+    {
+        icon: Palette,
+        title: '2. Design',
+        description: 'We craft a modern, user-friendly design that reflects your brand and engages visitors.',
+    },
+    {
+        icon: Code,
+        title: '3. Development',
+        description: 'Our team builds a fast, responsive, and SEO-friendly website using the latest technologies.',
+    },
+    {
+        icon: Rocket,
+        title: '4. Launch',
+        description: 'After thorough testing, we deploy your new website and provide support for a successful launch.',
+    },
+]
 
 const addOnServices = [
     { name: 'Website Maintenance', price: '₹1,999/month' },
@@ -111,7 +138,7 @@ export default function SpecialServicePage() {
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 items-end">
               {pricingPlans.map((plan, index) => (
                 <div key={plan.tier} className="transform transition-transform duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${150 * (index + 1)}ms` }}>
-                    <Card className={`glass-card h-full flex flex-col relative overflow-hidden ${plan.cardClass} transition-all duration-300`}>
+                    <Card className={`glass-card h-full flex flex-col relative overflow-hidden ${plan.cardClass} transition-all duration-300 group`}>
                       {plan.popular && (
                           <div className="absolute top-0 right-0">
                               <div className="bg-primary text-primary-foreground text-xs font-bold px-8 py-1 transform rotate-45 translate-x-8 translate-y-3 uppercase">Best</div>
@@ -119,7 +146,15 @@ export default function SpecialServicePage() {
                       )}
                       <CardHeader className="pt-8">
                           <CardTitle className={`font-headline text-center text-2xl uppercase font-bold ${plan.color}`}>{plan.tier}</CardTitle>
-                          <p className="text-center text-4xl font-bold pt-2">{plan.price}</p>
+                          <div className="relative aspect-video my-4 rounded-lg overflow-hidden border border-border/20 shadow-inner">
+                            <Image
+                                src={plan.imageSrc}
+                                alt={`${plan.tier} website design example`}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                data-ai-hint={plan.imageHint}
+                            />
+                          </div>
                           <p className="text-center text-muted-foreground text-sm min-h-[6rem] pt-2">{plan.description}</p>
                       </CardHeader>
                       <CardContent className="flex-grow flex flex-col">
@@ -157,6 +192,28 @@ export default function SpecialServicePage() {
                 </p>
             </Card>
         </div>
+
+        <section id="process" className="mb-20 sm:mb-28">
+            <div className="mx-auto mb-16 max-w-2xl text-center">
+                <h2 className="font-headline text-3xl font-bold tracking-tight text-glow sm:text-4xl uppercase animate-in fade-in slide-in-from-bottom-3 duration-700">
+                    Our Design Process
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground animate-in fade-in slide-in-from-bottom-3 duration-700 delay-100">
+                    We follow a streamlined 4-step process to ensure your website is built to perfection, on time.
+                </p>
+            </div>
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-y-10 md:grid-cols-4 md:gap-x-8">
+                {processSteps.map((step, index) => (
+                    <div key={step.title} className="text-center animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${150 * (index + 1)}ms` }}>
+                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary ring-2 ring-primary/20">
+                            <step.icon className="h-6 w-6" />
+                        </div>
+                        <h3 className="text-lg font-semibold uppercase">{step.title}</h3>
+                        <p className="mt-1 text-muted-foreground text-sm">{step.description}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
 
         <section id="add-ons" className="mb-20 sm:mb-28">
             <div className="mx-auto mb-12 max-w-2xl text-center">
